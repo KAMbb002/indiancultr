@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <fitguide_adminhtml_fitguide_index>
+	<reference name="content">
+	  <block type="fitguide/adminhtml_fitguide" name="fitguide" />
+	</reference>
+  </fitguide_adminhtml_fitguide_index>
+</layout>

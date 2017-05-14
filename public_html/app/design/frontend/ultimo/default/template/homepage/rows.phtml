@@ -1,0 +1,39 @@
+<?php
+
+$rows=$this->getRows();
+
+$counter=0;
+?>
+<div class="flexi-banner grid-full no-gutter" itemprop="name" itemscope="" itemtype="https://schema.org/ItemList">
+  <meta itemprop="itemListOrder" content="Unordered"/>
+<meta itemprop="name" content="Featured Designers"/>
+  <?php foreach($rows as $row):
+   $counter++;?>
+  <?php $images=$this->getRowImages($row->getId());
+  ?>
+    <?php if(!empty($images)): ?>
+     <div class="nested-container">
+         <div class="page-banners clearer">
+            <?php foreach($images as $image):?>
+             <div class="grid12-<?php echo 4*$image['column_layout']?> banner">
+             <?php if($image['url']):?>
+             <?php 
+                $custom_url = (($image['is_append_base_url'] == 1) ? Mage::getBaseUrl().$image['url'] : $image['url']);
+                if (strpos($custom_url, "?")!==false){
+                    $custom_url = $custom_url."&trk=row-".$counter;
+                }
+                else {
+                   $custom_url = $custom_url."?trk=row-".$counter;
+                }
+            ?>    
+             <a title="<?php echo $image['title']?>" href="<?php echo $custom_url ?>" itemprop="itemListElement"> <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . DS.'homepage'. DS.'rows'.DS.$image['image']?>" alt="" itemprop="image" /></a>
+            <?php else:?>
+            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . DS.'homepage'. DS.'rows'.DS.$image['image']?>" alt="" itemprop="image" />
+            <?php endif;?>
+         </div>
+             <?php endforeach;?>
+         </div>
+     </div>
+     <?php endif;?>
+  <?php endforeach; ?>
+</div>

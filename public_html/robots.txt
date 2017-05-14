@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+User-agent: GoogleBot
+Allow: /indiancultr.com
+Allow: /

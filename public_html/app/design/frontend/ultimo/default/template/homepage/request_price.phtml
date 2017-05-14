@@ -1,0 +1,120 @@
+<?php
+$page_content=$this->getPageContent();
+
+if($page_content[0]['banner_path']):
+?>
+<style>
+    .pageHead{margin: 15px 40px;
+font-size: 1.2em;}
+.requestLoader{
+    height: 19px;
+width: 100px;
+float: right;
+padding: 2px;
+}
+.pageSucess{padding:80px 40px}
+</style>
+<div class="clearer" style="width:100%;">
+    <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).DS.'homepage'. DS.'requestprice'.DS.$this->getPageId().DS.'banner'.DS.$page_content[0]['banner_path'] ?>" alt="" style="width:100%; height:auto">
+</div>
+<?php endif;?>
+<ul class="products-grid category-products-grid itemgrid itemgrid-4col centered hover-effect equal-height" style="text-align:center">
+  <?php foreach($page_content as $row):?> 
+  <li itemtype="http://schema.org/SomeProducts"  itemprop="itemListElement"  class="item" style="">
+    <div class="product-image-wrapper">
+        <img itemprop="image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . DS.'homepage'. DS.'requestprice'.DS.$this->getPageId().DS.$row['image']?>" style="width:100%;"> 
+        <div class="actions clearer"> </div>      
+    </div>
+    <!-- end: product-image-wrapper -->
+    <input type="hidden" class="rel-title-<?php echo $row['id']?>" value="<?php echo $row['title']?>"/>
+    <h3 class="product-name" style="margin-top:10px"><?php echo $row['title']?></h3>
+     <button id="<?php echo $row['id']?>" data-mfp-src="#requestPricePopup" type="button" title="Request for Price" class="button openPopUp" onclick="jQuery('.pageHead').html('Request price for <?php echo $row["title"]?>');jQuery('#reP').val('<?php echo $row["title"]?>')">
+        <span><span>Request Price</span></span>
+     </button>
+  </li>
+  <?php endforeach;?>
+</ul>
+
+<div id="requestPricePopup" class="requestPricePopup mfp-hide popBlock" style="background-color:white;">
+   <div class="pageform">
+         <div class="pageHead"></div>
+            <div class="pageHome">
+                <form name="requestPrice" id="requestPrice">
+                    <input type="hidden" id="reP" name="request[product_name]" value="">
+                    <ul class="form-list">
+                        <li>
+                           
+                                <label>Please Enter Your Name</label>
+                              <div class="input-box">   <input id="request_name" class="input-text" type="text" value="" name="request[name]">
+                            </div>
+                        </li>
+                        <li>
+                            
+                                <label>Please Enter Your Email Id</label>
+                              <div class="input-box">  <input id="request_email" class="input-text" type="text" value="" name="request[email]">
+                            </div>
+                        </li>
+                        <li>
+                            
+                                <label>your Message</label>
+                            <div class="input-box">    <textarea id="request_message" name="request[message]" rows="10" cols="7"></textarea>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                    <div class="buttons-set">
+                        <button id="requestButton" class="button pupupBtn" type="button" onclick="submitRequest(this);"><span><span>Submit</span></span></button> 
+                            <div class="loaderPop requestLoader"><img src="<?php echo $this->getSkinUrl('images/loader.gif') ?>" alt="Please Wait..."></div>
+                        
+                    </div>
+                </form>
+            </div>
+   </div>
+   <div class="pageSucess" style="display: none">
+    
+   </div>
+   
+</div>
+<script type="text/javascript">
+    jQuery('.openPopUp').magnificPopup({
+  type:'inline',
+  midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+});
+ jQuery.magnificPopup.instance.close = function () {
+        if(jQuery('.pageSucess'))
+        {
+            jQuery('.pageSucess').html("");
+            jQuery('.pageform').show();
+            jQuery('.pageSucess').hide();
+            jQuery(':input','#requestPrice')
+         .not(':button, :submit, :reset, :hidden')
+         .val('')
+         
+         .removeAttr('checked')
+         .removeAttr('selected');
+         jQuery('#requestButton').show();
+         jQuery('.loaderPop').hide();
+        }
+        jQuery.magnificPopup.proto.close.call(this);
+    };
+    
+    function submitRequest(obj)
+    {
+         jQuery(obj).hide();
+         jQuery('.loaderPop').show();
+         var pro_name=jQuery('#reP').val();
+         params=Form.serialize('requestPrice');
+         var request = new Ajax.Request(
+            '<?php echo $this->getUrl('homepage/requestpage/request')?>',
+            {
+                method:'post',
+                parameters:params,
+                onComplete: function(transport){
+                    jQuery('.pageSucess').html("We have received your price request for "+pro_name+". You will receive an email from us shortly");
+                    jQuery('.pageform').hide();
+                    jQuery('.pageSucess').show();
+                }
+            }
+        );
+    }
+</script>

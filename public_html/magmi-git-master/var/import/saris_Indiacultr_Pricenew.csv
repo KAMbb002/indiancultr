@@ -1,0 +1,21 @@
+store,websites,sku,cost,price,shipping_days,shipping_time_filter
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015VPB,3375,300,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015ZSPK,3195,275,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015ZSB,3195,275,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015SPO,2325,200,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015SPG,2325,200,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015SPP,2325,200,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015MHR,1975,175,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015MHP,1975,175,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015CSG,2225,200,7,7 days
+"store_us,global_m_sv","app_us,global_m_web",INCTR2015CSY,2225,200,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015VPB,3375,7500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015ZSPK,3195,7250,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015ZSB,3195,7250,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015SPO,2325,5500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015SPG,2325,5500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015SPP,2325,5500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015MHR,1975,4500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015MHP,1975,4500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015CSG,2225,5500,7,7 days
+"store_in,india_m_sv","app_in,india_m_web",INCTR2015CSY,2225,5500,7,7 days

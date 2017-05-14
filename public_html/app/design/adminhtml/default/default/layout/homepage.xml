@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <homepage_adminhtml_slider_index>
+	<reference name="content">
+	  <block type="homepage/adminhtml_slider" name="slider" />
+	</reference>
+  </homepage_adminhtml_slider_index>
+  <homepage_adminhtml_rows_index>
+	<reference name="content">
+	  <block type="homepage/adminhtml_rows" name="rows" />
+	</reference>
+  </homepage_adminhtml_rows_index>
+</layout>

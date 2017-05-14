@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Aurigait_Homepage>
+      <version>0.2.0</version>
+    </Aurigait_Homepage>
+  </modules>
+  <global>
+    <helpers>
+      <homepage>
+        <class>Aurigait_Homepage_Helper</class>
+      </homepage>
+    </helpers>
+	<blocks>
+	  <homepage>
+		<class>Aurigait_Homepage_Block</class>
+	  </homepage>
+	</blocks>
+	<models>
+	  <homepage>
+		<class>Aurigait_Homepage_Model</class>
+		<resourceModel>homepage_mysql4</resourceModel>
+	  </homepage>
+	  <homepage_mysql4>
+		<class>Aurigait_Homepage_Model_Mysql4</class>
+		<entities>		  
+			  <slider>
+				<table>homepage_slider</table>
+			  </slider>
+			  <rows>
+				<table>homepage_rows</table>
+			  </rows>
+			  <requestprice>
+				<table>homepage_requestprice</table>
+			  </requestprice>
+        </entities>
+	  </homepage_mysql4>
+	</models>
+	<resources>
+	  <homepage_setup>
+		<setup>
+		  <module>Aurigait_Homepage</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </homepage_setup>
+	  <homepage_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </homepage_write>
+	  <homepage_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </homepage_read>
+	</resources>
+	<page>
+	<layouts>
+	  <!-- neeteesh code starting here -->
+	  <home_page_layout translate="label">
+			<label>Homepage</label>
+			<template>page/homepage.phtml</template>
+			<!--<layout_handle>home_page_layout</layout_handle>-->
+	  </home_page_layout>
+	  <new_home_page_layout translate="label">
+			<label>New Homepage Global</label>
+			<template>page/new_homepage.phtml</template>
+			<!--<layout_handle>home_page_layout</layout_handle>-->
+	  </new_home_page_layout>
+	  <new_home_page_india_layout translate="label">
+			<label>New Homepage India</label>
+			<template>page/new_homepage_india.phtml</template>
+			<!--<layout_handle>home_page_layout</layout_handle>-->
+	  </new_home_page_india_layout>
+	  <about_page_layout translate="label">
+			<label>About</label>
+			<template>page/about.phtml</template>
+			<!--<layout_handle>home_page_layout</layout_handle>-->
+	  </about_page_layout>
+	  <designers_page_layout translate="label">
+			<label>Designers List</label>
+			<template>page/designers.phtml</template>
+			<!--<layout_handle>home_page_layout</layout_handle>-->
+	  </designers_page_layout>
+	  <faq_page_layout translate="label">
+			<label>FAQ</label>
+			<template>page/faq.phtml</template>
+			<!--<layout_handle>home_page_layout</layout_handle>-->
+	  </faq_page_layout>
+		  <two_columns_leftnavbar module="page" translate="label">
+		      <label>2 columns with page navigation bar in left</label>
+		      <!-- <template>page/2columns-leftnavbar.phtml</template> -->
+		      <layout_handle>page_two_columns_leftnavbar</layout_handle>
+		  </two_columns_leftnavbar>
+		  <one_column_menu_special module="page" translate="label">
+		      <label>1 column for Special Categories</label>
+		      <template>page/1column-menu-special.phtml</template>
+		      <layout_handle>page_one_column_menu_special</layout_handle>
+		  </one_column_menu_special>
+		  <!-- end: neeteesh code -->
+		  <fullwidth_layout translate="label">
+			<label>Full Width</label>
+			<template>page/fullwidth.phtml</template>
+	      </fullwidth_layout>
+		  <requestprice_layout translate="label">
+			<label>Request Price Page Layout</label>
+			<template>page/request_price.phtml</template>
+	      </requestprice_layout>
+	      <newlanding_layout translate="label">
+			<label>New Landing Page Layout</label>
+			<template>page/2columns-newleft.phtml</template>
+	      </newlanding_layout>
+	      <brandpage_layout translate="label">
+			<label>New Brand Page Layout</label>
+			<template>page/brandlayout.phtml</template>
+	      </brandpage_layout>
+		  <catbrandpage_layout translate="label">
+			<label>Category Brand Page Layout</label>
+			<template>page/catbrandlayout.phtml</template>
+	      </catbrandpage_layout>
+	</layouts>
+	</page>
+  </global>
+  <frontend>
+    <routers>
+      <homepage>
+        <use>standard</use>
+          <args>
+            <module>Aurigait_Homepage</module>
+            <frontName>homepage</frontName>
+          </args>
+      </homepage>
+    </routers>
+  </frontend>
+  <admin>
+	<routers>
+	  <homepage>
+	    <use>admin</use>
+		<args>
+		  <module>Aurigait_Homepage</module>
+		  <frontName>homepage</frontName>
+		</args>
+	  </homepage>
+	</routers>
+  </admin>
+  <adminhtml>
+	<menu>
+	  <cms>
+	    <children>
+	      <homepage module="homepage">
+		    <title>Homepage</title>
+		    <sort_order>100</sort_order>
+		    <children>
+		      <slider module="homepage">
+			<title>Manage Slider</title>
+			    <sort_order>0</sort_order>
+			    <action>homepage/adminhtml_slider</action>
+		      </slider>
+		      <rows module="homepage">
+			<title>Manage Rows</title>
+			    <sort_order>1</sort_order>
+			    <action>homepage/adminhtml_rows</action>
+		      </rows>
+		      <requestprice module="homepage">
+			<title>Manage Request Price Page</title>
+			    <sort_order>2</sort_order>
+			    <action>homepage/adminhtml_requestprice</action>
+		      </requestprice>
+		    </children>
+	      </homepage>
+	    </children>
+	  </cms>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+		  <cms>
+		    <children>
+			  <homepage translate="title" module="homepage">
+			    <title>Homepage</title>
+			    <sort_order>1000</sort_order>
+			    <children>
+			      <slider translate="title">
+				    <title>Manage Slider</title>
+				    <sort_order>0</sort_order>
+			      </slider>
+			      <rows translate="title">
+				    <title>Manage Rows</title>
+				    <sort_order>1</sort_order>
+			      </rows>
+			      <requestprice translate="title">
+				    <title>Manage Request Price Page</title>
+				    <sort_order>2</sort_order>
+			      </requestprice>
+			    </children>
+			  </homepage>
+		    </children>
+		  </cms>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<homepage>
+		  <file>homepage.xml</file>
+		</homepage>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

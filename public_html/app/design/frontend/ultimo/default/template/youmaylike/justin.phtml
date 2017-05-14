@@ -1,0 +1,152 @@
+<?php
+$products=$this->getProducts();
+$helpLabels = $this->helper('ultimo/labels');
+	 $_taxHelper  = $this->helper('tax');
+	  $_coreHelper = $this->helper('core');
+	    $_simplePricesTax = ($_taxHelper->displayPriceIncludingTax() || $_taxHelper->displayBothPrices());
+if(count($products)):
+?>
+
+<div class="justInSliderWrapper" itemprop="name" itemscope="" itemtype="http://schema.org/ItemList">
+<div class="similarProdHeading">
+			Trending Now
+</div>
+  <meta itemprop="itemListOrder" content="Descending"/>
+<ul id="justInSlider">
+<?php foreach($products as $product):?>
+<?php $_product_new = Mage::getModel('catalog/product')->load($product->getId());?>
+  <li class="item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/SomeProducts">
+    <div class="product-info">
+ 
+     <a href="<?php echo $_product_new->getProductUrl()?>">
+     <img src="<?php echo $this->helper('catalog/image')->init($_product_new, 'image')->resize(295,367);?>" alt="<?php echo $_product_new->getName();?>" itemprop="image" />
+     </a>
+     <meta itemprop="sku" content="<?php echo $_product_new->getSku()?>" />
+    <!-- <meta itemprop="inventoryLevel" content="5" />-->
+     <!--<h2 itemprop="brand"><?php //echo $_product_new->getAttributeText('designer_brand_name')?></h2>-->
+     <h3 class="product-name"><a href="<?php echo $_product_new->getProductUrl()?>" title="<?php echo $_product_new->getName();?>" itemprop="name"><?php echo $_product_new->getName();?></a></h3>
+     
+     <?php if($_product_new->getSpecialPrice()):?>
+     
+    <?php $_regularPrice = $_taxHelper->getPrice($_product_new, $_product_new->getPrice(), $_simplePricesTax) ?>
+    <?php $_finalPrice = $_taxHelper->getPrice($_product_new, $_product_new->getFinalPrice()) ?>
+    <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode()?>" />
+      <link itemprop="itemCondition" href="http://schema.org/NewCondition" />
+      <link itemprop="availability" href="http://schema.org/InStock" />
+                    <span class="old-price">
+                    	<span  class="price"><?php echo $_coreHelper->currency($_regularPrice,true,false);?></span>
+           			</span>
+                   <span class="special-price">
+                	<span class="price-label">|</span>
+                	<span  class="price" itemprop="price"><?php echo $_coreHelper->currency($_finalPrice,true,false);?></span>
+                        <?php if(round((($_regularPrice-$_finalPrice)/$_regularPrice)*100) > 0):?>
+                	<span class="discount"><?php echo round((($_regularPrice-$_finalPrice)/$_regularPrice)*100)."% off"?></span>
+                        <?php endif;?>
+            	   </span>
+        </div>
+     <?php else:?>
+     
+	  <?php if($_product_new->getMsrpPrice() && $_product_new->getMsrpPrice() > $_product_new->getPrice()):?>
+		<?php $_finalPrice = $_taxHelper->getPrice($_product_new, $_product_new->getPrice(), $_simplePricesTax) ?>
+		<?php $_regularPrice = $_taxHelper->getPrice($_product_new, $_product_new->getMsrpPrice()) ?>
+                <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		  <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode()?>" />
+		  <link itemprop="itemCondition" href="http://schema.org/NewCondition" />
+		  <link itemprop="availability" href="http://schema.org/InStock" />
+                <span class="old-price">
+                    <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                    <span class="price">
+                     <?php echo $_coreHelper->currency($_regularPrice,true,false); ?>
+                    </span>
+                </span>
+                <span class="special-price">
+                 <span class="price-label">|</span>
+                 <span class="price" itemprop="price">
+                  <?php echo $_coreHelper->currency($_finalPrice,true,false);?>
+                 </span>
+                   <span class="discount"><?php echo round((($_regularPrice-$_finalPrice)/$_regularPrice)*100)."% off"?></span>
+               </span>
+               </div>
+            <?php else:?>
+	    <?php $_regularPrice = $_taxHelper->getPrice($_product_new, $_product_new->getPrice(), $_simplePricesTax) ?>
+                <div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		  <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode()?>" />
+		  <link itemprop="itemCondition" href="http://schema.org/NewCondition" />
+		  <link itemprop="availability" href="http://schema.org/InStock" />
+                  <span  class="regular-price">
+                  <span class="price" itemprop="price"><?php echo $_coreHelper->currency($_regularPrice,true,false);?></span>                </span>             
+                </div>
+            <?php endif;?>
+    
+     <?php endif;?>
+   </div>
+  </li>
+<?php endforeach; ?>
+</ul>
+</div>
+<script type="text/javascript">
+  jQuery(function($) {
+		var t; $(window).resize(function() { clearTimeout(t); t = setTimeout(function() { $(".more-images .cloud-zoom-gallery").first().click(); }, 200); });
+	
+		  
+	  var A;
+	if(self.innerWidth!=undefined)
+             A= self.innerWidth;
+			else{
+				var D= document.documentElement;
+				if(D) A= D.clientWidth;
+			}
+	  if(A >= 768){
+	  var sliderJust = jQuery('#justInSlider').bxSlider({
+		  minSlides: 4,
+                 maxSlides: 4,
+                 slideWidth: 270,
+                 slideMargin:10,
+		 pager:false,
+		 infiniteLoop:false,
+		 hideControlOnEnd:true});
+		  }
+		else{
+	  var sliderJust = jQuery('#justInSlider').bxSlider({
+		  minSlides: 2,
+                 maxSlides: 2,
+                 slideWidth: 300,
+                 slideMargin:10,
+		 pager:false,
+		 infiniteLoop:false,
+		 hideControlOnEnd:true});
+		  }
+		
+		jQuery(window).resize(function(e){
+  e.preventDefault();
+  if(self.innerWidth!=undefined)
+             A= self.innerWidth;
+			else{
+				var D= document.documentElement;
+				if(D) A= D.clientWidth;
+			}
+	  if(A >= 768){
+	  sliderJust.reloadSlider({
+		  minSlides: 4,
+                 maxSlides: 4,
+                 slideWidth: 270,
+                 slideMargin:10,
+		 pager:false,
+		 infiniteLoop:false,
+		 hideControlOnEnd:true});
+		  }
+		else{
+	  sliderJust.reloadSlider({
+		  minSlides: 2,
+                 maxSlides: 2,
+                 slideWidth: 300,
+                 slideMargin:10,
+		 pager:false,
+		 infiniteLoop:false,
+		 hideControlOnEnd:true});
+		  }
+		});
+	});
+</script>
+<?php endif;?>

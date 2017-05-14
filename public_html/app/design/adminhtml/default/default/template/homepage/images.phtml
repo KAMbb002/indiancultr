@@ -1,0 +1,115 @@
+<?php
+$ImageData=$this->getImageData();
+$i=0;
+
+?>
+<div class="form-buttons">
+    <button  type="button" class="scalable add" onclick="addrow()" style=""><span>Add Image</span></button>
+</div>
+<div>
+  <h3>Image sizes for different layout</h3>
+  <table>
+    <tr>
+        <td>1 Column--</td>
+        <td>310X385</td>
+    </tr>
+    <tr>
+        <td>2 Column--</td>
+        <td>640X385</td>
+    </tr>
+    <tr>
+        <td>3 Column--</td>
+        <td>1176X385</td>
+    </tr>
+  </table>
+</div>
+<input type="hidden" id="rows_count" value="1">
+<div class="grid">
+<table id="images" cellspacing="0" class="data">
+    
+    <thead >
+        <tr class="headings">
+        <th>Image Title</th>
+        <th>Column width</th>
+        <th>Image URL</th>
+        <th>Is Append base Url?</th>
+        <th>Image</th>
+        <th>Position</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody id="rowBody">
+    <?php 
+    if(!empty($ImageData)){
+    foreach($ImageData as $image){?>
+        <tr>
+            <td><input type="text" name="image[<?php echo $i; ?>][title]" value="<?php echo $image['title'];?>"></td>
+            <td>
+            	<select name="image[<?php echo $i; ?>][column_layout]">
+	            	<option value="1" <?php echo ($image['column_layout']==1)? "selected='selected'":'';?> >1 column</option>
+	            	<option value="2" <?php echo ($image['column_layout']==2)? "selected='selected'":'';?>>2 column</option>
+	            	<option value="3" <?php echo ($image['column_layout']==3)? "selected='selected'":'';?>>3 column</option>
+            	</select>
+            </td>
+            
+            
+            <td>
+	            
+            <input type="text" name="image[<?php echo $i; ?>][url]" value="<?php echo $image['url'];?>">
+            </td>
+            <td>
+             <input type="checkbox" <?php if($image['is_append_base_url'] == 1){ ?>checked="checked"<?php } ?> value="1" name="image[<?php echo $i; ?>][is_append_base_url]">       
+            
+            </td>
+            <td>
+           
+            <input type="hidden" name="image[<?php echo $i; ?>][image_prev]" value="<?php echo $image['image'];?>">
+            <input type="file" name="image_<?php echo $i; ?>" value="">
+            <?php if(!empty($image['image'])):?> <img style="float:left" height="50px" width="50px" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'homepage/rows/'.$image['image'];?>" /><?php endif ?>
+            <input type="hidden" name="imageCounter[]" value="<?php echo $i; ?>"></td>
+            
+            <td><input type="text" name="image[<?php echo $i; ?>][sort_order]" value="<?php echo $image['sort_order'];?>"></td>
+            <td><a href="javascript:void(0)" onclick="deleterow(this)">X</a><td>
+        </tr>
+        <?php 
+        	$i++;}
+		}else{
+        ?>
+         <tr>
+            <td><input type="text" name="image[<?php echo $i; ?>][title]" value=""></td>
+            <td><select name="image[<?php echo $i; ?>][column_layout]"><option value="1">1 column</option><option value="2">2 column</option><option value="3">3 column</option></select></td>
+            <td><input type="text" name="image[<?php echo $i; ?>][url]" value=""></td>
+            <td><input type="checkbox" checked="checked" name="image[<?php echo $i; ?>][is_append_base_url]" value="1"></td>
+            <td>
+            	<input type="hidden" name="imageCounter[]" value="<?php echo $i; ?>">
+            	<input type="file" name="image_<?php echo $i; ?>" value=""></td>
+            <td><input type="text" name="image[<?php echo $i; ?>][sort_order]" value=""></td>
+            <td class="deleteRow"></td>
+        </tr>
+       <?php }?>
+    </tbody>
+</table>
+</div>
+<script>
+template="<td><input type='text' name='image[#{index}][title]' value=''></td>"+
+"<td><select name='image[#{index}][column_layout]'><option value='1'>1 column</option><option value='2'>2 column</option><option value='3'>3 column</option></select></td>"+
+"<td><input type='text' name='image[#{index}][url]' value=''></td>"+
+"<td><input type='checkbox' checked='checked' name='image[#{index}][is_append_base_url]' value=''></td>"+
+"<td><input type='hidden' name='imageCounter[]' value='#{index}'><input type='file' name='image_#{index}' value=''></td>"+
+"<td><input type='text' name='image[#{index}][sort_order]' value=''></td>";
+i=<?php echo $i+1; ?>;
+row = new Template(template);
+function addrow()
+{
+	newRow=row.evaluate({'index':i});
+//	var row=$('base').innerHTML;
+	$('rowBody').insert("<tr>"+newRow+"<td><a href=\"javascript:void(0)\" onclick=\"deleterow(this)\">X</a><td></tr>");
+	
+	i++;
+}
+function deleterow(row)
+{
+    $(row).up(1).remove();
+      
+}
+</script>

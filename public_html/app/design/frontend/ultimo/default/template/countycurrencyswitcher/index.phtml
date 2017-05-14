@@ -1,0 +1,108 @@
+<?php
+/**
+ * Currency switcher
+ *
+ * @see Mage_Directory_Block_Currency
+ */
+
+$country=$this->getCurrentCountryCode();
+$curr=$this->getCurrentCurrencyCode();
+
+?>
+<input type="hidden" id="countryName" value="<?php echo Mage::app()->getLocale()->getCountryTranslation($country)?>"/>
+<input type="hidden" id="countrycode" value="<?php echo $country;?>"/>
+<div id="ccswitcher" class="block block-currency dropdown-content">
+<div class="country_arrow"></div>
+<div class="popClose"></div>
+<form name="ccurrencyswitcher" action="<?php echo $this->getUrl("countycurrencyswitcher/index/save");?>" method="POST" class="form-list" >
+<?php /*?>
+<div class="fields clearer">    
+	<div class="field">
+    <label><?php echo $this->__('Change Country') ?></label>
+    <div class="input-box">
+        <select name="country" title="<?php echo $this->__('Change Country') ?>">
+        <?php foreach ($this->getCountries() as $_val): ?>
+            <option value="<?php echo $_val['value'];?>" <?php if($_val['value']==$country): ?> selected="selected"<?php endif; ?> >
+                <?php echo $_val['label'] ?>
+            </option>
+        <?php endforeach; ?>
+        </select>
+    </div>
+    </div>
+	<div class="field">
+    <?php  echo Mage::app()->getLayout()->createBlock('directory/currency')->setTemplate('countycurrencyswitcher/currency.phtml')->toHtml();
+    ?>
+    </div>
+ </div>
+ <div class="button-set">
+<button type="button" name="save" title="Save Changes" class="button" onclick="document.ccurrencyswitcher.submit()"><span><span>Save Changes</span></span></button>     
+</div>
+<?php */?>
+	<!--<div class="popTitle"> Where do you want your products to be shipped? </div>-->
+	<div class="shipTo mar-sm-t clearfix">
+            <input type="hidden" name="country" id="countryC" value="IN" />
+            <div class="shipToIN fl <?php if($country == 'IN'){ echo 'Active'; } ?>" >
+			<p class="radioNflag"></p>
+			<p ><span class="txt-bold">Within India</span> <br /> <span>(Shop in <span class="txt-bold">INR ₹</span>)</span></p>
+		</div>
+		<div class="shipToROW fr <?php if($country != 'IN'){ echo 'Active'; } ?>" >
+			<p class="radioNflag"></p>
+			<p class="shipToLabel text-center"><span class="txt-bold">Outside India</span> <br /> <span>(Shop in <span class="txt-bold">USD $</span>)</span></p>
+		</div>
+	</div>
+</form>
+</div>
+
+<?php /*?><div style="white-space: nowrap">
+	<span>SHIP TO: </span>
+	<span> <?php echo Mage::app()->getLocale()->getCountryTranslation($country);?></span>
+    <span class="caret">&nbsp;</span>
+    <?php /*?><?php
+    	$cnt_list = Mage::getStoreConfig('dutiestaxgeneral/dutiestaxgeneralgroup/countries');
+		$cnt_list_arr = explode(",",$cnt_list);
+		if($country=='IN')
+		{
+			echo "<span class='sep'>|</span><span>FREE SHIPPING</span>";
+		}
+		else if(!in_array($country, $cnt_list_arr))
+		{
+			echo "<span class='sep'>|</span><span>DUTY FREE SHIPPING</span>";
+		}
+		else if(in_array($country, $cnt_list_arr))
+		{
+			echo "<span class='sep'>|</span><span>". strtoupper(Mage::app()->getLocale()->getCountryTranslation($country))."</span>";
+		}
+    ?><?php ?>
+</div>
+<script>
+ jQuery(function($){
+	$(window).load(function(){
+	    //$('#ccswitcherContainer  .flag').addClass('flag-<?php echo strtolower($country);?>');
+			$('#ccswitcherContainer').click(function(){
+				$("#layerbg").show();
+				$("#globalShip").fadeIn();
+			});
+	    });});            
+</script><?php */?>
+<script type="text/javascript">
+	jQuery( document ).ready(function() {
+		//document.getElementsByClassName("shipToIN")[0].addEventListener("click", function(){
+    	jQuery( ".shipToIN" ).click(function(e){
+      		jQuery(this)[0].className+=" Active";
+      		jQuery(".shipToROW")[0].className="shipToROW fr";
+      		document.getElementById('countryC').value='IN'; 
+      		document.ccurrencyswitcher.submit();
+      		 //return false;
+    	});
+    	//document.getElementsByClassName("shipToROW")[0].addEventListener("click", function(){
+    	jQuery( ".shipToROW" ).click(function(){
+    		jQuery(this)[0].className+=" Active";
+      		jQuery(".shipToIN")[0].className="shipToIN fl";
+      		document.getElementById('countryC').value='US'; 
+      		document.ccurrencyswitcher.submit();
+      		// jQuery(this).addClass( "Active" );
+      		// jQuery(".shipToIN").removeClass( "Active" );
+      		 //return false;
+    	});
+  });
+</script>

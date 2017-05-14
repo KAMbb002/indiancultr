@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>   
+    <modules>
+        <Aurigait_Youmaylike>
+            <version>0.1.0</version>
+        </Aurigait_Youmaylike>
+    </modules>
+   <global>
+        
+        <blocks>
+            <youmaylike>
+                <class>Aurigait_Youmaylike_Block</class>
+            </youmaylike>
+        </blocks>
+        
+ </global>   
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+        <modules>
+                <Aurigait_Youmaylike>
+                        <active>true</active>
+                        <codePool>local</codePool>
+                </Aurigait_Youmaylike>
+        </modules>
+</config>

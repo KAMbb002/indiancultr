@@ -1,0 +1,25 @@
+store,websites,sku,cost,price,shipping_days,shipping_time_filter
+"store_us,global_m_sv","app_us,global_m_web",VMS2001,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2002,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2003,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2004,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2005,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2006,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2007,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2008,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2009,250,49,15,15 days
+"store_us,global_m_sv","app_us,global_m_web",VMS2010,250,49,15,15 days
+"store_us,global_m_sv",,VMS2011,250,49,15,15 days
+"store_us,global_m_sv",,VMS2012,250,49,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2001,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2002,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2003,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2004,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2005,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2006,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2007,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2008,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2009,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2010,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2011,250,1899,15,15 days
+"store_in,india_m_sv","app_in,india_m_web",VMS2012,250,1899,15,15 days
