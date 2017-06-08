@@ -57,8 +57,10 @@
          
          <?php
          /*Added By Saurbh */
-          $ids = $_product->getCategoryIds();
-               if ($ids[2][2] = '58') {   		  	
+          $ids = $_product->getCategoryIds(); 
+            
+            if ($ids[2] =='58') {             		  	
+           
             ?>
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
          <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
