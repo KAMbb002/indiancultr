@@ -59,7 +59,9 @@
          /*Added By Saurbh */
           $ids = $_product->getCategoryIds(); 
             
-            if ($ids[2] =='58') {             		  	
+            foreach($ids as $value);
+            
+            if ($value[2] =='58') {             		  	
            
             ?>
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
