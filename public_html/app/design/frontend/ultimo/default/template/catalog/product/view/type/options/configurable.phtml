@@ -54,6 +54,12 @@
          </select>
          
          <?php if($fitguide=$_product->getFitguide()) { ?>
+         
+         <?php
+         /*Added By Saurbh */
+          $ids = $_product->getCategoryIds();
+               if ($ids[2][2] = '58') {   		  	
+            ?>
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
          <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline1" style="width:600px;display: none;">
@@ -63,11 +69,7 @@
          <p style="line-height: 40px;"> 
             <?php echo $this->__('or') ?>
          </p>
-         <?php
-         /*Added By Saurbh */
-          $ids = $_product->getCategoryIds();
-               if ($ids[2][2] = '58') {   		  	
-            ?>
+         
          <p style="line-height: 57px;">
             <?php echo $this->__('Made To Order') ?>	
             <a style="margin-left: 36px;" class="fancybox" href="#inline2" style="margin-left: 20px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon1.PNG")?>" alt="Measurement Chart" title="Measurement Guide"></a>
