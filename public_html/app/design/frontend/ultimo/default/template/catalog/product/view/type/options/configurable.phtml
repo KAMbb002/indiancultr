@@ -41,7 +41,7 @@
 <?php
    $_product    = $this->getProduct();
         echo '<pre>';
-        print_r($_product->getData()); die;
+        print_r($_product->getData([2] = 58)); die;
    
    $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
    ?>
