@@ -40,6 +40,8 @@
 </script>
 <?php
    $_product    = $this->getProduct();
+    $ids[2] = $_product->getCategoryIds(58); 
+        print_r($ids); die;
            
    $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
    ?>
@@ -65,8 +67,7 @@
          </p>
          <?php
          /*Added By Saurbh */
-            $ids = $_product->getCategoryIds(58);  
-            if ($ids[2] ='58') {         		  	
+               if ($ids[2] ='58') {         		  	
             ?>
          <p style="line-height: 57px;">
             <?php echo $this->__('Made To Order') ?>	
