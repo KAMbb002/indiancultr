@@ -54,7 +54,12 @@
          </select>
          
          <?php if($fitguide=$_product->getFitguide()) { ?>
-         
+          <?php
+         /*Added By Saurbh */
+            $ids = $_product->getCategoryIds();
+       
+            if ($ids[2] =='19') {             		  	
+            ?>
         
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
          <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
@@ -73,7 +78,7 @@
          <div id="inline2" style="width:1000px;display: none;">
             <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('size_chart_new')->toHtml(); ?>
          </div>
-         <?php }  ?>
+         <?php } }  ?>
        
       </div>
    </dd>
