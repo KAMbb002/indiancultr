@@ -69,11 +69,8 @@
           <?php
          /*Added By Saurbh */
             $ids = $_product->getCategoryIds();
-   
-              foreach($ids[2] as $value) {
- 
-       
-            if ($value =='19') {             		  	
+              foreach($ids[2] as $value) {  
+                       if ($value =='19') {             		  	
             ?>
          
          <p style="line-height: 57px;">
@@ -83,7 +80,7 @@
          <div id="inline2" style="width:1000px;display: none;">
             <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('size_chart_new')->toHtml(); ?>
          </div>
-         <?php } } }  ?>
+         <?php } } } ?>
        
       </div>
    </dd>
