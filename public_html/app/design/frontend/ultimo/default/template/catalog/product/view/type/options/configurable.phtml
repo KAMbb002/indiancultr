@@ -40,7 +40,7 @@
 </script>
 <?php
    $_product    = $this->getProduct();
-   
+       
    $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
    ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
@@ -52,14 +52,10 @@
          <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
             <option><?php echo $this->__('Select Size') ?></option>
          </select>
-         <?php
-         /*Added By Saurbh */
-            $ids = $_product->getCategoryIds(); 
-
-                   
-            if ($ids[2] =='58') {             		  	
-            ?>
+         
          <?php if($fitguide=$_product->getFitguide()) { ?>
+         
+        
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
          <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline1" style="width:600px;display: none;">
@@ -69,14 +65,15 @@
          <p style="line-height: 40px;"> 
             <?php echo $this->__('or') ?>
          </p>
+         
          <p style="line-height: 57px;">
             <?php echo $this->__('Made To Order') ?>	
             <a style="margin-left: 36px;" class="fancybox" href="#inline2" style="margin-left: 20px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon1.PNG")?>" alt="Measurement Chart" title="Measurement Guide"></a>
-         </p>
+         </p> 
          <div id="inline2" style="width:1000px;display: none;">
             <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('size_chart_new')->toHtml(); ?>
          </div>
-         <?php } } ?>
+         <?php }  ?>
          <!-- Code End Saurabh -->
       </div>
    </dd>
