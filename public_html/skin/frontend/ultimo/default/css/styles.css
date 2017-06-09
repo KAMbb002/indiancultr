@@ -1683,7 +1683,7 @@ h3.product-name {
 
 	/* Align to the center
 	-------------------------------------------------------------- */
-	.products-grid.centered .item { text-align: center; }
+	.products-grid.centered .item { text-align: center; padding-bottom: 44px; }
 	.products-grid.centered .item .ratings .rating-box,
 	.products-grid.centered .item .btn-cart { margin-left: 0; margin-right: 0; }
 	.products-grid.centered .item .ratings .amount { margin-left: 3px; }
