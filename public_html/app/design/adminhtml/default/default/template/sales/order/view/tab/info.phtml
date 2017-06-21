@@ -94,8 +94,8 @@
 					<?php 
 						$read = Mage::getSingleton('core/resource')->getConnection('core_read');
 						$order_id_giftwrap = $_order->getId();
-						//$result=$read->query("SELECT `giftwrap`,`giftwrap_price` FROM `sales_flat_order` WHERE `entity_id` ='$order_id_giftwrap'"); 
-						//$row = $result->fetch();
+						$result=$read->query("SELECT `giftwrap`,`giftwrap_price` FROM `sales_flat_order` WHERE `entity_id` ='$order_id_giftwrap'"); 
+						$row = $result->fetch();
 						if($row['giftwrap'] == 1)
 						{
 							echo "Gift Wrap : Yes";
