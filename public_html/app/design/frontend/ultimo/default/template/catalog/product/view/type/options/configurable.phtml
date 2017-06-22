@@ -40,6 +40,7 @@
 </script>
 <?php
    $_product    = $this->getProduct();
+   
        
    $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
    ?>
@@ -52,7 +53,12 @@
          <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
             <option><?php echo $this->__('Select Size') ?></option>
          </select>
-         
+         <?php $productCollection = Mage::getModel("catalog/product")->load($_product->getId()); $i = 1; 
+		 foreach ($productCollection->getOptions() as $value) 
+		 {
+			  if(empty($value->getData('option_id'))){
+			
+		 ?>
          <?php if($fitguide=$_product->getFitguide()) { ?>
          
         
@@ -72,7 +78,7 @@
          <div id="inline2" style="width:1000px;display: none;">
             <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('size_chart_new')->toHtml(); ?>
          </div>
-         <?php }?>
+         <?php }}}?>
        
       </div>
    </dd>
