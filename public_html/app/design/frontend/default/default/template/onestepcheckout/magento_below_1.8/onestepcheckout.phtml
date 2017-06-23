@@ -44,12 +44,12 @@ $mod_version	= Mage::helper('onestepcheckout')->getOPCVersion();
 
 <form action="" id="onestepcheckout_orderform">
 <div class="col3-set onestepcheckout_datafields">
-    <div class="one_step1">
+    <div class="col-1">
         <?php echo $this->getChildHtml('billing.address') ?>
         <?php echo $this->getChildHtml('shipping.address') ?>
     </div>
 
-    <div class="one_step1">
+    <div class="col-2">
         <?php echo $this->getChildHtml('shipping.method') ?>
         <?php echo $this->getChildHtml('payment.method') ?>
          <div id="checkout-coupon-discount-load">
@@ -78,7 +78,7 @@ $mod_version	= Mage::helper('onestepcheckout')->getOPCVersion();
         <?php endif; ?>
     </div>
 
-    <div class="one_step1">
+    <div class="col-3">
         <?php echo $this->getChildHtml('review') ?>
     </div>
 </div>
