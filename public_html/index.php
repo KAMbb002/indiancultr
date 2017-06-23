@@ -76,9 +76,9 @@ require_once $mageFilename;
 Varien_Profiler::enable();
 
 if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
-    Mage::setIsDeveloperMode(true);
+    # Mage::setIsDeveloperMode(true);
 }
-
+Mage::setIsDeveloperMode(true);
 ini_set('display_errors', 1);
 
 umask(0);
@@ -88,7 +88,7 @@ $mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : ''
 
 /* Run store or run website */
 $mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
-
+die;
 if(isset($_COOKIE['webCode'])){
    $c_code=$_COOKIE['webCode'];
 }
