@@ -1,115 +1,18 @@
 <?xml version="1.0"?>
 <package>
-    <name>PayU-payment-gateway</name>
-    <version>1.0.0</version>
-    <stability>devel</stability>
-    <license>PayU v1.0</license>
-    <channel>community</channel>
-    <extends/>
-    <summary>PayU Payment Gateway</summary>
-    <description>PayU Payment Gateway</description>
-    <notes>you can use this extension for integrating PayU payment gateway</notes>
-    <authors><author><name>Ramakant</name><user>ramakant2you</user><email>ramakant2you@gmail.com</email></author></authors>
-    <date>2011-12-27</date>
-    <time>10:59:17</time>
-    <contents><target name="magecommunity"><dir name="Payu"><dir name="PayuCheckout"><dir name="Block"><dir name="Shared"><file name="Canceled.php" hash="bb19a12f92b3f4813dfbea0b39d54239"/><file name="Failure.php" hash="08abafbca12b0b90026f868f94baff29"/><file name="Form.php" hash="1910d6be84e75325aea85821133ce73c"/><file name="Redirect.php" hash="62bd8f284ca07038f11b81ddcdefe1ff"/></dir></dir><dir name="Controller"><file name="Abstract.php" hash="35e4b83aa3aed060125fbeb653192b4f"/></dir><dir name="Helper"><file name="Data.php" hash="896c95a620ad4ecc5aaa93e157e369fb"/></dir><dir name="Model"><dir name="Api"><file name="Debug.php" hash="b841c48492958030919d40f1e106755c"/></dir><dir name="Mysql4"><dir name="Api"><dir name="Debug"><file name="Collection.php" hash="f6c9e33b04b46242737204488fcd9081"/></dir><file name="Debug.php" hash="7d02543559f7d7cca60d8339898ad76b"/></dir><file name="Setup.php" hash="a03cdaf2dda7cb47e5cab334aa15cebd"/></dir><file name="Shared.php" hash="a13530746c7ff6adb8bf0317e9baf27e"/><dir name="Source"><file name="DemoModes.php" hash="3bd1cc16836adecb9d29a55ba9d3bffc"/><file name="DirectReturn.php" hash="be10b40fe41199d36d1d49c1e1af59cb"/><file name="PaymentRoutines.php" hash="5e6e78e13cf245c790762bf5e754fad3"/></dir></dir><dir name="controllers"><file name="SharedController.php" hash="a4979e849b15b46ff7d5133b2a4c43b8"/><file name="SharedController26.php" hash="2af9a71dc45c8e7f6c3a7c731dce8b25"/></dir><dir name="etc"><file name="config.xml" hash="8d61170d5acbebf04feefffd6e00b468"/><file name="system.xml" hash="f4c823828cb787d107c6e204f4342226"/></dir><dir name="sql"><dir name="payucheckout_setup"><file name="mysql4-install-0.1.0.php" hash="e551af7989f2bdca0e863ccdd14cfa56"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="default"><dir name="default"><dir name="template"><dir name="payucheckout"><file name="form.phtml" hash="68b329da9893e34099c7d8ad5cb9c940"/><file name="info.phtml" hash="d41d8cd98f00b204e9800998ecf8427e"/><dir name="shared"><file name="canceled.phtml" hash="bdef89131c08a83d3c1742399d58b433"/><file name="failure.phtml" hash="a54ece778621c5e2b35f4983923bfeb3"/><file name="form.phtml" hash="f8f62958bac1bf15fde40ed24078d97f"/></dir></dir></dir><dir name="layout"><file name="payucheckout.xml" hash="c77d92a6c0a9fe598e61525658382fe6"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Payu_PayuCheckout.xml" hash="284666c8d3fdb0742ceb390ee7081e80"/></dir></target></contents>
-    <compatible/>
-    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
-</package>
-
-<?xml version="1.0"?>
-<package>
-    <name>Razorpay</name>
-    <version>1.1.10</version>
+    <name>IWD_All</name>
+    <version>1.2.2</version>
     <stability>stable</stability>
-    <license>MIT</license>
+    <license>MIT License</license>
     <channel>community</channel>
     <extends/>
-    <summary>Razorpay extension to accept payments from multiple banks and wallets.</summary>
-    <description>Razorpay is a payment aggregator to accept payments from various method including netbanking, credit card, debit card, wallets etc.</description>
-    <notes>This version uses the Razorpay API v1 for the best possible experience.</notes>
-    <authors>
-        <author>
-            <name>Abhay Rana</name>
-            <user>captn3mO</user>
-            <email>nemo@razorpay.com</email>
-        </author>
-        <author>
-            <name>Vivek Kumar</name>
-            <user>crims0n</user>
-            <email>vivek@razorpay.com</email>
-        </author>
-        <author>
-            <name>Mayank Amencherla</name>
-            <user>mayank</user>
-            <email>mayank.amencherla@razorpay.com</email>
-        </author>
-    </authors>
-    <date>2016-10-18</date>
-    <time>15:37:59</time>
-    <contents>
-        <target name="magecommunity">
-            <dir name="Razorpay">
-                <dir name="Payments">
-                    <dir>
-                        <dir name="Block">
-                            <file hash="15049195e1e3d519298a3bd5095990fe" name="Checkout.php"/>
-                        </dir>
-                        <dir name="Helper">
-                            <file hash="bbf4955d0095e8f53022936eca12aab6" name="Data.php"/>
-                            <file hash="308c55e7a7d56a27fcfb3983169c3491" name="ca-bundle.crt"/>
-                        </dir>
-                        <dir name="Model">
-                            <file hash="3a06966d04bb508ff85ec8a355a7f943" name="Paymentmethod.php"/>
-                        </dir>
-                        <dir name="controllers">
-                            <file hash="d7b1742fe6f37803208a93795915a81b" name="CheckoutController.php"/>
-                        </dir>
-                        <dir name="etc">
-                            <file hash="ee05ae1c78daa8f263de0f3c6d25a9df" name="config.xml"/>
-                            <file hash="3045e0b5d2d2d0b52e47c23a64f99445" name="system.xml"/>
-                        </dir>
-                    </dir>
-                </dir>
-            </dir>
-        </target>
-        <target name="magedesign">
-            <dir name="frontend">
-                <dir name="base">
-                    <dir name="default">
-                        <dir name="layout">
-                            <file hash="733e8107f58a1a76fc13f5b11090a6df" name="razorpay.xml"/>
-                        </dir>
-                        <dir name="template">
-                            <dir name="razorpay">
-                                <file hash="568d98738658141ef1ce47edc5363494" name="checkout.phtml"/>
-                            </dir>
-                        </dir>
-                    </dir>
-                </dir>
-            </dir>
-        </target>
-        <target name="mageetc">
-            <dir name="modules">
-                <file hash="84978ab3d49e7f70fc8e1aa00cb2dc36" name="Razorpay_Payments.xml"/>
-            </dir>
-        </target>
-        <target name="mage">
-            <dir name="js">
-                <dir name="razorpay">
-                    <file hash="7d8379be889bfe8445515c48f111e79f" name="razorpay-utils.js"/>
-                </dir>
-            </dir>
-        </target>
-    </contents>
+    <summary>IWD All</summary>
+    <description>IWD All</description>
+    <notes>IWD All</notes>
+    <authors><author><name>IWD</name><user>Oleksiy</user><email>hi@iwdagency.com</email></author></authors>
+    <date>2016-10-04</date>
+    <time>09:16:44</time>
+    <contents><target name="magecommunity"><dir name="IWD"><dir name="All"><dir name="Block"><dir name="Adminhtml"><dir name="Conflicts"><dir name="Grid"><dir name="Renderer"><file name="Rewrites.php" hash="9687dfecd6b401eafc51dc337a771252"/></dir></dir><file name="Grid.php" hash="067540605f4b1e068a7845da82da5fe0"/></dir><file name="Conflicts.php" hash="324ab3c4ed3bd51f04ef551d3f1d7d20"/><dir name="Notification"><file name="Modal.php" hash="c8dc1ec02a7fc7f1bdda72cec6a271f6"/></dir><dir name="Support"><dir name="Edit"><file name="Form.php" hash="3ff00d37b05320e5fc292cd164077536"/><dir name="Renderer"><file name="Filemultiple.php" hash="b25b7273cc86b4247bdbf7fe979728db"/></dir></dir><file name="Edit.php" hash="0dc044f37edd102f42232bbc3fd603aa"/></dir></dir><file name="Jsinit.php" hash="9f542bc1a870f64d51ec33504177cdce"/><dir name="System"><dir name="Config"><dir name="Form"><dir name="Fieldset"><file name="Store.php" hash="2144781581ac4092af28374b73eecde5"/></dir></dir></dir></dir></dir><dir name="Helper"><file name="Data.php" hash="688eb4daa16d6ab86633190d3f419ad3"/><file name="Message.php" hash="454dc5567de41bb8b0d00f1410bda54e"/></dir><dir name="Model"><dir name="Braintree"><file name="Paymentmethod.php" hash="1d8be48265c5e787f62f8e3820d96ed6"/></dir><file name="Conflicts.php" hash="8a94e1ebb10214584fef8c251fbb56ad"/><file name="Feed.php" hash="cbca9d6da0603b4449315ac49ee9945f"/><file name="Indexes.php" hash="365742eba7d5c37e553d867024fb8cab"/><file name="Issuetype.php" hash="9be960638e7170f3d192cb2956a61372"/><dir name="Mysql4"><dir name="Notification"><file name="Collection.php" hash="72ad908152d9f2bb7b63f35868fd5d7b"/></dir><file name="Notification.php" hash="f6717c74a87a9065f0de16201c529731"/><file name="Setup.php" hash="b419e34837037fd8ddae7afecbc2b77b"/></dir><file name="Notification.php" hash="106339b19428dab4b6d146db14f3e518"/><file name="Observer.php" hash="a0c13f25433990bd877f5561c2da1c9c"/><dir name="Paygate"><file name="Authorizenet.php" hash="4bca6b61cc641e3447daebe4b6fe75b4"/></dir><dir name="Paypal"><file name="Config.php" hash="1633ee4e8a4223300a2216d0cb8b0a87"/></dir><dir name="Resource"><file name="Collection.php" hash="8de415b2ed5c290b8d4e9ee634cd4083"/></dir></dir><dir name="controllers"><dir name="Adminhtml"><file name="ConflictsController.php" hash="8415593c13154f116534e6461df1d88e"/><dir name="Iwd"><dir name="All"><file name="ConflictsController.php" hash="209164863ac51ba128c1e5076c941b76"/><file name="SupportController.php" hash="9fa7ae61f16c09557ecaa007dc21da3a"/></dir></dir><file name="MessageController.php" hash="5a3d85bf14e2c553055784d5b53627e7"/><file name="SupportController.php" hash="8a3ca604d3d738555ad3dc6371ff1e4c"/></dir><file name="InfoController.php" hash="0ef369b0dd694f8b3bb7c7b3351623b3"/></dir><dir name="etc"><file name="adminhtml.xml" hash="1b8993a1b3eb6c71d6c698b9b90c07ae"/><file name="config.xml" hash="c8b1757dc0f54271033790aad911eaf7"/><file name="system.xml" hash="d46109dbef906f0f7195fa7d35f67c6b"/></dir><dir name="sql"><dir name="iwdall_setup"><file name="mysql4-install-1.0.0.php" hash="7ea2799695e1e91cb44c667d6f50417c"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="IWD_All.xml" hash="c4eee17392eccf0956ca9b49b679b735"/></dir></target><target name="mage"><dir name="js"><dir name="iwd"><dir name="all"><dir name="adminhtml"><file name="notification.js" hash="28cbe97adcc4028645fcff7c1a976e44"/></dir><file name="bootstrap.min.js" hash="85a6024355eff3f96735fd2c0f95d122"/><file name="iwd-jquery-2.1.3.min.js" hash="9772750934a0092349bd664ee16cce53"/><file name="jquery-1.10.2.min.js" hash="c04fbebacf96da98e82efe1a916c6d29"/><file name="jquery-ui-1.10.3.min.js" hash="bff6e18c85852fb142dea0c08033dff9"/><file name="modal.js" hash="7960716f983f4a247f265f491fc56282"/></dir></dir></dir></target><target name="mageskin"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="iwd"><dir name="all"><dir name="images"><file name="comment-pop-background.png" hash="e1333690d3e62053997c734f568ece32"/><file name="iwdlogo.png" hash="7ae811b70abb84e92654a93a18d692db"/><file name="modal-footer.png" hash="bbbd4f2d0efdbe78cc89d668ffb7abbe"/></dir><file name="iwdall.css" hash="6f42091375cbe25bd5b85815285ef6ff"/></dir></dir></dir></dir></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="iwdall.xml" hash="d625635d08ab2247cfe4e4abbc0d39e0"/></dir><dir name="template"><dir name="iwd"><file name="jsinit.phtml" hash="ab5db5b073af14c65ee12ab129a029b4"/><dir name="notification"><file name="modal.phtml" hash="b9d171589c0595b893e0243ba4680598"/></dir></dir></dir></dir></dir></dir><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="iwd_all.xml" hash="cf3b45a162659d4451f061c29169f130"/></dir><dir name="template"><dir name="iwd"><dir name="all"><file name="info.phtml" hash="81c2b26f0ed7b97f39bffdd40378b28d"/></dir></dir></dir></dir></dir></dir></target><target name="magelocale"><dir name="en_US"><file name="IWD_All.csv" hash="bb029fcefea217f6c74e56748e9614ac"/></dir></target></contents>
     <compatible/>
-    <dependencies>
-        <required>
-            <php>
-                <min>5.4.45</min>
-                <max>5.6.26</max>
-            </php>
-        </required>
-    </dependencies>
+    <dependencies><required><php><min>5.2.0</min><max>8.0.0</max></php></required></dependencies>
 </package>
-
