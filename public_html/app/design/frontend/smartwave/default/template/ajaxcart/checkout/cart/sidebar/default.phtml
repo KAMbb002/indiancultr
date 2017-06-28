@@ -24,9 +24,11 @@
 					$deleteUrl = $this->getUrl('checkout/cart/delete',array('id'=>$_item->getId(),Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED => $this->helper('core/url')->getEncodedUrl($refererUrl)));
 				}     
 			?>
-			<a style="cursor: pointer;" class="btn-remove" onclick="deleteAction('<?php echo $deleteUrl ?>','<?php echo $_item->getId()?>','<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>')" title="<?php echo $this->__('Remove This Item') ?>" ></a>
+		
+			
+			<a style="cursor: pointer;" class="btn-remove" onclick="deleteAction('<?php echo $deleteUrl ?>form_key/<?php echo $formKey = Mage::getSingleton('core/session')->getFormKey();?>','<?php echo $_item->getId()?>','<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>')" title="<?php echo $this->__('Remove This Item') ?>" ></a>
 		<?php else: ?>
-			<a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove This Item') ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>');" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
+			<a href="<?php echo $this->getDeleteUrl() ?>form_key/<?php echo $formKey = Mage::getSingleton('core/session')->getFormKey();?>" title="<?php echo $this->__('Remove This Item') ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>');" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
         <?php endif; ?>
 		<?php if ($isVisibleProduct): ?>
         <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item') ?>" class="btn-edit"><?php echo $this->__('Edit item')?></a>
