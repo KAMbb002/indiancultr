@@ -332,5 +332,10 @@ $imgHeight = 168;
         <?php endif; ?>
     </td>
     <?php endif; ?>
-    <td class="col-delete a-center"><a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove item')?></a></td>
+    <td class="col-delete a-center">
+	<?php /*
+	<a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove item')?></a>*/?>
+	<a href="<?php echo $this->getDeleteUrl() ?>form_key/<?php echo $formKey = Mage::getSingleton('core/session')->getFormKey();?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Remove Item')) ?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove Item') ?></a>
+	
+	</td>
 </tr>
