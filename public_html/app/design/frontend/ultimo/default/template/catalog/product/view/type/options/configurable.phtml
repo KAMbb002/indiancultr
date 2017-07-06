@@ -58,9 +58,10 @@
 		 {?>
 			 <?php if($fitguide=$_product->getFitguide()) { ?>
               <?php if($i>1) break;?>
-              
+         
+         <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>     
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
-         <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
+         
          <div id="inline1" style="width:600px;display: none;">
             <?php echo $fitguide->getContent();?>
             <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('size_chart')->toHtml(); ?>
