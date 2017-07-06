@@ -53,16 +53,14 @@
          <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
             <option><?php echo $this->__('Select Size') ?></option>
          </select>
-         <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <?php $productCollection = Mage::getModel("catalog/product")->load($_product->getId()); $i=1;
 		 foreach ($productCollection->getOptions() as $value) 
 		 {?>
 			 <?php if($fitguide=$_product->getFitguide()) { ?>
               <?php if($i>1) break;?>
-         
-
+              
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
-         
+         <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline1" style="width:600px;display: none;">
             <?php echo $fitguide->getContent();?>
             <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('size_chart')->toHtml(); ?>
