@@ -86,10 +86,10 @@
     <?php if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==2)){
 		
 	  $fitguide=Mage::getModel('fitguide/fitguide')->getCollection();?>
-	 <?php  if($fitguide->getData('id')==($_product->getFitguide())){?>
+	 <?php  if($fitguide->getData('id')==2){?>
          <a class="fancybox" href="#inline4" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline4" style="width:600px;display: none;">
-            <?php echo "==".$fitguide->getContent();?>
+            <?php echo $fitguide->getContent();?>
             
          </div>
 	  
