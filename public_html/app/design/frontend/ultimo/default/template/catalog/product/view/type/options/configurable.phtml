@@ -83,11 +83,15 @@
       </div>
    </dd>
    <?php endforeach; ?>
-  
-  <?php echo  $_product->getTypeId();
-  
-  echo $fitguide=$_product->getFitguide();
-  ?>
+    <?php if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==2)){
+	  $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
+         <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
+         <div id="inline1" style="width:600px;display: none;">
+            <?php echo $fitguide->getContent();?>
+            
+         </div>
+	  
+  <?php }  ?>
 
    
    
