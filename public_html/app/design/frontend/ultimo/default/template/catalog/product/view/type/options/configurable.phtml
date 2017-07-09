@@ -86,7 +86,7 @@
     <?php if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==2)){
 		
 	  $fitguide=Mage::getModel('fitguide/fitguide')->getCollection();?>
-	<?php print_r($fitguide->getData();?>
+	<?php print_r($fitguide->getData());?>
 	 <?php  if($fitguide->getTitle()=='Footwear'){?>
          <a class="fancybox" href="#inline4" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline4" style="width:600px;display: none;">
