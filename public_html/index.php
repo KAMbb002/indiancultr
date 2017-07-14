@@ -28,7 +28,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$_SERVER['MAGE_IS_DEVELOPER_MODE'] = true; 
+// $_SERVER['MAGE_IS_DEVELOPER_MODE'] = true; 
 
  
  
@@ -76,10 +76,10 @@ require_once $mageFilename;
 Varien_Profiler::enable();
 
 if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
-    Mage::setIsDeveloperMode(true);
+   //  Mage::setIsDeveloperMode(true);
 }
 ini_set('display_errors', 1);
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '1024M');
 
 umask(0);
 
