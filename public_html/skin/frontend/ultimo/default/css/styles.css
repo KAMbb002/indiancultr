@@ -3722,6 +3722,7 @@ body.cms-index-index .breadcrumbs { display:none; }
     overflow: visible;
     text-transform: uppercase;
     cursor: pointer;
+       height: 36px;
     line-height: 36px;
     font-size: 15px;
     background-color: #333333;
@@ -3729,14 +3730,17 @@ body.cms-index-index .breadcrumbs { display:none; }
     font-weight: normal;
     white-space: nowrap;
     text-align: center;
-    padding: 0 25px;
+    padding: 0 15px;
     transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -moz-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -webkit-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -o-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;}
 .opc-col-right #checkout-review-submit .buttons-set .button span {background: transparent;
     color: inherit;
-    font-size: inherit;
+    line-height: 36px;
+    font-size: 15px;
+    height: 36px;
+    font-family: 'lora-regular';
     font-weight: inherit;
     text-transform: inherit;
     text-shadow: none;
@@ -3749,7 +3753,10 @@ body.cms-index-index .breadcrumbs { display:none; }
     color: inherit;
     font-size: inherit; padding: 0;
     font-weight: inherit;
-    text-transform: inherit;
+    text-transform: inherit;    font-family: 'lora-regular'!important;
+    font-size: 15px;
+    line-height: 36px;
+    height: 36px;
     text-shadow: none;
     box-shadow: none;
     display: block;}
@@ -3760,14 +3767,15 @@ body.cms-index-index .breadcrumbs { display:none; }
     overflow: visible;
     text-transform: uppercase;
     cursor: pointer;
-    font-size: 12px;
+    font-family: 'lora-regular'!important;
+    font-size: 15px;
+    line-height: 36px;
+    height: 36px;
     font-weight: normal;
     white-space: nowrap;
-    height: 40px;
-    text-align: center;
+   text-align: center;
     font-family: 'lora-regular';
-    line-height: 36px;
-    padding: 0 25px;
+    padding: 0 15px;
     transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -moz-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -webkit-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
