@@ -3713,29 +3713,28 @@ body.cms-index-index .breadcrumbs { display:none; }
 
 /*=========================================*/
 
-#checkout-review-submit .buttons-set .button:hover {    background-color: #3ec2df;
+.opc-col-right #checkout-review-submit .buttons-set .button:hover {  background-color: #3ec2df;
     color: #ffffff;}
-#checkout-review-submit .buttons-set .button {    padding: 0 15px;
-    background-color: #eeeeee;
-    display: inline-block;
+.opc-col-right #checkout-review-submit .buttons-set .button {display: inline-block;
     margin: 0;
     border: 0;
     font-family: 'lora-regular';
     overflow: visible;
     text-transform: uppercase;
     cursor: pointer;
-    font-size: 12px;
+    line-height: 36px;
+    font-size: 15px;
+    background-color: #333333;
+    color: #ffffff;
     font-weight: normal;
     white-space: nowrap;
     text-align: center;
-    line-height: 36px;
     padding: 0 25px;
     transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -moz-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -webkit-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
-    -o-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
-    color: #333333;}
-#checkout-review-submit .buttons-set .button span {background: transparent;
+    -o-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;}
+.opc-col-right #checkout-review-submit .buttons-set .button span {background: transparent;
     color: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -3744,35 +3743,36 @@ body.cms-index-index .breadcrumbs { display:none; }
     box-shadow: none;
     display: block;}
 
-    .discount .discount-form .buttons-set .button:hover {background-color: #3ec2df; color: #ffffff;}
-.discount .discount-form .buttons-set .button span {background: transparent;
+    .opc-col-center .discount .discount-form .buttons-set .button:hover {    background-color: #3ec2df;
+    color: #ffffff;}
+.opc-col-center .discount .discount-form .buttons-set .button span {background: transparent;
     color: inherit;
-    font-size: inherit;
+    font-size: inherit; padding: 0;
     font-weight: inherit;
     text-transform: inherit;
     text-shadow: none;
     box-shadow: none;
     display: block;}
-  .discount .discount-form .buttons-set .button {background-color: #333333;
-    color: #ffffff;
-    font-size: 15px;
-        vertical-align: middle;
+  .opc-col-center .discount .discount-form .buttons-set .button {background-color: #eeeeee;
     display: inline-block;
     margin: 0;
     border: 0;
-    font-family: 'lora-regular';
     overflow: visible;
     text-transform: uppercase;
     cursor: pointer;
+    font-size: 12px;
     font-weight: normal;
     white-space: nowrap;
+    height: 40px;
     text-align: center;
+    font-family: 'lora-regular';
     line-height: 36px;
     padding: 0 25px;
     transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -moz-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
     -webkit-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
-    -o-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;}
+    -o-transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+    color: #333333;}
 
 
 
