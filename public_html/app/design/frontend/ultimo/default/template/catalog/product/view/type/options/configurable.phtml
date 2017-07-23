@@ -97,6 +97,10 @@
          </div>
 	  
 	<?php }  ?>
+	  <?php if ( $_product->getData('has_options') ): ?>
+    <!-- do something -->
+	<?php echo "xxya"; ?>
+  <?php endif; ?>
 	<?php echo '=='.($_product->hasOptions()) ;
 if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==1)){
 		
