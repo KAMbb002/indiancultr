@@ -97,7 +97,7 @@
          </div>
 	  
 	<?php }  ?>
-	<?php echo ($_product->hasOptions()) ;
+	<?php echo '=='.($_product->hasOptions()) ;
 if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==1)){
 		
 	  $fitguide=Mage::getModel('fitguide/fitguide')->getCollection();?>
