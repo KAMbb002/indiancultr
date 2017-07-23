@@ -86,33 +86,10 @@
     <?php if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==2)){
 		
 	  $fitguide=Mage::getModel('fitguide/fitguide')->getCollection();?>
-	<?php // print_r($fitguide->getData());		 ?>
-		 
          <a class="fancybox" href="#inline4" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline4" style="width:600px;display: none;">
 		
-		 <img src="<?php echo "http://www.indiancultr.com/media/wysiwyg/footwear-size-chart.jpg";?>"/>
-
-            
-         </div>
-	  
-	<?php }  ?>
-	  <?php if ( $_product->getData('has_options') ): ?>
-    <!-- do something -->
-	<?php echo "xxya"; ?>
-  <?php endif; ?>
-	<?php 
-if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==1)){
-		
-	  $fitguide=Mage::getModel('fitguide/fitguide')->getCollection();?>
-	<?php // print_r($fitguide->getData());		 ?>
-		 
-         <a class="fancybox" href="#inline5" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
-         <div id="inline5" style="width:600px;display: none;">
-<img src="<?php echo "http://www.indiancultr.com/media/wysiwyg/SIZE_CHART_1_.jpg";?>" alt="Size Chart" />
-		 
-
-            
+		 <img src="<?php echo "http://www.indiancultr.com/media/wysiwyg/footwear-size-chart.jpg";?>"/>            
          </div>
 	  
 	<?php }  ?>
