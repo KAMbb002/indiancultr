@@ -55,9 +55,7 @@
          </select>
          <?php $productCollection = Mage::getModel("catalog/product")->load($_product->getId()); 
 		 ?>
-			 <?php if($fitguide=$_product->getFitguide()) { ?>
-             
-              
+			 <?php if($fitguide=$_product->getFitguide()) { ?> 
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
          <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline1" style="width:600px;display: none;">
@@ -81,11 +79,12 @@
 			 
 			
          
-		 <?php } $i++;	 }?>
+		 <?php $i++;	}  }?>
        
       </div>
    </dd>
    <?php endforeach; ?>
+   <?php /*
     <?php if(($_product->getTypeId()=='configurable') and($_product->getFitguide()==2)){
 		
 	  $fitguide=Mage::getModel('fitguide/fitguide')->getCollection();?>
@@ -95,7 +94,7 @@
 		 <img src="<?php echo "http://www.indiancultr.com/media/wysiwyg/footwear-size-chart.jpg";?>"/>            
          </div>
 	  
-	<?php }  ?>
+	<?php }  ?> */?>
 	
    
    
