@@ -3794,6 +3794,8 @@ body.cms-index-index .breadcrumbs { display:none; }
     -moz-border-radius: 50%;  border-radius: 50%; }
 .footer-primary-bottom  .block-content a i {  font-size: 22px; vertical-align: middle; height: 36px; line-height: 34px;}
 .footer-primary-bottom  .block-content a:hover {background: #444;} 
+.hp-block form#search_mini_form .form-search button.button:before { content: "\f002"!important; font-family: FontAwesome!important;
+    color: gray;  font-size: 14px;}
 
 
 
