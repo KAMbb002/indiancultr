@@ -275,21 +275,24 @@
 
 					<?php if (!empty($menuContainerHtml)): ?>
 						<a href="#header-nav" class="skip-link skip-nav">
-							<span class="icon ic ic-menu"></span>
+							<!--<span class="icon ic ic-menu"></span>-->
+							<span class="icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
 							<span class="label"><?php echo $this->__('Menu'); ?></span>
 						</a>
 					<?php endif; ?>
 
 					<?php if (!empty($searchHtml) || $existsInChildBlock['search']): ?>
 						<a href="#header-search" class="skip-link skip-search">
-							<span class="icon ic ic-search"></span>
+							<!--<span class="icon ic ic-search"></span>-->
+							<span class="search-mobile icon"><i class="fa fa-search" aria-hidden="true"></i></span>
 							<span class="label"><?php echo $this->__('Search'); ?></span>
 						</a>
 					<?php endif; ?>
 
 					<?php if ($existsInChildBlock['account-links']): ?>
 						<a href="#header-account" class="skip-link skip-account">
-							<span class="icon ic ic-user"></span>
+							<!--<span class="icon ic ic-user"></span>-->
+							<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
 							<span class="label"><?php echo $this->__('My Account'); ?></span>
 						</a>
 					<?php endif; ?>
@@ -336,7 +339,7 @@
 									<div class="item"><?php echo $element; ?></div>
 								<?php endforeach; ?>
 							<?php endif; ?><?php */?>
-						</div> <!-- end: left column -->
+						</div> <!-- end: left column --> 
 					<?php endif; ?>
 
 					<?php if (isset($grid['primCentralCol'])): ?>
