@@ -3801,7 +3801,7 @@ body.cms-index-index .breadcrumbs { display:none; }
  #mini-cart .skip-cart span.first i { font-size: 17px; color: #000;}
 
  @media only screen and (max-width: 959px) {
- #mini-cart .skip-link.skip-cart span.first {    font-size: 17px; color: #000;} 
+ #mini-cart .skip-link.skip-cart span.first i { font-size: 17px; color: #000;} 
  }
 
 
