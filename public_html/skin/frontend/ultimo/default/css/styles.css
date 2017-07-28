@@ -3807,7 +3807,11 @@ body.cms-index-index .breadcrumbs { display:none; }
  /*=================27-7-17============================*/ 
  .the-slideshow .owl-controls .owl-buttons .owl-next:before { content: "\f105"!important;  font-family: FontAwesome!important; }
   .the-slideshow .owl-controls .owl-buttons .owl-prev:before { content: "\f104"!important;  font-family: FontAwesome!important; }
-
+  .toolbar .view-mode .grid:before { content: "\f009"!important;  font-family: FontAwesome!important; }
+    .toolbar .view-mode .list:before { content: "\f03a"!important;  font-family: FontAwesome!important; }
+.pager .pages a.next:before { content: "\f105"!important;  font-family: FontAwesome!important; }
+.pager .pages a.previous:before { content: "\f104"!important;  font-family: FontAwesome!important; }
+.mini-cart .mini-cart-content .actions button.button:last-child {margin-top: 15px;}
 
 
 
