@@ -3804,9 +3804,9 @@ body.cms-index-index .breadcrumbs { display:none; }
  #mini-cart .skip-link.skip-cart span.first i { font-size: 17px; color: #000;} 
  }
 
- /*=================27-7-17============================*/
- .the-slideshow .owl-controls .owl-buttons .owl-next:before { content: "\f105"!important;  font-family: FontAwesome!important; color: #000;}
-  .the-slideshow .owl-controls .owl-buttons .owl-prev:before { content: "\f104"!important;  font-family: FontAwesome!important; color: #000;}
+ /*=================27-7-17============================*/ 
+ .the-slideshow .owl-controls .owl-buttons .owl-next:before { content: "\f105"!important;  font-family: FontAwesome!important; }
+  .the-slideshow .owl-controls .owl-buttons .owl-prev:before { content: "\f104"!important;  font-family: FontAwesome!important; }
 
 
 
