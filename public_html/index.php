@@ -79,7 +79,7 @@ if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
     Mage::setIsDeveloperMode(true);
 }
 ini_set('display_errors', 1);
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '2128M');
 
 umask(0);
 
