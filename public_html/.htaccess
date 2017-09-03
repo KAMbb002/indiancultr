@@ -51,7 +51,7 @@ RewriteRule ^(.*)$ http://www.indiancultr.com/$1 [L,R=301,NC]
 ##### Domain-specific PHP Settings #####
 
 <IfModule mod_php5.c> 
-	php_value memory_limit 2128M 
+	php_value memory_limit 3128M 
 	php_value max_execution_time 18000 
 	php_flag magic_quotes_gpc off 
 	php_flag session.auto_start off 
