@@ -32,6 +32,9 @@
 	<?php if ($_product->isAvailable()): ?>
 	    <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
 	    <meta itemprop="availability" content="http://schema.org/InStock">
+
+            <p class="additional-gst" style="color:#999999">Additional GST will be charged at checkout.</p>
+
 	<?php else: ?>
 	    <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
 	    <meta itemprop="availability" content="http://schema.org/OutOfStock">
