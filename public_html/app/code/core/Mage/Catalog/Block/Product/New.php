@@ -87,6 +87,11 @@ class Mage_Catalog_Block_Product_New extends Mage_Catalog_Block_Product_Abstract
      */
     protected function _getProductCollection()
     {
+        $collection = parent::_getProductCollection();    
+    $collection->addAttributeToSort('news_from_date', 'desc');
+
+    return $collection;
+}
         $todayStartOfDayDate  = Mage::app()->getLocale()->date()
             ->setTime('00:00:00')
             ->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
