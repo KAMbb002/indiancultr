@@ -62,7 +62,7 @@
 			      
 				  <option value="<?php echo $this->getOrderUrl('recentlyadded', 'asc') ?>" <?php if(($_REQUEST['order']=="recentlyadded") && ($this->getCurrentDirection() == 'asc')): ?>selected="selected" <?php endif;?>>New Arrivals</option>
 			       
-				   <option value="<?php echo $this->getOrderUrl('percent_discount', 'desc') ?>" <?php if($this->isOrderCurrent('percent_discount') && $this->getCurrentDirection() == 'desc'): ?>selected="selected" <?php endif;?>>Discount</option>
+				   <option value="<?php echo $this->getOrderUrl('special_price', 'desc') ?>" <?php if($this->isOrderCurrent('special_price') && $this->getCurrentDirection() == 'desc'): ?>selected="selected" <?php endif;?>>Discount</option>
 			 
 				
 			<?php /*endforeach;*/ ?>
