@@ -231,7 +231,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
         }
         if ($this->getCurrentOrder()) {
           if(($this->getCurrentOrder())=='recentlyadded'){
-              $this->_collection->setOrder('entity_id','desc');
+              $this->_collection->setOrder('entity_id','asc');
           }
           else {
            $this->_collection->setOrder($this->getCurrentOrder(),$this->getCurrentDirection());
@@ -388,27 +388,13 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
      * @param string $field
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
-    // public function setDefaultOrder($field)
-    // {
-        // if (isset($this->_availableOrder[$field])) {
-            // $this->_orderField = $field;
-        // }
-        // return $this;
-    // }
-	
-	public function setDefaultOrder($field) {
-		if (isset($this->_availableOrder[$field])) {
-			$this->_availableOrder = array(
-
-				'recentlyadded'    => $this->__('Recently Added'),
-				'name'        => $this->__('Name'),
-				'price'       => $this->__('Price'),
-			);
-			$this->_orderField = $field;
-		}
-
-		return $this;
-	}
+    public function setDefaultOrder($field)
+    {
+        if (isset($this->_availableOrder[$field])) {
+            $this->_orderField = $field;
+        }
+        return $this;
+    }
 
     /**
      * Set default sort direction
