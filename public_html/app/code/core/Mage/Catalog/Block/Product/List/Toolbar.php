@@ -231,8 +231,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
         }
         if ($this->getCurrentOrder()) {
           if(($this->getCurrentOrder())=='recentlyadded'){
-              $this->_collection->setOrder('name','desc');
-			  echo "Hii Testing....";
+              $this->_collection->setOrder('entity_id','desc');
           }
           else {
            $this->_collection->setOrder($this->getCurrentOrder(),$this->getCurrentDirection());
