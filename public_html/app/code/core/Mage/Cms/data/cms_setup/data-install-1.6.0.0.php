@@ -47,26 +47,18 @@ $cmsPages = array(
                         => 'Page description',
         'identifier'    => 'no-route',
         'content'       => "
-<div class=\"page-title\"><h1>Whoops, our bad...</h1></div>
+<div class=\"page-title\"><h1>THIS PAGE CANNOT BE FOUND</h1></div>
 <dl>
-    <dt>The page you requested was not found, and we have a fine guess why.</dt>
-    <dd>
-        <ul class=\"disc\">
-            <li>If you typed the URL directly, please make sure the spelling is correct.</li>
-            <li>If you clicked on a link to get here, the link is outdated.</li>
-        </ul>
-    </dd>
-</dl>
+    <dt>We apologize for the inconvenience caused, this page is currently unavailable.</dt>
+    </dl>
 <dl>
-    <dt>What can you do?</dt>
-    <dd>Have no fear, help is near! There are many ways you can get back on track with Magento Store.</dd>
-    <dd>
-        <ul class=\"disc\">
-            <li><a href=\"#\" onclick=\"history.go(-1); return false;\">Go back</a> to the previous page.</li>
-            <li>Use the search bar at the top of the page to search for your products.</li>
-            <li>Follow these links to get you back on track!<br /><a href=\"{{store url=\"\"}}\">Store Home</a>
-            <span class=\"separator\">|</span> <a href=\"{{store url=\"customer/account\"}}\">My Account</a></li>
-        </ul>
+    <dt>Please try one of the links below to browse our list of designers or categories and shop the latest items.</dt>
+        <dd>
+        <ul>
+            <li><a href=\"{{store url=\"designers.html\"}}\">Visit the Designers</a></li>
+            <li><a href=\"{{store url=\"new-arrivals.html?dir=asc&order=position\"}}\">Shop New Arrivals</a></li>
+            <li><a href=\"{{store url=\"\"}}\">Go to the Home Page</a>
+            </ul>
     </dd>
 </dl>
 ",
