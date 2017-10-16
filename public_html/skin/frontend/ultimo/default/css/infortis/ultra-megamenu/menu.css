@@ -462,7 +462,8 @@ div.mobnav-trigger-wrapper { display:none; } /* Important: added "div" to select
 .nav .itemslider .item { padding-top:5px; padding-bottom:0; }
 .nav .itemslider .product-name a { display: inline-block; }
 .nav .itemslider .product-name { margin-top: 8px; }
-.nav-regular .nav-submenu--mega .nav-item > li > a {
+
+.nav-regular .nav-submenu--mega .nav-item a span {
     font-size: 13px;
     text-transform: capitalize;
     padding-bottom: 5px;
