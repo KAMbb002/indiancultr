@@ -165,6 +165,3 @@ function get_client_ip() {
 
      return $ipaddress; 
 }
-
-
-
