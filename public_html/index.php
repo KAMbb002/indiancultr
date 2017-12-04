@@ -101,7 +101,19 @@ else
 
 if($c_code=='IN')
 {
-	Mage::run('app_in', 'website');
+	
+	$allowedIps = Mage::getStoreConfig('dev/restrict/allow_ips');         
+    $allowedIpsArray = explode(',', $allowedIps);     
+    $currentIp = $_SERVER['REMOTE_ADDR'];    
+    if(in_array($currentIp, $allowedIpsArray))
+    {
+      Mage::run('app_us', 'website');
+    }
+    else
+    {
+      Mage::run('app_in', 'website');
+    }
+	//Mage::run('app_in', 'website');
 }
 else
 {
