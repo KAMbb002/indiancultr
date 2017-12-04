@@ -104,7 +104,7 @@ if($c_code=='IN')
 	
 	$allowedIps = Mage::getStoreConfig('dev/restrict/allow_ips');         
     $allowedIpsArray = explode(',', $allowedIps);     
-    $currentIp = $_SERVER['REMOTE_ADDR'];    
+    echo $currentIp = get_client_ip();    
     if(in_array($currentIp, $allowedIpsArray))
     {
       Mage::run('app_us', 'website');
