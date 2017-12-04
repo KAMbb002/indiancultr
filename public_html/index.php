@@ -101,10 +101,10 @@ else
 
 if($c_code=='IN')
 {
-	echo "India".$c_code;
-	echo "SIP".$allowedIps = Mage::getStoreConfig('dev/restrict/allow_ips');         
+	
+	$allowedIps = Mage::getStoreConfig('dev/restrict/allow_ips');         
     $allowedIpsArray = explode(',', $allowedIps);     
-    echo "CIP".$currentIp = $_SERVER['REMOTE_ADDR'];    
+    $currentIp = $_SERVER['REMOTE_ADDR'];    
     if(in_array($currentIp, $allowedIpsArray))
     {
       Mage::run('app_us', 'website');
