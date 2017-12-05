@@ -7,7 +7,7 @@
 
 $country=$this->getCurrentCountryCode();
 $curr=$this->getCurrentCurrencyCode();
-/*
+
 ?>
 <input type="hidden" id="countryName" value="<?php echo Mage::app()->getLocale()->getCountryTranslation($country)?>"/>
 <input type="hidden" id="countrycode" value="<?php echo $country;?>"/>
@@ -15,7 +15,7 @@ $curr=$this->getCurrentCurrencyCode();
 <div class="country_arrow"></div>
 <div class="popClose"></div>
 <form name="ccurrencyswitcher" action="<?php echo $this->getUrl("countycurrencyswitcher/index/save");?>" method="POST" class="form-list" >
-<?php ?>
+<?php /*?>
 <div class="fields clearer">    
 	<div class="field">
     <label><?php echo $this->__('Change Country') ?></label>
@@ -39,7 +39,7 @@ $curr=$this->getCurrentCurrencyCode();
 </div>
 <?php */?>
 	<!--<div class="popTitle"> Where do you want your products to be shipped? </div>-->
-	<?php /* <div class="shipTo mar-sm-t clearfix">
+	<div class="shipTo mar-sm-t clearfix">
             <input type="hidden" name="country" id="countryC" value="IN" />
             <div class="shipToIN fl <?php if($country == 'IN'){ echo 'Active'; } ?>" >
 			<p class="radioNflag"></p>
@@ -49,7 +49,7 @@ $curr=$this->getCurrentCurrencyCode();
 			<p class="radioNflag"></p>
 			<p class="shipToLabel text-center"><span class="txt-bold">Outside India</span> <br /> <span>(Shop in <span class="txt-bold">USD $</span>)</span></p>
 		</div>
-	</div> */ ?>
+	</div>
 </form>
 </div>
 
@@ -85,24 +85,24 @@ $curr=$this->getCurrentCurrencyCode();
 	    });});            
 </script><?php */?>
 <script type="text/javascript">
-	// jQuery( document ).ready(function() {
-		// //document.getElementsByClassName("shipToIN")[0].addEventListener("click", function(){
-    	// jQuery( ".shipToIN" ).click(function(e){
-      		// jQuery(this)[0].className+=" Active";
-      		// jQuery(".shipToROW")[0].className="shipToROW fr";
-      		// document.getElementById('countryC').value='IN'; 
-      		// document.ccurrencyswitcher.submit();
-      		 // //return false;
-    	// });
-    	// //document.getElementsByClassName("shipToROW")[0].addEventListener("click", function(){
-    	// jQuery( ".shipToROW" ).click(function(){
-    		// jQuery(this)[0].className+=" Active";
-      		// jQuery(".shipToIN")[0].className="shipToIN fl";
-      		// document.getElementById('countryC').value='US'; 
-      		// document.ccurrencyswitcher.submit();
-      		// // jQuery(this).addClass( "Active" );
-      		// // jQuery(".shipToIN").removeClass( "Active" );
-      		 // //return false;
-    	// });
-  // });
+	jQuery( document ).ready(function() {
+		//document.getElementsByClassName("shipToIN")[0].addEventListener("click", function(){
+    	jQuery( ".shipToIN" ).click(function(e){
+      		jQuery(this)[0].className+=" Active";
+      		jQuery(".shipToROW")[0].className="shipToROW fr";
+      		document.getElementById('countryC').value='IN'; 
+      		document.ccurrencyswitcher.submit();
+      		 //return false;
+    	});
+    	//document.getElementsByClassName("shipToROW")[0].addEventListener("click", function(){
+    	jQuery( ".shipToROW" ).click(function(){
+    		jQuery(this)[0].className+=" Active";
+      		jQuery(".shipToIN")[0].className="shipToIN fl";
+      		document.getElementById('countryC').value='US'; 
+      		document.ccurrencyswitcher.submit();
+      		// jQuery(this).addClass( "Active" );
+      		// jQuery(".shipToIN").removeClass( "Active" );
+      		 //return false;
+    	});
+  });
 </script>
