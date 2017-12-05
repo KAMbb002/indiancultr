@@ -216,9 +216,7 @@
 .header-regular .left-column .dropdown {
 	display: inline-block;
 }
-div#ccswitcher {
-    display: none !important;
-}
+
 /* Search box
 -------------------------------------------------------------- */
 .header-regular .left-column .form-search {
@@ -247,7 +245,7 @@ div#ccswitcher {
 }
 /* Avoid dropdown heading stretched in containing block */
 .header-regular .right-column .dropdown {
-	/* display: inline-block; */
+	display: inline-block;
 }
 
 /* Search box
