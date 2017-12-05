@@ -294,7 +294,6 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
         $customer = $this->_getCustomer();
 
         try {
-			echo "Hiiiiiiiiii"; exit;
             $errors = $this->_getCustomerErrors($customer);
 
             if (empty($errors)) {
