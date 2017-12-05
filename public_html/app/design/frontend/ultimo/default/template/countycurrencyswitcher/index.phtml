@@ -7,7 +7,7 @@
 
 $country=$this->getCurrentCountryCode();
 $curr=$this->getCurrentCurrencyCode();
-
+/*
 ?>
 <input type="hidden" id="countryName" value="<?php echo Mage::app()->getLocale()->getCountryTranslation($country)?>"/>
 <input type="hidden" id="countrycode" value="<?php echo $country;?>"/>
@@ -15,7 +15,7 @@ $curr=$this->getCurrentCurrencyCode();
 <div class="country_arrow"></div>
 <div class="popClose"></div>
 <form name="ccurrencyswitcher" action="<?php echo $this->getUrl("countycurrencyswitcher/index/save");?>" method="POST" class="form-list" >
-<?php /*?>
+<?php ?>
 <div class="fields clearer">    
 	<div class="field">
     <label><?php echo $this->__('Change Country') ?></label>
