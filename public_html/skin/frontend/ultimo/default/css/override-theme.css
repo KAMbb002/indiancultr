@@ -214,9 +214,11 @@
 }
 /* Avoid dropdown heading stretched in containing block */
 .header-regular .left-column .dropdown {
-	/* display: inline-block; */
+	display: inline-block;
 }
-
+div#ccswitcher {
+    display: none !important;
+}
 /* Search box
 -------------------------------------------------------------- */
 .header-regular .left-column .form-search {
