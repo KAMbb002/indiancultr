@@ -214,7 +214,7 @@
 }
 /* Avoid dropdown heading stretched in containing block */
 .header-regular .left-column .dropdown {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 /* Search box
@@ -245,7 +245,7 @@
 }
 /* Avoid dropdown heading stretched in containing block */
 .header-regular .right-column .dropdown {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 /* Search box
