@@ -3813,5 +3813,5 @@ body.cms-index-index .breadcrumbs { display:none; }
 .pager .pages a.previous:before { content: "\f104"!important;  font-family: FontAwesome!important; } 
 .mini-cart .mini-cart-content .actions button.button:last-child {margin-top: 15px;}
 
-
+h2.product-name { height: 36px; }
 
