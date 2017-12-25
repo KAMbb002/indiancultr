@@ -87,15 +87,15 @@ umask(0);
 $mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : '';
 
 /* Run store or run website */
-//$mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
-echo "HHHHHHHHHHHHHHHHHHHH";
+$mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
+
 if(isset($_COOKIE['webCode'])){
    $c_code=$_COOKIE['webCode'];
 }
 else
    {
-   echo "RAVIK"; echo $c_code=getCountryCodeByIp(get_client_ip());
-    //setcookie('webCode',$c_code,time()+60*60*24*30,'/','.indiancultr.com');
+    $c_code=getCountryCodeByIp(get_client_ip());
+    setcookie('webCode',$c_code,time()+60*60*24*30,'/','.indiancultr.com');
     //$_COOKIE['webCode'] = $c_code;
 }
 
