@@ -94,7 +94,7 @@ if(isset($_COOKIE['webCode'])){
 }
 else
    {
-    echo $c_code=getCountryCodeByIp(get_client_ip());
+   echo "RAVIK"; echo $c_code=getCountryCodeByIp(get_client_ip());
     //setcookie('webCode',$c_code,time()+60*60*24*30,'/','.indiancultr.com');
     //$_COOKIE['webCode'] = $c_code;
 }
