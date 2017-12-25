@@ -64,7 +64,7 @@ $session = Mage::getSingleton('customer/session');
 
                   <div class="feature-hover"><span class="changCountry flag flag-<?php echo strtolower($_COOKIE['webCode']);?>"></span><span > <?php echo substr(Mage::app()->getLocale()->getCountryTranslation($country),0,14);?></span></div>
               </div>
-              <?php //echo $this->getLayout()->createBlock('countycurrencyswitcher/index')->setTemplate('countycurrencyswitcher/index.phtml')->toHtml(); //flag removed ?>
+              <?php echo $this->getLayout()->createBlock('countycurrencyswitcher/index')->setTemplate('countycurrencyswitcher/index.phtml')->toHtml(); //flag removed ?>
           </div>
       </div>
     </li>
