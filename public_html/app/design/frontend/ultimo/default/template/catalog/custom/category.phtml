@@ -95,10 +95,14 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 																	</div>
 																<?php } ?>
 															<?php } else { ?>
-																<?php if(in_array($values, $subCatFcName)) { ?>
+																<?php 
+																	$dArray= array(0,1,2,3,4,5,6,7,8,9);
+																	$intersection  = array_intersect($subCatFcName, $dArray);
+																?>
+																<?php if(!empty($intersection)) { ?>
 																	<div>
 																		<h2>0-9</h2>
-																		<ul class="content-tab">
+																		<ul>
 																			<?php foreach($subCatName as $_key=>$_val){ ?>
 																				<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
 																				<?php $digit = "0123456789" ?>
