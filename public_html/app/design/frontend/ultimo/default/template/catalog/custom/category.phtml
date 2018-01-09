@@ -12,14 +12,15 @@
 $_helper = Mage::helper('catalog/category');
 $_categories = $_helper->getStoreCategories();
 $category=array();
+$removeParentCategoryById = array();
+$removeChildCategoryById = array();
 if (count($_categories) > 0){
     foreach($_categories as $_category){
-		$category[$_category->getId()] = $_category->getName();
+		if(!in_array($_category->getId(),$removeParentCategoryById)){
+			$category[$_category->getId()] = $_category->getName();
+		}
     }
 }
-?>
-    
-<?php
 //$category=array('tabHeader_1'=>'ALL DESIGNERS', 'tabHeader_3'=> 'ACCESSORIES','tabHeader_4'=>'MEN','tabHeader_2'=>'CLOTHING');
 $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');	
 ?>
@@ -32,7 +33,7 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 				.content-tab ul {width:auto;}
 				.content-tab .tabdata h3{ border: 0 none; color: #333; font-family: DidotHTF24Light; font-size: 28px;padding-bottom: 0; text-transform: capitalize; margin-bottom:15px; text-align:left; font-style: italic;  font-weight: normal;}
 		</style>
-		<div class="tabHeader_0" rel="tabHeader_0">DESIGNERS</div>
+		<div class="tabHeader_0" rel="tabHeader_0">All Designers</div>
 			<div id="categorys">
 				<div class="left-navi">
 					<ul class="category-nav">
@@ -68,8 +69,10 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 											//->addAttributeToSelect('is_active')->addAttributeToSort('name','ASC');
 											if (count($_subcategories) > 0){     
 												foreach($_subcategories as $_subcategory){
-													$subCatName[$_subcategory->getUrl()] = $_subcategory->getName();
-													$subCatFcName[] = strtolower(substr($_subcategory->getName(), 0, 1));
+													if(!in_array($_subcategory->getId(),$removeChildCategoryById)){
+														$subCatName[$_subcategory->getUrl()] = $_subcategory->getName();
+														$subCatFcName[] = strtolower(substr($_subcategory->getName(), 0, 1));
+													}
 												}
 											}
 										?>
