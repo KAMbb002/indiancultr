@@ -65,7 +65,7 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 								<div class="city_areas">
 									<ul class="locations_coimbatore">
 										<?php foreach($asserious as $key=>$values){ ?>
-											<li class="<?php if($key == 1) { echo "active" ;}?>" rel="alpha_<?=$charIdf?><?= $key; ?>"><?= $values ; ?></li>
+											<li class="<?php if($key == 1) { echo "active activeDefault" ;}?>" rel="alpha_<?=$charIdf?><?= $key; ?>"><?= $values ; ?></li>
 										<?php } ?>
 									</ul>
 								</div>
@@ -194,7 +194,8 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 jQuery(document).ready(function(){
     jQuery(".category-nav li").click(function(){
         jQuery('.defaultActive').css("display", "block");
+        jQuery('.locations_coimbatore li').removeClass("active");
+        jQuery('.activeDefault').addClass("active");
     });
 });
 </script>
-
