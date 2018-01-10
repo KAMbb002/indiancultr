@@ -89,50 +89,44 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 										?>
 										<div class="city_coimbatore <?php if($k==1){ echo 'defaultActive'; } ?>" id="alpha_<?=$charIdf?><?= $key; ?>">
 											<?php if($key == 1) { ?>
-												<div class="content-tab">
-													<div class="block1">
-														<?php foreach($asserious as $key=>$values){ ?>
-															<?php if($key !=28) { ?>
-																<?php if(in_array($values, $subCatFcName)) { ?>
-																	<div class="tabdata">
-																		<h2><?= $values ?></h2>
-																		<ul>
-																			<?php foreach($subCatName as $_key=>$_val){ ?>
-																				<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																				<?php if($fChat == $values) {?>
-																					<li>
-																						<a href="<?= $_key ?>"><?= $_val ?></a>
-																					</li>
-																				<?php } ?>
-																			<?php } ?>	
-																		</ul>
-																	</div>
-																<?php } ?>
-															<?php } else { ?>
-																<?php 
-																	$dArray= array(0,1,2,3,4,5,6,7,8,9);
-																	$intersection  = array_intersect($subCatFcName, $dArray);
-																?>
-																<?php if(!empty($intersection)) { ?>
-																	<div>
-																		<h2>0-9</h2>
-																		<ul>
-																			<?php foreach($subCatName as $_key=>$_val){ ?>
-																				<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																				<?php $digit = "0123456789" ?>
-																				<?php if(strpos($digit, $fChat)) {?>
-																					<li>
-																						<a href="<?= $_key ?>"><?= $_val ?></a>
-																					</li>
-																				<?php } ?>
-																			<?php } ?>
-																		</ul>
-																	</div>
-																<?php } ?>
-															<?php } ?>
+											
+												<?php foreach($asserious as $key=>$values){ ?>
+													<?php if($key !=28) { ?>
+														<?php if(in_array($values, $subCatFcName)) { ?>
+															<h2><?= $values ?></h2>
+															<ul class="content-tab">
+																<?php foreach($subCatName as $_key=>$_val){ ?>
+																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
+																	<?php if($fChat == $values) {?>
+																		<li>
+																			<a href="<?= $_key ?>"><?= $_val ?></a>
+																		</li>
+																	<?php } ?>
+																<?php } ?>	
+															</ul>
 														<?php } ?>
-													</div>
-												</div>
+													<?php } else { ?>
+														<?php 
+															$dArray= array(0,1,2,3,4,5,6,7,8,9);
+															$intersection  = array_intersect($subCatFcName, $dArray);
+														?>
+														<?php if(!empty($intersection)) { ?>
+															<h2>0-9</h2>
+															<ul class="content-tab">
+																<?php foreach($subCatName as $_key=>$_val){ ?>
+																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
+																	<?php $digit = "0123456789" ?>
+																	<?php if(strpos($digit, $fChat)) {?>
+																		<li>
+																			<a href="<?= $_key ?>"><?= $_val ?></a>
+																		</li>
+																	<?php } ?>
+																<?php } ?>
+															</ul>
+														<?php } ?>
+													<?php } ?>
+												<?php } ?>
+												
 												<?php } else { ?>
 													<?php if($key !=28) { ?>
 														<h2><?= $values ?></h2>
