@@ -1,26 +1,230 @@
-<?php //error_reporting(E_ALL); ini_set('display_errors', 1); ?>
-   <link href='//martjackassests.azureedge.net/css/themes/mjt02012487/main_min.css?v=v10' rel='stylesheet' type='text/css' />
-   <link href='https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Stylesheet/CustomStyles.css?v=v4758' rel='stylesheet' type='text/css' />
+<?php error_reporting(E_ALL); 
+ini_set('display_errors', 1); ?>
+
+<style type="text/css">
+.breadcrumbs {
+	display: none;
+}
+.category-title {
+	display: none;
+}
+ul li{
+	display: inline;
+}
+.alpha li{    
+	float: left;
+    padding: 7px !important;
+    margin: 0 3px 3px;
+    font-size: 18px;
+    color: #000;
+    background: #f2f2f2;
+    padding: 0 8px;
+    border: 1px solid #ccc;
+}
+
+#limheight li {
+    display: inline-block;
+    padding-bottom: 10px;  
+    width:100%;  
+}
+.alpha li:hover {
+	background: #86754c !important;
+
+}
+.alpha li:hover a {
+	color: white !important;
+
+}
+
+#limheight li a {
+    color: #86754c;
+    
+}
+.designer {
+	margin: 25px;
+	float: left;
+}
+.alpha .active {
+	background: #86754c !important;
+}
+.alpha .active a {
+	color: white !important;
+}
+</style>
+<?php 
+if(isset($_GET['category'])) {
+	$get_param = explode('-', $_GET['category']);
+}
+
+$parent_category = (isset($_GET['parent_category']) && $_GET['parent_category'] > 0)  ? $_GET['parent_category'] : '';
+
+
+$_helper = Mage::helper('catalog/category');
+
+$categoryId = 81;
+
+$categories = Mage::getModel('catalog/category')->load($categoryId);
+
+$uCategories = $categories->getChildrenCategories();
+
+
+$parent_cat_ids = array();
+
+foreach ($uCategories as $_category)
+{
+   $_categories[$_category->getName()] = $_category;
+   $cat_values = Mage::getResourceModel('catalog/category')->getAttributeRawValue($_category->getId(), "designer_name", Mage::app()->getStore()->getId());
+    if ($cat_values) {
+	   	$cat_value_array = explode(',', $cat_values);
+	    foreach ($cat_value_array as $value) {
+		   	//if (!array_key_exists($value, $parent_cat_ids)){
+		   	 $parent_cat_ids[$value][] = array($_category->getId() => $_category->getName());
+		   //	} else {
+		   	// array_push($parent_cat_ids[$value], $_category->getName());
+		   //}
+   		}
+	}
+}
+ksort($_categories);
+
+
+$asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');
+
+ ?>
+<div class="container">
+<div class="parent-cat-div">
+	<ul>
+<?php
+if ($parent_category >  0) {
+	$_categories = array();
+}
+foreach ($parent_cat_ids as $parent_cat_id => $parent_cat_value) {
+
+$parent_categories = Mage::getModel('catalog/category')->load($parent_cat_id);
+if ($parent_category > 0) {
+   
+ 	if ($parent_cat_id == $parent_category) {
+		foreach ($parent_cat_value as $child_key => $child_value) {
+			foreach ($child_value as $key => $value) {
+				
+			 	$final_cat= Mage::getModel('catalog/category')->load($key);
+			 	$child_cat_name = $final_cat->getName();
+			 	if (isset($get_param)) {
+			 		if (strtolower($child_cat_name[0]) == $get_param[0]) {
+			 		 	$_categories[$child_cat_name] = $final_cat;
+			 		}
+			 	}else {
+			 		$_categories[$child_cat_name] = $final_cat;
+			 	}
+			 	
+			   
+			 } 
+			
+		}
+	 
+		ksort($_categories);
+	}
+}
+//var_dump(count($_categories)); die();
+?>
+	   <li>
+	   	<a href="/designers.html/?parent_category=<?php echo $parent_cat_id ?>"><?php echo $parent_categories->getName(); ?></a>
+	   </li>
+	   
+<?php } ?>
+</ul>
+
+</div>
+	<div class="test">
+
+		<ul class="alpha" >
+			
+			<?php foreach ($asserious as $key => $value) { ?>
+			<?php if (isset($get_param[0]) && $get_param[0] == $value){ ?>
+			<?php $class = 'active'; ?>
+			<?php }else { ?>
+			<?php $class = ""; ?>
+			<?php }?>
+			    <?php if (!isset($get_param[0]) && $value == 'AllDesigners') { ?>
+					<li class="active"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
+				<?php } else { ?>
+				<li class="<?php echo $class ?>"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
+				<?php } ?>
+			<?php } ?>
+		</ul>
+    </div>
+<?php if (count($_categories) > 0): ?>
+	<div class ="designer" >
+	    <ul id = "limheight">
+
+	    	<?php $prev_cat_name = ''; ?>
+	    	<?php if(isset($get_param[0]) && is_numeric($get_param[0]) ) { ?>
+	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($_GET['category']); ?></a></li>
+	    	<?php } else if (isset($get_param[0]) && $get_param[0] != 'All-Designers') { ?>
+	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($get_param[0]); ?></a></li>
+	    	<?php } ?>
+
+	        <?php foreach($_categories as $_category): ?>
+	             <?php $cat_name = strtolower($_category->getName()); ?>
+	               
+	               <?php if (isset($get_param[0]) && $get_param[0] != 'AllDesigners') { ?>
+		               <?php if (is_numeric($get_param[0])) { ?>
+			               <?php if (is_numeric($cat_name[0])) { ?>
+			               		<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
+			               <?php } ?>
+		               <?php } else if (strpos($cat_name, $get_param[0]) === 0) { ?>
+	                        	
+	                        <li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
+	                	
+	                	<?php } ?>
+
+	            	<?php } else { ?>
+                        <style type="text/css">
+                        #limheight {
+							column-count: 5;
+						}</style>
+		            	<?php if ($prev_cat_name != $cat_name[0] || $prev_cat_name = '') { ?>
+		            	
+		            		<li style="padding-bottom: 10px; color: black; font-size: 18px;"><h3><a href="" style="color: black;"><?php echo strtoupper($cat_name[0]); ?></a></h3></li>
+		            	
+		            	<?php } ?>
+	            		
+	            			<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name); ?></a> </li><br/>
+	            		
+	            		<?php $prev_cat_name = $cat_name[0]; ?>
+	                <?php } ?>
+	                
+	            
+	        <?php endforeach; ?>
+	    </ul>
+	</div>
+
+<?php endif; ?> 
+</div>
+<?php die(); ?>
+   <!-- <link href='//martjackassests.azureedge.net/css/themes/mjt02012487/main_min.css?v=v10' rel='stylesheet' type='text/css' />
+   <link href='https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Stylesheet/CustomStyles.css?v=v4758' rel='stylesheet' type='text/css' /> -->
 
 <!-- <link href='https://www.indiancultr.com/skin/frontend/ultimo/default/css/customdesigner.css' rel='stylesheet' type='text/css' /> -->
 
-   <script type="text/javascript">
+<!--    <script type="text/javascript">
    MartJack ={"Config":{"MerchantId":"37509c70-78e6-42a4-a0cc-744f8212d423","st01_path":"//martjackassets-scripts.azureedge.net/script/Zone02","SiteUrlForControls":"https://www.carmaonlineshop.com","FilePaths":null,"IsProductCompare":"True","IsReview":"True","AppId":"171002983383275","IsAutoComplete":"True","jsVersion":"v3","InstalledApps":["ChimpJack","MobileSite","RewardPoints","LocationAwareness"],"PublisherMerchantId":"37509c70-78e6-42a4-a0cc-744f8212d423","IsSecurePage":"false","LangCode":"en","LangSiteUrl":"https://www.carmaonlineshop.com","IsFacebookUser":"True","Channel":"W","ThemeURL":"//martjackassests.azureedge.net/css","Theme":"mjt02012487","IsLightWeightIntegration":"False","Analytics":{"GaProfileId":"UA-54053197-1"},"Returnurl":"https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F","GoogleClientID":"359007044967-h503jib8cfhlipoich59343r21oucae0.apps.googleusercontent.com","GoogleAPIKey":"AIzaSyBYrYn8ZybvecMGK_YdTkDz2PaDKEcxjX8","IsGoogleUser":"True","IsResponsive":"True","CartOrientation":"H","IsQuickView":true,"NavigationType":"MC","DefaultShoppingListID":"688","Culture":"en-IN","IsSSLEnabled":true,"ConversionFactor":1.0,"DynamicImagePath":"//images-cdn.azureedge.net/azure/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Images/ProductImages/Source","IsTwitterUser":"False","ResourceUrl":"https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423","JSLibUrl":"http://martjackassets-scripts.azureedge.net/script/ZoneTP"},"PageInfo":{"PageID":1191134,"PredefinedPageID":5,"PageTitle":"Designers pages","PageConfigType":"content","CategoryID":null,"CategoryName":null,"BrandID":null,"BrandName":null,"GroupID":null,"GroupName":null,"PostID":0,"ProductID":0,"ProductTitle":null,"Sku":null,"ProductMrp":0.0,"WebPrice":0.0,"OfferText":null,"BlogId":0,"Variants":null,"PageType":"content"},"ProviderConfig":{"GoogleAddwords":{"RemarketingEnabled":"0","ConversionId":"966923379","ConversionLanguage":"en","ConversionFormat":"3","ConversionColor":"ffffff","ConversionLabel":"4dUhCLXx7WsQ86iIzQM","ConversionValue":"0.00","IsRemarketingVariantLevel":null}},"WebNotifications":[],"Current":{"Cart":[],"Location":{"LocationId":0,"LocationCode":null,"LocationName":null,"City":null,"Country":null},"User":{"Email":null,"UserID":null,"FBProfileId":null,"GmailProfileID":null,"crm_externalid":null,"crm_uniqueid":null,"FirstName":null,"LastName":null,"MobileNo":null,"UserEmail":null},"RequestTime":1515143417,"CurrencySymbol":"<span class=\"sp_currencysyb WebRupee\">INR </span><span class=\"sp_amt\"></span>","CurrencyCode":null,"OrderId":0,"OrderTotal":0.0,"CheckoutType":null,"ActualShippingCost":0.0,"TaxTotal":0.0,"BillEmail":null,"OrderStatus":null,"Source":null,"DeliveryMode":"","utm_source":"","utm_medium":"","utm_campaign":"","IsOrderTrack":false,"utm_content":""},"WidgetSettings":"","Apps":{}}</script>
-   <script src="//martjackassets-scripts.azureedge.net/script/Zone02/js/Lib/MJ_Static-Built.js?v=v3" type="text/javascript"></script>
-  
+   <script src="//martjackassets-scripts.azureedge.net/script/Zone02/js/Lib/MJ_Static-Built.js?v=v3" type="text/javascript"></script> -->
 <?php
-$_helper = Mage::helper('catalog/category');
-$_categories = $_helper->getStoreCategories();
-$category=array();
-$removeParentCategoryById = array(15,81);
-$removeChildCategoryById = array();
-if (count($_categories) > 0){
-    foreach($_categories as $_category){
-		if(!in_array($_category->getId(),$removeParentCategoryById)){
-			$category[$_category->getId()] = $_category->getName();
-		}
-    }
-}
+die();
+// $_helper = Mage::helper('catalog/category');
+// $_categories = $_helper->getStoreCategories();
+// $category=array();
+// $removeParentCategoryById = array(15,81);
+// $removeChildCategoryById = array();
+// if (count($_categories) > 0){
+//     foreach($_categories as $_category){
+// 		if(!in_array($_category->getId(),$removeParentCategoryById)){
+// 			$category[$_category->getId()] = $_category->getName();
+// 		}
+//     }
+// }
+ // echo "hellos"; die();
 //$category=array('tabHeader_1'=>'ALL DESIGNERS', 'tabHeader_3'=> 'ACCESSORIES','tabHeader_4'=>'MEN','tabHeader_2'=>'CLOTHING');
 $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');	
 
@@ -43,7 +247,7 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 		</style>
 		<div class="tabHeader_0" rel="tabHeader_0">All Designers</div>
 			<div id="categorys">
-				<div class="left-navi">
+				<!-- <div class="left-navi">
 					<ul class="category-nav">
 						<?php $i=1; foreach($category as $key=>$values){ 
 							
@@ -52,7 +256,7 @@ $asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 
 						<?php 
 						$i++; } ?>
 					</ul>
-				</div>
+				</div> -->
 
 				<div class="Location_container">
 					<?php foreach($category as $key=>$values){ ?>
