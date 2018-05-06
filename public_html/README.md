@@ -1,41 +1,47 @@
-Magento SMTP Pro Extension
-by Ashley Schroder (aschroder.com)
+Abandoned Cart Module for Magento1
+=====================
 
-- Free and Opensource email extension for Magento
-- Easily send Magento transactional emails via Google Apps, Gmail, Amazon SES or your own SMTP server.
-- Test your conifguration from the Magento admin
-- View a log of all emails
-- Improve deliverability with an external SMTP server
+Easily recover lost sales sending an automatic reminders to shoppers who abandoned carts in Magento.
 
-Contributors
-- nl_NL translations thanks to [Melvyn Sopacua](http://www.supportdesk.nu/)
-- es_ES translations thanks to [Jhoon Saravia](http://twitter.com/jsaravia)
-- pt_BR translations thanks to [Gabriel Zamprogna] (https://github.com/gabrielz)
-- fr_FR translations thanks to [@aymencis Aymen Hajri](https://github.com/aymencis)
-- de_DE translations thanks to [@quafzi Thomas Birke](https://github.com/quafzi)
+TODO
+-----
+- Allow coupon generation
+
+Facts
+-----
+- version: 0.1.0
+- [extension on GitHub](https://github.com/vpietri/ADM_AbandonedCart)
+
+Compatibility
+-------------
+- Magento CE 1.8, 1.9 (may also work in other versions and EE, not tested)
+
+Installation
+------------
+1. Install the extension using [modman](https://github.com/colinmollenhour/modman) or copy all the
+files to the according Magento directories manually.
+
+Uninstallation
+--------------
+1. Remove the files.
 
 
-FAQ
+Support
+-------
+If you have any issues with this extension, open an issue in the GitHub
+repository. Please provide error messages, debug information like output
+from the Magento error logs and the exact steps / code to reproduce the
+issue.
 
-Q: It's not working
-A: Check for extension conflicts, and check that your host allows outbound SMTP traffic
+Contribution
+------------
+Any contribution is highly appreciated. The best way to contribute code is to
+open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests).
 
-Q: Does it work with the Mailchimp extension
-A: yes, see: http://www.aschroder.com/2011/09/using-smtp-pro-and-ebizmarts-mailchimp-extension-in-magento/
+Developers
+---------
+* Vincent Pietri ([vincent-pietri.fr](http://www.vincent-pietri.fr))
 
-Q: How do I install it manually
-A: See: http://www.aschroder.com/2010/05/installing-a-magento-extension-manually-via-ftp-or-ssh/ or use modman.
-
-Q: Self test is failing with "Exception message was: Unable to connect via TLS"
-A: Check that you have OpenSSL installed for your PHP environment.
-
-Q: Self test is failing with messages like: "can not open connection to the host, on port 587" or "Connection timed out".
-A: Check that you have the SMTP server host and port correct, if you do - then check with your webhost, many block SMTP connections due to spam. If that's the case, there are plenty of expert Magento hosts on display at magespeedtest.com.
-
-Q: Self test is failing with "Exception message was: 5.7.1 Username and Password not accepted. Learn more at 5.7.1..."
-A: It's actually good advice to learn more here:  http://support.google.com/mail/bin/answer.py?answer=14257. But two things to check: 
-1) that you are really 110% sure you have the right username and password (test it on gmail.com)
-2) If that does work, then Google may have blocked your server IP due to too many wrong passwords. You need to log in to gmail.com _from_ that IP - in order to answer the captcha and allow the IP through again. There's a few ways to do that - SOCKS proxy, X forward a browser, use Lynx.
-
-Q: I am getting a Subject set twice error
-A: This happens sometimes, typically if it is happening it would also be happening in core Magento. There is a Pull Request [here] (https://github.com/aschroder/Magento-SMTP-Pro-Email-Extension/pull/57) that includes a work around thanks to [Rafael Kassner] (https://github.com/kassner).
+Licence
+-------
+[OSL - Open Software Licence 3.0](http://opensource.org/licenses/osl-3.0.php)

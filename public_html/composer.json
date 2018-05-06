@@ -1,21 +1,15 @@
 {
-  "name": "aschroder/smtp_pro",
-  "type": "magento-module",
-  "description": "sending Magento mail through an external smtp-server",
-  "homepage":"https://github.com/aschroder/Magento-SMTP-Pro-Email-Extension",
-  "require": {
-    "magento-hackathon/magento-composer-installer": "*"
-  }, 
-  "authors":[
-    {"name": "aschroder"
-    }
-  ],
-  "extra": {
-    "map" : [
-      ["app/etc/modules/Aschroder_SMTPPro.xml", "app/etc/modules/Aschroder_SMTPPro.xml"],
-      ["app/code/local/Aschroder/SMTPPro", "app/code/local/Aschroder/SMTPPro"],
-      ["app/design/adminhtml/base/default/template/smtppro", "app/design/adminhtml/default/default/template/smtppro"],
-      ["app/locale/en_US/Aschroder_SMTPPro.csv", "app/locale/en_US/Aschroder_SMTPPro.csv"]
+    "name": "vpietri/adm_abandonedcart",
+    "license": "OSL3",
+    "type": "magento-module",
+    "description": "This Magento extensions aims to send an eamil to customer who abandoned their cart",
+    "homepage": "",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "authors":[
+        {
+            "name":"Vincent Pietri"
+        }
     ]
-  }
 }
