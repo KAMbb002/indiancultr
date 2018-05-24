@@ -143,6 +143,10 @@
 				<h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
 			</div>
 			
+			<div class="product-name">
+				<p><?php echo $_helper->productAttribute($_product, $_product->getVendor(), 'vendor') ?></p>
+			</div>
+			
 			<?php echo $this->getReviewsSummaryHtml($_product, false, true); //reviews ?>
 
 			<?php if ($shortDescription): ?>
