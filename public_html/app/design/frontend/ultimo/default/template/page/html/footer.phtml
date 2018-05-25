@@ -427,7 +427,7 @@ background: rgba(0, 0, 0, 0.4);
 
 <div id="layerbg" style="display: none;"></div>
 <div class="mg-popup-body" style="display:none">
-        <a href="#" class="mg-close">&times;</a>
+        <a href="#" class="mg-close" onClick="popupclose();">&times;</a>
         <div class="mg-header"> <img src="<?php echo $this->getSkinUrl('images/banner.png') ?>" alt="">
             <input type="email" id="emailfield" class="inputfeild" placeholder="Email Address">
             <div class="clearfix"></div>
@@ -510,9 +510,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 
 <script>
-	function registeremail(){
+	function popupclose(){
 		
-			alert('closeing');		    
+				    
 			jQuery('#layerbg').hide(); 
 			jQuery('.mg-popup-body').hide();
 		
