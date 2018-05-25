@@ -511,7 +511,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script>
 	jQuery(document).ready(function(){
-		jQuery('.mg-close').click(function(event){
+		jQuery('.mg-close').on( "click",function(event){
 			event.preventDefault();
 			alert('closeing');		    
 			jQuery('#layerbg').hide(); 
