@@ -3821,3 +3821,4 @@ body.cms-index-index .breadcrumbs { display:none; }
     bottom: 28px;
 }
 .catalog-category-view h2.product-name.product-brand {height: 15px;}
+.catalogsearch-result-index h2.product-name.product-brand {height: 15px;}
