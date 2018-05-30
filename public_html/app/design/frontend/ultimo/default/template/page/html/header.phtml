@@ -175,7 +175,7 @@
 	}
 
 	//Mini compare
-	if (!empty($compareHtml) || $existsInChildBlock['compare'])
+	if (!empty($compareHtml))
 	{
 		$skipLinksCount++;
 	}
@@ -185,6 +185,17 @@
 	{
 		$skipLinksCount++;
 	}
+?>
+<?php 
+
+	$storeCode = Mage::app()->getStore()->getCode();
+
+	if($storeCode == 'store_in'){
+	echo $this->getLayout()->createBlock('cms/block')->setBlockId(124)->toHtml();
+	}else {
+		echo $this->getLayout()->createBlock('cms/block')->setBlockId(125)->toHtml();
+	}
+
 ?>
 <div id="top" class="header-container header-regular<?php if ($classes['root']) echo $classes['root']; ?>">
 <div class="header-container2">

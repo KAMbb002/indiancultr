@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+	                <customer>
+	                    <children>
+	                         <adm_abandonedcart translate="title" module="adm_abandonedcart">
+	                             <title>Abandoned Cart</title>
+	                             <sort_order>30</sort_order>
+	                         </adm_abandonedcart>
+	                    </children>
+	                </customer>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <abandonedcart translate="title" module="adm_abandonedcart">
+                                        <title>Abandoned Cart</title>
+                                        <sort_order>70</sort_order>
+                                    </abandonedcart>
+                                </children>
+                            </config>
+                        </children>
+                    </system>                    
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <customer>
+             <children>
+                 <adm_abandonedcart translate="title" module="adm_abandonedcart">
+                     <title>Abandoned Cart</title>
+                     <action>adminhtml/abandonedcart_followup</action>
+                 </adm_abandonedcart>
+             </children>
+        </customer>
+    </menu>
+</config>
