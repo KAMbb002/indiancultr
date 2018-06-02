@@ -36,7 +36,8 @@
 			});
 		});
 		function popupcloseme(){
-			jQuery.fancybox.close(true);
+			console.log('welcome');
+			jQuery.fancybox.close();
 		}
    	});
    
@@ -68,7 +69,7 @@
 			<?php 
 				$product_id = $_product->getId();
 				if($product_id == 11253){ ?>
-					<div class="fieldset">
+					<div class="fieldset custom-size-chart">
 						<h2 class="legend">Customize Your Product</h2>
 						<ul class="product-custom-option form-list">
 							<li class="fields">
