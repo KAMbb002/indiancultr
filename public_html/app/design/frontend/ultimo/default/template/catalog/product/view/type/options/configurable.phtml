@@ -60,7 +60,24 @@
          <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
          <div id="inline1" style="width:600px;display: none;">
             <?php echo $fitguide->getContent();?>
-           test
+			
+			
+			<?php 
+				$product_id = $_product->getId();
+				if($product_id == 11253){
+					echo "testing123";			
+				}
+				else{
+					echo "test";
+				}
+			?>
+			
+			
+           
+		   
+		   
+		   
+		   
          </div>
 		 
 		<?php $i=1; foreach ($productCollection->getOptions() as $value) 
