@@ -18,7 +18,7 @@ class Tilkor_ProductOptions_Model_Observer
 		$quote_id = $firstItem->getQuoteId();		
 		$product_id = Mage::getSingleton('checkout/session')->getLastAddedProductId(true);
 		
-Mage::log('<br>Your Data product_id :'.$product_id, Zend_Log::DEBUG, 'custom.log');
+//Mage::log('<br>Your Data product_id :'.$product_id, Zend_Log::DEBUG, 'custom.log');
 			
 		
 		$resource = Mage::getSingleton('core/resource');
@@ -27,12 +27,12 @@ Mage::log('<br>Your Data product_id :'.$product_id, Zend_Log::DEBUG, 'custom.log
 		
 		if($product_id != ''){			
 			$select = "SELECT item_id FROM icsales_flat_quote_item WHERE quote_id = $quote_id AND product_id = $product_id";
-Mage::log('<br>Your Data select query :'.$select, Zend_Log::DEBUG, 'custom.log');
+//Mage::log('<br>Your Data select query :'.$select, Zend_Log::DEBUG, 'custom.log');
 			$item_id = $readConnection->fetchOne($select);
-Mage::log('<br>Your Data item_id :'.$item_id, Zend_Log::DEBUG, 'custom.log');
+//Mage::log('<br>Your Data item_id :'.$item_id, Zend_Log::DEBUG, 'custom.log');
 			if($item_id != ''){
 				$query = "UPDATE icsales_flat_quote_item SET custom_measurement = 'Bust/Chest: $bust_chest, Waist: $waist, Sleeve Length: $sleeve_length, Shoulders: $shoulders, Armhole: $armhole, Neck: $neck, Length: $length' WHERE item_id = $item_id AND quote_id = $quote_id";
-Mage::log('<br>Your Data update query :'.$query, Zend_Log::DEBUG, 'custom.log'); 
+//Mage::log('<br>Your Data update query :'.$query, Zend_Log::DEBUG, 'custom.log'); 
 				$res = $writeConnection->query($query);
 			}
 		}
