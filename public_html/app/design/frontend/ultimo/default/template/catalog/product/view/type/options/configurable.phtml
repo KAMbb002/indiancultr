@@ -27,14 +27,17 @@
 <script type="text/javascript" src="<?php echo $this->getSkinUrl("js/jquery.fancybox.js?v=2.1.5") ?>"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl("js/jquery.fancybox.css?v=2.1.5") ?>" media="screen" />
 <script type="text/javascript">
-   jQuery(document).ready(function() {
-   	jQuery('.fancybox').fancybox();
-   	jQuery("#fancybox-manual-c").click(function() {
-   		jQuery.fancybox.open([
-   		], {
-   			
-   		});
-   	});
+	jQuery(document).ready(function() {
+		jQuery('.fancybox').fancybox();
+		jQuery("#fancybox-manual-c").click(function() {
+			jQuery.fancybox.open([
+			], {
+				
+			});
+		});
+		function popupcloseme(){
+			jQuery.fancybox.close(true);
+		}
    	});
    
 </script>
@@ -65,35 +68,62 @@
 			<?php 
 				$product_id = $_product->getId();
 				if($product_id == 11253){ ?>
-					<div class="product-custom-option">
-						<label>Bust/Chest</label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="bust_chest" value="">
-						</div>
-						<label>Waist</label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="waist" value="">
-						</div>
-						<label>Sleeve Length</label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="sleeve_length" value="">
-						</div>
-						<label><p>Shoulders</p></label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="shoulders" value="">
-						</div>
-						<label>Armhole</label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="armhole" value="">
-						</div>
-						<label>Neck</label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="neck" value="">
-						</div>
-						<label>Length</label>
-						<div class="input-box">
-							<input type="text" class="input-text  product-custom-option" name="length" value="">
-						</div>
+					<div class="fieldset">
+						<h2 class="legend">Customize Your Product</h2>
+						<ul class="product-custom-option form-list">
+							<li class="fields">
+								<div class="field">
+									<label for="bust_chest">Bust/Chest</label>
+									<div class="input-box">
+										<input type="text" class="input-text product-custom-option" name="bust_chest" value="">
+									</div>
+								</div>
+								<div class="field">
+									<label for="bust_chest">Waist</label>
+									<div class="input-box">
+										<input type="text" class="input-text  product-custom-option" name="waist" value="">
+									</div>
+								</div>
+							</li>
+							<li class="fields">
+								<div class="field">
+									<label for="bust_chest">Sleeve Length</label>
+									<div class="input-box">
+										<input type="text" class="input-text  product-custom-option" name="sleeve_length" value="">
+									</div>
+								</div>
+								<div class="field">
+									<label for="bust_chest">Shoulders</label>
+									<div class="input-box">
+										<input type="text" class="input-text  product-custom-option" name="shoulders" value="">
+									</div>
+								</div>
+							</li>
+							<li class="fields">
+								<div class="field">
+									<label for="bust_chest">Armhole</label>
+									<div class="input-box">
+										<input type="text" class="input-text  product-custom-option" name="armhole" value="">
+									</div>
+								</div>
+								<div class="field">
+									<label for="bust_chest">Neck</label>
+									<div class="input-box">
+										<input type="text" class="input-text  product-custom-option" name="neck" value="">
+									</div>
+								</div>
+							</li>
+							<li class="fields">
+								<div class="field">
+									<label for="bust_chest">Length</label>
+									<div class="input-box">
+										<input type="text" class="input-text  product-custom-option" name="length" value="">
+									</div>
+								</div>
+							</li>
+						</ul>
+						<a href="#" title="Submit" class="button" onclick="popupcloseme();"><span><span>Submit</span></span></a>
+						
 					</div>			
 			<?php }	?>
 			
