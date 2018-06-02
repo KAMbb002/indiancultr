@@ -74,12 +74,12 @@
 				$product_id = $_product->getId();
 				if($product_id == 11253){ ?>
 					<div class="fieldset custom-size-chart">
-						<h2 class="legend">Customize Your Product</h2>
+						
 						
 						<div class="customize-your-product-image">
 							<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('customize-your-product-image')->toHtml(); ?>
 						</div>
-						
+						<h2 class="legend">Customize Your Product</h2>
 						<div class="customize-your-product-option">
 							<ul class="product-custom-option form-list">
 								<li class="fields">
@@ -197,6 +197,7 @@
 		font-family: arial;
 		text-transform: uppercase;
 		color: #000;     padding-bottom: 15px;
+		margin-bottom:20px;
 	}
 	.custom-size-chart .form-list .field{
 		width:48%;
@@ -213,7 +214,7 @@
 	.customize-your-product-image{
 		display:block;
 		width:100%;
-		margin-bottom:15px;
+		margin-bottom:30px;
 	}
 	.customize-your-product-image img{
 		max-width:100%;
