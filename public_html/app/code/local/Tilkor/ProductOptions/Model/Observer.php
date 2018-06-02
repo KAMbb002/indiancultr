@@ -17,6 +17,8 @@ class Tilkor_ProductOptions_Model_Observer
 		
 		$quote_id = $firstItem->getQuoteId();		
 		$product_id = Mage::getSingleton('checkout/session')->getLastAddedProductId(true);
+		
+		Mage::log('<br>Your Data product_id :'.$product_id, Zend_Log::DEBUG, 'custom.log');
 			
 		
 		$resource = Mage::getSingleton('core/resource');
@@ -26,6 +28,7 @@ class Tilkor_ProductOptions_Model_Observer
 		
 		if($product_id != ''){			
 			$select = "SELECT item_id FROM icsales_flat_quote_item WHERE quote_id = $quote_id AND product_id = $product_id";
+			Mage::log('<br>Your Data select query :'.$select, Zend_Log::DEBUG, 'custom.log');
 			$item_id = $readConnection->fetchOne($select);
 			if($item_id != ''){
 				$query = "UPDATE $tableName SET custom_measurement = 'Bust/Chest: $bust_chest, Waist: $waist, Sleeve Length: $sleeve_length, Shoulders: $shoulders, Armhole: $armhole, Neck: $neck, Length: $length' WHERE item_id = $item_id AND quote_id = $quote_id";
