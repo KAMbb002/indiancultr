@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Tilkor_ProductOptions>
+      <version>1.0.0</version>
+    </Tilkor_ProductOptions>
+  </modules>
+  <global>
+	<events> 
+		<checkout_cart_save_after>
+			<observers>
+				<tilkor_productoptions_add_after>
+					<class>Tilkor_ProductOptions_Model_Observer</class>
+					<method>afterAddToCart</method>
+				</tilkor_productoptions_add_after>
+			</observers>
+		</checkout_cart_save_after>
+		<sales_order_place_after>
+			<observers>
+				<tilkor_productoptions_order_after>
+					<class>Tilkor_ProductOptions_Model_Observer</class>
+					<method>afterOrderSuccess</method>
+				</tilkor_productoptions_order_after>
+			</observers>
+        </sales_order_place_after>
+    </events>
+  </global>
+  
+  
+</config> 
