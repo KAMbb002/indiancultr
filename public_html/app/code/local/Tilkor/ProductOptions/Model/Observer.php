@@ -34,7 +34,7 @@ class Tilkor_ProductOptions_Model_Observer
 			if($item_id != ''){
 				$query = "UPDATE $tableName SET custom_measurement = 'Bust/Chest: $bust_chest, Waist: $waist, Sleeve Length: $sleeve_length, Shoulders: $shoulders, Armhole: $armhole, Neck: $neck, Length: $length' WHERE item_id = $item_id AND quote_id = $quote_id";
 				$res = $writeConnection->query($query);
-			Mage::log('<br>Your Data update query :'.$query, Zend_Log::DEBUG, 'custom.log');
+			Mage::log('<br>Your Data update query :'.$query, Zend_Log::DEBUG, 'custom.log'); 
 			}
 		}
 	}
