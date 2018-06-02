@@ -3833,8 +3833,7 @@ body.cms-index-index .breadcrumbs { display:none; }
     font-size: 20px;
     font-family: arial;
     text-transform: uppercase;
-    color: #000;
-    padding-bottom: 15px;
+    color: #000;     padding-bottom: 15px;
 }
 .custom-size-chart .form-list .field{
 	width:48%;
