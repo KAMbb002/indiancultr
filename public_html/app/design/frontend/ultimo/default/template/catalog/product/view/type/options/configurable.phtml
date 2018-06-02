@@ -62,12 +62,13 @@
 		 ?>
 			 <?php if($fitguide=$_product->getFitguide()) { ?> 
          <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
-         <a class="fancybox" href="#inline1" style="margin-left: 0px;"><img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide"></a>
+         <a class="fancybox sizechart-link" href="#inline1" style="margin-left: 0px;"><!--<img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide">--> Size Chart</a>
+
          <div id="inline1" style="width:600px;display: none;">
             <?php echo $fitguide->getContent();?>			
          </div>
 		 
-		  <a class="fancybox" href="#inline3" style="margin-left: 0px;">Customize</a>
+		  <a class="fancybox customize-link" href="#inline3" style="margin-left: 0px;">Customize</a>
 		  <div id="inline3" style="max-width:600px; width:100%;display: none;">
 		  <?php 
 				$product_id = $_product->getId();
@@ -220,6 +221,25 @@
 	.customize-your-product-option{
 		display:block;
 		width:100%;
+	}
+	
+	.sizechart-link,
+	.customize-link{
+		font-size: 12px;
+		font-family: arial;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: red;
+		display: inline-block;
+		line-height: 17px;
+		margin: 0;
+		padding: 0;
+		height: 30px;
+		line-height: 30px;
+		letter-spacing: 1.1px;
+	}
+	.sizechart-link{
+		color:#000;
 	}
 	
 	@media (max-width:480px){
