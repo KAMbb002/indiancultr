@@ -3,6 +3,8 @@ class Tilkor_ProductOptions_Model_Observer
 {	
 	public function afterAddToCart($observer) {
 		
+		$data = Mage::app()->getRequest()->getParams();
+		
 		$bust_chest = $data[bust_chest] ? $data[bust_chest] : 'N/A';		
 		$waist = $data[waist] ? $data[bust_chest] : 'N/A';		
 		$sleeve_length = $data[sleeve_length] ? $data[bust_chest] : 'N/A';	
