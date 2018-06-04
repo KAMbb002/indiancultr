@@ -45,7 +45,7 @@
         <?php endif; ?>
         <?php echo $this->escapeHtml($_item->getDescription()) ?>
 		
-		
+		<span style="font-size:9px;">
 		<?php 
 			$resource = Mage::getSingleton('core/resource');
 			$readConnection = $resource->getConnection('core_read');
@@ -53,7 +53,7 @@
 			$select = "SELECT custom_measurement FROM icsales_flat_order_item WHERE item_id = $itemId";
 			echo $custom_measurement = $readConnection->fetchOne($select);				
 		?>
-		
+		</span>
 		
 		
 		

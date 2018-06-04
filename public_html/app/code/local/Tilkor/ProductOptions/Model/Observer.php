@@ -6,12 +6,12 @@ class Tilkor_ProductOptions_Model_Observer
 		$data = Mage::app()->getRequest()->getParams();
 		
 		$bust_chest = $data[bust_chest] ? $data[bust_chest] : 'N/A';		
-		$waist = $data[waist] ? $data[bust_chest] : 'N/A';		
-		$sleeve_length = $data[sleeve_length] ? $data[bust_chest] : 'N/A';	
-		$shoulders = $data[shoulders] ? $data[bust_chest] : 'N/A';	
-		$armhole = $data[armhole] ? $data[bust_chest] : 'N/A';		
-		$neck = $data[neck] ? $data[bust_chest] : 'N/A';
-		$length = $data[length] ? $data[bust_chest] : 'N/A';	
+		$waist = $data[waist] ? $data[waist] : 'N/A';		
+		$sleeve_length = $data[sleeve_length] ? $data[sleeve_length] : 'N/A';	
+		$shoulders = $data[shoulders] ? $data[shoulders] : 'N/A';	
+		$armhole = $data[armhole] ? $data[armhole] : 'N/A';		
+		$neck = $data[neck] ? $data[neck] : 'N/A';
+		$length = $data[length] ? $data[length] : 'N/A';	
 		$hip = $data[hip] ? $data[hip] : 'N/A';	
 		$length_shoulder_to_nee = $data[length_shoulder_to_nee] ? $data[length_shoulder_to_nee] : 'N/A';	
 		$length_waist_to_ankle = $data[length_waist_to_ankle] ? $data[length_waist_to_ankle] : 'N/A';		
@@ -34,10 +34,14 @@ class Tilkor_ProductOptions_Model_Observer
 //Mage::log('<br>Your Data select query :'.$select, Zend_Log::DEBUG, 'custom.log');
 			$item_id = $readConnection->fetchOne($select);
 //Mage::log('<br>Your Data item_id :'.$item_id, Zend_Log::DEBUG, 'custom.log');
-			if($item_id != ''){				
-				$query = "UPDATE icsales_flat_quote_item SET custom_measurement = 'Bust/Chest: $bust_chest, Waist: $waist, Sleeve Length: $sleeve_length, Shoulders: $shoulders, Armhole: $armhole, Neck: $neck, Length: $length Hip: $hip, Length (Shoulder to Knee): $length_shoulder_to_nee, Length (Waist to Ankle): $length_waist_to_ankle' WHERE item_id = $item_id AND quote_id = $quote_id";
-//Mage::log('<br>Your Data update query :'.$query, Zend_Log::DEBUG, 'custom.log'); 
-				$res = $writeConnection->query($query);
+			if($item_id != ''){
+
+				if(trim($data[bust_chest]) || trim($data[waist]) || trim($data[sleeve_length]) || trim($data[shoulders])){
+					$query = "UPDATE icsales_flat_quote_item SET custom_measurement = 'Bust/Chest: $bust_chest, Waist: $waist, Sleeve Length: $sleeve_length, Shoulders: $shoulders, Armhole: $armhole, Neck: $neck, Length: $length Hip: $hip, Length (Shoulder to Knee): $length_shoulder_to_nee, Length (Waist to Ankle): $length_waist_to_ankle' WHERE item_id = $item_id AND quote_id = $quote_id";
+					$res = $writeConnection->query($query);
+				}
+				
+
 			}
 		}
 	}
