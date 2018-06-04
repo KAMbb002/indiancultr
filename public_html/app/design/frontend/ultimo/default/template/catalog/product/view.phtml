@@ -408,3 +408,73 @@
 	<?php endif; ?>
 
 </div> <!-- end: product-view -->
+
+<style>
+	.custom-size-chart{
+		background:#fff;
+		padding:15px 15px 30px;
+		width:100%;
+		box-sizing:border-box;
+	}
+	.custom-size-chart.fieldset .legend{
+		font-weight: 500;
+		font-size: 20px;
+		font-family: arial;
+		text-transform: uppercase;
+		color: #000;     padding-bottom: 15px;
+		margin-bottom:20px;
+	}
+	.custom-size-chart .form-list .field{
+		width:48%;
+	}
+	.custom-size-chart .form-list .field:nth-child(even){
+		float:right;
+	}
+	.custom-size-chart .form-list .field:nth-child(odd){
+		float:left;
+	}
+	.custom-size-chart .form-list label{font-weight:500; font-family: arial; font-size: 13px; color: #000;}
+	.custom-size-chart .form-list input.input-text{display:block; width:100%;}
+
+	.customize-your-product-image{
+		display:block;
+		width:100%;
+		margin-bottom:30px;
+	}
+	.customize-your-product-image img{
+		max-width:100%;
+	}
+	.customize-your-product-option{
+		display:block;
+		width:100%;
+	}
+	
+	.sizechart-link,
+	.customize-link{
+		font-size: 12px;
+		font-family: arial;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: #aaa;
+		display: inline-block;
+		line-height: 17px;
+		margin: 0;
+		padding: 0;
+		height: 30px;
+		line-height: 30px;
+		letter-spacing: 1.1px;
+	}
+	.sizechart-link{
+		color: #aaa;
+		margin: 0 10px !important;
+		letter-spacing: .5px;
+	}
+	
+	@media (max-width:480px){
+		.custom-size-chart .form-list .field{
+			width:100%;
+			margin-bottom:10px;
+		}
+	}
+	
+</style>
