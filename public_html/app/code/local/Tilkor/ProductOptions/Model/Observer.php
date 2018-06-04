@@ -37,7 +37,7 @@ class Tilkor_ProductOptions_Model_Observer
 			if($item_id != ''){
 
 				if(trim($data[bust_chest]) || trim($data[waist]) || trim($data[sleeve_length]) || trim($data[shoulders])){
-					$query = "UPDATE icsales_flat_quote_item SET custom_measurement = '<br>Bust/Chest: $bust_chest, <br>Waist: $waist, <br>Sleeve Length: $sleeve_length, <br>Shoulders: $shoulders, <br>Armhole: $armhole, Neck: $neck, <br>Length: $length <br>Hip: $hip, <br>Length (Shoulder to Knee): $length_shoulder_to_nee, <br>Length (Waist to Ankle): $length_waist_to_ankle' WHERE item_id = $item_id AND quote_id = $quote_id";
+					$query = "UPDATE icsales_flat_quote_item SET custom_measurement = 'Bust/Chest: $bust_chest, <br>Waist: $waist, <br>Sleeve Length: $sleeve_length, <br>Shoulders: $shoulders, <br>Armhole: $armhole, Neck: $neck, <br>Length: $length, <br>Hip: $hip, <br>Length (Shoulder to Knee): $length_shoulder_to_nee, <br>Length (Waist to Ankle): $length_waist_to_ankle' WHERE item_id = $item_id AND quote_id = $quote_id";
 					$res = $writeConnection->query($query);
 				}
 				
