@@ -245,6 +245,7 @@
 			</div> -->
 			
 			<?php 
+			if($_product->getTypeId() == 'simple' ){
 			$custom_measurement = $_product->getResource()->getAttribute('custom_measurement')->getFrontend()->getValue($_product); 
 			if($custom_measurement == 'Yes'){ ?>
 				<a class="fancybox customize-link" href="#inline3" style="margin-left: 0px;">Customize</a>
@@ -334,6 +335,7 @@
 						
 					</div>						
 				</div>
+			<?php }	?>
 			<?php }	?>
 			
 			<!--  End: added new customization -->
