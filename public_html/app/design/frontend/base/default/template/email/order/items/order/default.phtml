@@ -50,7 +50,7 @@
 			$resource = Mage::getSingleton('core/resource');
 			$readConnection = $resource->getConnection('core_read');
 			$itemId = $_item->getId();
-			$select = "SELECT custom_measurement FROM sales_flat_order_item WHERE item_id = $itemId";
+			$select = "SELECT custom_measurement FROM icsales_flat_order_item WHERE item_id = $itemId";
 			echo $custom_measurement = $readConnection->fetchOne($select);				
 		?>
 		
