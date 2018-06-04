@@ -59,7 +59,106 @@
             <option><?php echo $this->__('Select Size') ?></option>
          </select>
          <?php $productCollection = Mage::getModel("catalog/product")->load($_product->getId()); ?>
-			 
+		
+		<?php if($fitguide=$_product->getFitguide()) { ?> 
+         <?php $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide);?>
+         <a class="fancybox sizechart-link" href="#inline1" style="margin-left: 0px;"><!--<img src="<?php echo $this->getSkinUrl("images/size-chart-icon.PNG")?>" alt="Size Chart" title="Size Guide">--> Size Chart</a>
+
+         <div id="inline1" style="width:600px;display: none;">
+            <?php echo $fitguide->getContent();?>			
+         </div>
+		 
+		<?php 
+			$custom_measurement = $_product->getResource()->getAttribute('custom_measurement')->getFrontend()->getValue($_product); 
+			if($custom_measurement == 'Yes'){ ?>
+				<a class="fancybox customize-link" href="#inline3" style="margin-left: 0px;">Customize</a>
+				<div id="inline3" style="max-width:600px; width:100%;display: none;">	  
+					<div class="fieldset custom-size-chart">					
+						<div class="customize-your-product-image">
+							<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('customize-your-product-image')->toHtml(); ?>
+						</div>
+						<h2 class="legend">Customize Your Product</h2>
+						<div class="customize-your-product-option">
+							<ul class="product-custom-option form-list">
+								<li class="fields">
+									<div class="field">
+										<label for="bust_chest">Bust/Chest</label>
+										<div class="input-box">
+											<input type="text" class="input-text product-custom-option" name="bust_chest" value="">
+										</div>
+									</div>
+									<div class="field">
+										<label for="waist">Waist</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="waist" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="sleeve_length">Sleeve Length</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="sleeve_length" value="">
+										</div>
+									</div>
+									<div class="field">
+										<label for="shoulders">Shoulders</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="shoulders" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="armhole">Armhole</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="armhole" value="">
+										</div>
+									</div>
+									<div class="field">
+										<label for="neck">Neck</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="neck" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="length">Length</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="length" value="">
+										</div>
+									</div>
+								
+									<div class="field">
+										<label for="hip">Hip</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="hip" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="length_shoulder_to_nee">Length (Shoulder to Knee)</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="length_shoulder_to_nee" value="">
+										</div>
+									</div>
+								
+									<div class="field">
+										<label for="length_waist_to_ankle">Length (Waist to Ankle)</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="length_waist_to_ankle" value="">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<a href="#" title="Submit" class="button" onclick="popupcloseme();"><span><span>Submit</span></span></a>
+						</div>
+						
+					</div>						
+				</div>
+			<?php }	?>
 		 
 		 
 		<?php $i=1; foreach ($productCollection->getOptions() as $value) 
