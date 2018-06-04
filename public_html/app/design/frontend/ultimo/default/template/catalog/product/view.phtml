@@ -6,6 +6,28 @@
  * @see Mage_Review_Block_Product_View
  */
 ?>
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl("js/jquery.fancybox.js?v=2.1.5") ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl("js/jquery.fancybox.css?v=2.1.5") ?>" media="screen" />
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('.fancybox').fancybox();
+		jQuery("#fancybox-manual-c").click(function() {
+			jQuery.fancybox.open([
+			], {
+				
+			});
+		});
+		
+   	});
+	function popupcloseme(){
+		console.log('close button called');
+		jQuery.fancybox.close();
+	}
+   
+</script>
+
+
 <?php
 	$_helper = $this->helper('catalog/output');
 	$_product = $this->getProduct();
