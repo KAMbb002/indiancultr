@@ -203,46 +203,8 @@
 
 		<?php echo $this->getBlockHtml('formkey'); ?>
 			<?php if (!$this->hasOptions()): //add to cart when no options (e.g. simple products) ?>
-				<?php if($_product->isSaleable()): ?>
-					<div class="add-to-box">
-						<?php echo $this->getChildHtml('addtocart') ?>
-					</div>
-				<?php endif; ?>
-				<?php echo $this->getChildHtml('extra_buttons') ?>
-			<?php endif; ?>
-
-			<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-				<?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
-					<div class="container1-wrapper"><?php echo $container1_html; ?></div>
-				<?php endif; ?>
-			<?php endif;?>
 			
-			<?php if ($addtoLinksHtml = $this->getChildHtml('addto')): //compare, wishlist, send to friend ?>
-				<div> <!--   class="action-box clearer"> -->
-					<?php echo $addtoLinksHtml; ?>
-				</div>
-			<?php endif; ?>
-			<!--  added customization -->
-			<div class="clear"></div>
-			<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-				<?php if ($container2_html = $this->getChildChildHtml('container2', '', true, true)): ?>
-					<div class="box-additional grid12"> <!-- orignal code was <?php echo $grid['cont2Col']; ?> -->
-    					<div class="container2-wrapper"><?php echo $container2_html; ?></div>
-    				</div>
-					
-    			<?php endif; ?>
-    		<?php endif; ?>
-    		<div class="clear"></div>
-			<!--  added customization -->
-			
-			<!--  added new customization -->
-			
-			<!--<?php // if($fitguide=$_product->getFitguide()) { ?> 
-			<?php // $fitguide=Mage::getModel('fitguide/fitguide')->load($fitguide); ?>
-			
-			<div id="inline1" style="width:600px;display: none;">
-				<?php //echo $fitguide->getContent();?>			
-			</div> -->
+				<!--  added new customization -->
 			
 			<?php 
 			if($_product->getTypeId() == 'simple' ){
@@ -339,6 +301,40 @@
 			<?php }	?>
 			
 			<!--  End: added new customization -->
+			
+				<?php if($_product->isSaleable()): ?>
+					<div class="add-to-box">
+						<?php echo $this->getChildHtml('addtocart') ?>
+					</div>
+				<?php endif; ?>
+				<?php echo $this->getChildHtml('extra_buttons') ?>
+			<?php endif; ?>
+
+			<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+				<?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
+					<div class="container1-wrapper"><?php echo $container1_html; ?></div>
+				<?php endif; ?>
+			<?php endif;?>
+			
+			<?php if ($addtoLinksHtml = $this->getChildHtml('addto')): //compare, wishlist, send to friend ?>
+				<div> <!--   class="action-box clearer"> -->
+					<?php echo $addtoLinksHtml; ?>
+				</div>
+			<?php endif; ?>
+			<!--  added customization -->
+			<div class="clear"></div>
+			<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+				<?php if ($container2_html = $this->getChildChildHtml('container2', '', true, true)): ?>
+					<div class="box-additional grid12"> <!-- orignal code was <?php echo $grid['cont2Col']; ?> -->
+    					<div class="container2-wrapper"><?php echo $container2_html; ?></div>
+    				</div>
+					
+    			<?php endif; ?>
+    		<?php endif; ?>
+    		<div class="clear"></div>
+			<!--  added customization -->
+			
+			
 			
 			
 			<?php if (isset($p['primCol_2'])) echo $p['primCol_2']; ?>
