@@ -44,6 +44,19 @@
             <?php echo $addInfoBlock->setItem($_item)->toHtml(); ?>
         <?php endif; ?>
         <?php echo $this->escapeHtml($_item->getDescription()) ?>
+		
+		
+		<?php 
+			$resource = Mage::getSingleton('core/resource');
+			$readConnection = $resource->getConnection('core_read');
+			$itemId = $_item->getId();
+			$select = "SELECT custom_measurement FROM sales_flat_order_item WHERE item_id = $itemId";
+			echo $custom_measurement = $readConnection->fetchOne($select);				
+		?>
+		
+		
+		
+		
     </td>
     <td align="left" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;"><?php echo $this->escapeHtml($this->getSku($_item)) ?></td>
     <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;"><?php echo $_item->getQtyOrdered()*1 ?></td>
