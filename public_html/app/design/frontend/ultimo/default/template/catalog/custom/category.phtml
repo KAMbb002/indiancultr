@@ -1,7 +1,6 @@
 <?php error_reporting(E_ALL); 
 ini_set('display_errors', 1); ?>
 
-
 <style type="text/css">
 .parent-cat-div{
 	text-align: center;
@@ -86,20 +85,6 @@ if(isset($_GET['category'])) {
 
 $parent_category = (isset($_GET['parent_category']) && $_GET['parent_category'] > 0)  ? $_GET['parent_category'] : '';
 
-if (isset($get_param[0]) && $get_param[0] != 'All-Designers' && $parent_category < 1) { ?>
-<style type="text/css">
-	#limheight {
-		column-count: auto;
-	} 
-</style>
-<?php }else {?>
-<style type="text/css">
-	#limheight {
-		column-count: 5;
-	}
-</style>
-<?php } ?>
-<?php 
 
 $_helper = Mage::helper('catalog/category');
 
@@ -107,32 +92,26 @@ $categoryId = 81;
 
 $categories = Mage::getModel('catalog/category')->load($categoryId);
 
-$uCategories = $categories->getChildren();
-
+$uCategories = $categories->getChildrenCategories();
 
 
 $parent_cat_ids = array();
 
-foreach (explode(',', $uCategories) as $_category)
+foreach ($uCategories as $_category)
 {
-   $_category = Mage::getModel('catalog/category')->load($_category);
-   if ($_category->getIsActive()) {
-   	   $_categories[$_category->getName()] = $_category;
-   		$cat_values = Mage::getResourceModel('catalog/category')->getAttributeRawValue($_category->getId(), "designer_name", Mage::app()->getStore()->getId());
-	    if ($cat_values) {
-		   	$cat_value_array = explode(',', $cat_values);
-		    foreach ($cat_value_array as $value) {
-			   	//if (!array_key_exists($value, $parent_cat_ids)){
-			   	 $parent_cat_ids[$value][] = array($_category->getId() => $_category->getName());
-			   //	} else {
-			   	// array_push($parent_cat_ids[$value], $_category->getName());
-			   //}
-	   		}
-		}
-   }
-
+   $_categories[$_category->getName()] = $_category;
+   $cat_values = Mage::getResourceModel('catalog/category')->getAttributeRawValue($_category->getId(), "designer_name", Mage::app()->getStore()->getId());
+    if ($cat_values) {
+	   	$cat_value_array = explode(',', $cat_values);
+	    foreach ($cat_value_array as $value) {
+		   	//if (!array_key_exists($value, $parent_cat_ids)){
+		   	 $parent_cat_ids[$value][] = array($_category->getId() => $_category->getName());
+		   //	} else {
+		   	// array_push($parent_cat_ids[$value], $_category->getName());
+		   //}
+   		}
+	}
 }
-
 ksort($_categories);
 
 
@@ -141,294 +120,15 @@ $asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =
  ?>
 <div class="container">
 <div class="parent-cat-div">
-	<ul class="parent-cat-ul">
+	<ul>
 <?php
 if ($parent_category >  0) {
 	$_categories = array();
-}
-if (isset($_GET['xyz'])) {
- 	var_dump($parent_cat_ids); 
 }
 foreach ($parent_cat_ids as $parent_cat_id => $parent_cat_value) {
 
 $parent_categories = Mage::getModel('catalog/category')->load($parent_cat_id);
 if ($parent_category > 0) {
-   
- 	if ($parent_cat_id == $parent_category) {
-		foreach ($parent_cat_value as $child_key => $child_value) {
-			foreach ($child_value as $key => $value) {
-				
-			 	$final_cat= Mage::getModel('catalog/category')->load($key);
-			 	$child_cat_name = $final_cat->getName();
-			 	if (isset($get_param) && $get_param[0] != 'AllDesigners') {
-			 		if (strtolower($child_cat_name[0]) == $get_param[0]) {
-			 		 	$_categories[$child_cat_name] = $final_cat;
-			 		}
-			 	}else {
-			 		$_categories[$child_cat_name] = $final_cat;
-			 	}
-			 	
-			   
-			 } 
-			
-		}
-
-		ksort($_categories);
-	}else if(isset($get_param[0]) && $get_param[0]  == 'AllDesigners') {
-
-	}
-}
-// if (isset($_GET['xyz'])) {
-//  	var_dump($_categories); 
-// }
-?>
-	   <li>
-	   	<a href="/designers.html/?parent_category=<?php echo $parent_cat_id ?>"><?php echo $parent_categories->getName(); ?></a>
-	   </li>
-	   
-<?php } ?>
-</ul>
-
-</div>
-	<div class="test">
-
-		<ul class="alpha" >
-			
-			<?php foreach ($asserious as $key => $value) { ?>
-			<?php if (isset($get_param[0]) && $get_param[0] == $value){ ?>
-			<?php $class = 'active'; ?>
-			<?php }else { ?>
-			<?php $class = ""; ?>
-			<?php }?>
-			    <?php if (!isset($get_param[0]) && $value == 'AllDesigners') { ?>
-					<li class="active"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
-				<?php } else { ?>
-				<li class="<?php echo $class ?>"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
-				<?php } ?>
-			<?php } ?>
-		</ul>
-    </div>
-<?php if (count($_categories) > 0): ?>
-	<div class ="designer" >
-	    <ul id = "limheight">
-
-	    	<?php $prev_cat_name = ''; ?>
-	    	<?php if(isset($get_param[0]) && is_numeric($get_param[0]) ) { ?>
-	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($_GET['category']); ?></a></li>
-	    	<?php } else if (isset($get_param[0]) && $get_param[0] != 'All-Designers') { ?>
-	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($get_param[0]); ?></a></li>
-	    	<?php } ?>
-
-	        <?php foreach($_categories as $_category): ?>
-	             <?php $cat_name = strtolower($_category->getName()); ?>
-	               
-	               <?php if (isset($get_param[0]) && $get_param[0] != 'AllDesigners') { ?>
-		               <?php if (is_numeric($get_param[0])) { ?>
-			               <?php if (is_numeric($cat_name[0])) { ?>
-			               		<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
-			               <?php } ?>
-		               <?php } else if (strpos($cat_name, $get_param[0]) === 0) { ?>
-	                        	
-	                        <li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
-	                	
-	                	<?php } ?>
-
-	            	<?php } else { ?>
-                        <style type="text/css">
-                        
-						@media only screen and (max-width: 500px) {
-					     #limheight {
-							column-count: 3;
-						}
-					}
-					</style>
-		            	<?php if ($prev_cat_name != $cat_name[0] || $prev_cat_name = '') { ?>
-		            	
-		            		<li style="padding-bottom: 10px; color: black; font-size: 18px;"><h3><a href="" style="color: black;"><?php echo strtoupper($cat_name[0]); ?></a></h3></li>
-		            	
-		            	<?php } ?>
-	            		
-	            			<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name); ?></a> </li><br/>
-	            		
-	            		<?php $prev_cat_name = $cat_name[0]; ?>
-	                <?php } ?>
-	                
-	            
-	        <?php endforeach; ?>
-	    </ul>
-	</div>
-
-<?php endif; ?> 
-</div>
-
- 
-
-<?php
-//die();
-// $_helper = Mage::helper('catalog/category');
-// $_categories = $_helper->getStoreCategories();
-// $category=array();
-// $removeParentCategoryById = array(15,81);
-// $removeChildCategoryById = array();
-// if (count($_categories) > 0){
-//     foreach($_categories as $_category){
-// 		if(!in_array($_category->getId(),$removeParentCategoryById)){
-// 			$category[$_category->getId()] = $_category->getName();
-// 		}
-//     }
-// }
- // echo "hellos"; die();
-//$category=array('tabHeader_1'=>'ALL DESIGNERS', 'tabHeader_3'=> 'ACCESSORIES','tabHeader_4'=>'MEN','tabHeader_2'=>'CLOTHING');
-$asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');	
-
-
-?>
-<div id="ctl00_ContentPlaceHolder1_ctl00_Pane1" >
-<div class="container1">
-    <div class="controlcontent_r">
-		<div class="htmlbucket">
-		<style type="text/css">
-				.content-tab .tabdata {float: left;  width: 25%;}
-				.content-tab ul {width:auto;}
-				.content-tab .tabdata h3{ border: 0 none; color: #333; font-family: DidotHTF24Light; font-size: 28px;padding-bottom: 0; text-transform: capitalize; margin-bottom:15px; text-align:left; font-style: italic;  font-weight: normal;}
-				.tabHeader_1, .tabHeader_2, .tabHeader_3, .tabHeader_4, .tabHeader_5 {
-					box-sizing: border-box;
-					display: inline-block;
-					padding: 0 10px !important;
-					width: 19% !important;
-				}
-		</style>
-		<div class="tabHeader_0" rel="tabHeader_0">All Designers</div>
-			<div id="categorys">
-				<!-- <div class="left-navi">
-					<ul class="category-nav">
-						<?php $i=1; foreach($category as $key=>$values){ 
-							
-							?>
-							<li class="tabHeader_<?php echo $i ;?>" rel='tabHeader_<?php echo $key ;?>'><?php echo $values;?></li>
-						<?php 
-						$i++; } ?>
-					</ul>
-				</div> -->
-
-				<div class="Location_container">
-					<?php foreach($category as $key=>$values){ ?>
-						<div class="Cityes" id="tabHeader_<?php echo $key;?>"><!-- Inside City Names -->
-							<?php 
-								$charIdf = strtolower(substr($values, 0, 3));
-								$pcatId = $key;
-							?>
-							<div class="places_coimbatore">
-								<div class="city_areas">
-									<ul class="locations_coimbatore">
-										<?php foreach($asserious as $key=>$values){ ?>
-											<li class="<?php if($key == 1) { echo "active activeDefault" ;}?>" rel="alpha_<?=$charIdf?><?= $key; ?>"><?= $values ; ?></li>
-										<?php } ?>
-									</ul>
-								</div>
-
-								<div class="places_container">
-									<?php $k=1; foreach($asserious as $key=>$values){ ?>
-										<?php 
-											$subCatName = array();
-											$subCatFcName = array();
-											$_category = Mage::getModel('catalog/category')->load($pcatId);
-											$_subcategories = $_category->getChildrenCategories();
-											//->addAttributeToSelect('is_active')->addAttributeToSort('name','ASC');
-											if (count($_subcategories) > 0){     
-												foreach($_subcategories as $_subcategory){
-													if(!in_array($_subcategory->getId(),$removeChildCategoryById)){
-														$subCatName[$_subcategory->getUrl()] = $_subcategory->getName();
-														$subCatFcName[] = strtolower(substr($_subcategory->getName(), 0, 1));
-													}
-												}
-											}
-										?>
-										<div class="city_coimbatore <?php if($k==1){ echo 'defaultActive'; } ?>" id="alpha_<?=$charIdf?><?= $key; ?>">
-											<?php if($key == 1) { ?>
-											
-												<?php foreach($asserious as $key=>$values){ ?>
-													<?php if($key !=28) { ?>
-														<?php if(in_array($values, $subCatFcName)) { ?>
-															<h2><?= $values ?></h2>
-															<ul class="content-tab">
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == $values) {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														<?php } ?>
-													<?php } else { ?>
-														<?php 
-															$dArray= array(0,1,2,3,4,5,6,7,8,9);
-															$intersection  = array_intersect($subCatFcName, $dArray);
-														?>
-														<?php if(!empty($intersection)) { ?>
-															<h2>0-9</h2>
-															<ul class="content-tab">
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																	<?php $digit = "0123456789" ?>
-																	<?php if(strpos($digit, $fChat)) {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>
-															</ul>
-														<?php } ?>
-													<?php } ?>
-												<?php } ?>
-												
-												<?php } else { ?>
-													<?php if($key !=28) { ?>
-														<h2><?= $values ?></h2>
-														<ul class="content-tab">
-															<?php foreach($subCatName as $_key=>$_val){ ?>
-																<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																<?php if($fChat == $values) {?>
-																	<li>
-																		<a href="<?= $_key ?>"><?= $_val ?></a>
-																	</li>
-																<?php } ?>
-															<?php } ?>	
-														</ul>
-													<?php } else { ?>
-														<h2>0-9</h2>
-														<ul class="content-tab">
-															<?php foreach($subCatName as $_key=>$_val){ ?>
-																<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																<?php $digit = "0123456789" ?>
-																<?php if(strpos($digit, $fChat)) {?>
-																	<li>
-																		<a href="<?= $_key ?>"><?= $_val ?></a>
-																	</li>
-																<?php } ?>
-															<?php } ?>
-														</ul>
-													<?php } ?>
-												<?php } ?>
-										</div>
-									<?php $k++; } ?>
-								</div>
-							<!-- Inside All Alphabets section closed -->
-							</div>
-						</div>
-					<?php } ?>
-					<!-- Location_container -->
-				</div>
-			</div>
-			<div class="r_bottom">
-				<div class="l_bottom">
-				</div>
-			</div> 
-	</div>
-  </div>
-<?php
    
  	if ($parent_cat_id == $parent_category) {
 		foreach ($parent_cat_value as $child_key => $child_value) {
