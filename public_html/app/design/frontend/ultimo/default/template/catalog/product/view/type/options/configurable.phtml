@@ -56,7 +56,7 @@
    <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
       <div class="input-box">
          <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
-            <option><?php echo $this->__('Select Size') ?></option>
+            <!-- <option><?php echo $this->__('Select Size') ?></option> -->
          </select>
          <?php $productCollection = Mage::getModel("catalog/product")->load($_product->getId()); ?>
 		
@@ -71,6 +71,7 @@
 		 <?php 
 			$custom_measurement = $_product->getResource()->getAttribute('custom_measurement')->getFrontend()->getValue($_product); 
 			if($custom_measurement == 'Yes'){ ?>
+				<span>OR</span>
 				<a class="fancybox customize-link" href="#inline3" style="margin-left: 0px;">Customize</a>
 				<div id="inline3" style="max-width:600px; width:100%;display: none;">	  
 					<div class="fieldset custom-size-chart">					
