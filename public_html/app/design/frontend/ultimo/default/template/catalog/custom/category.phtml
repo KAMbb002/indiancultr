@@ -1,6 +1,155 @@
 <?php error_reporting(E_ALL); 
 ini_set('display_errors', 1); ?>
 
+
+<?php 
+if(isset($_GET['category'])) {
+	$get_param = explode('-', $_GET['category']);
+}
+
+$parent_category = (isset($_GET['parent_category']) && $_GET['parent_category'] > 0)  ? $_GET['parent_category'] : '';
+
+
+$_helper = Mage::helper('catalog/category');
+
+$categoryId = 81;
+
+$categories = Mage::getModel('catalog/category')->load($categoryId);
+
+$uCategories = $categories->getChildrenCategories();
+
+
+$parent_cat_ids = array();
+
+foreach ($uCategories as $_category)
+{
+   $_categories[$_category->getName()] = $_category;
+   $cat_values = Mage::getResourceModel('catalog/category')->getAttributeRawValue($_category->getId(), "designer_name", Mage::app()->getStore()->getId());
+    if ($cat_values) {
+	   	$cat_value_array = explode(',', $cat_values);
+	    foreach ($cat_value_array as $value) {
+		   	//if (!array_key_exists($value, $parent_cat_ids)){
+		   	 $parent_cat_ids[$value][] = array($_category->getId() => $_category->getName());
+		   //	} else {
+		   	// array_push($parent_cat_ids[$value], $_category->getName());
+		   //}
+   		}
+	}
+}
+ksort($_categories);
+
+
+$asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');
+
+ ?>
+<div class="container">
+	<div class="parent-cat-div">
+		<ul>
+			<?php
+			if ($parent_category >  0) {
+				$_categories = array();
+			}
+			foreach ($parent_cat_ids as $parent_cat_id => $parent_cat_value) {
+
+			$parent_categories = Mage::getModel('catalog/category')->load($parent_cat_id);
+			if ($parent_category > 0) {			   
+				if ($parent_cat_id == $parent_category) {
+					foreach ($parent_cat_value as $child_key => $child_value) {
+						foreach ($child_value as $key => $value) {
+							
+							$final_cat= Mage::getModel('catalog/category')->load($key);
+							$child_cat_name = $final_cat->getName();
+							if (isset($get_param)) {
+								if (strtolower($child_cat_name[0]) == $get_param[0]) {
+									$_categories[$child_cat_name] = $final_cat;
+								}
+							}else {
+								$_categories[$child_cat_name] = $final_cat;
+							}					
+						   
+						} 						
+					}				 
+					ksort($_categories);
+				}
+			}
+			//var_dump(count($_categories)); die();
+			?>
+				<li><a href="/designers.html/?parent_category=<?php echo $parent_cat_id ?>"><?php echo $parent_categories->getName(); ?></a></li>				   
+			<?php } ?>
+		</ul>
+	</div>
+	
+	<div class="test alphabet-outer">
+		<ul class="alpha" >			
+			<?php foreach ($asserious as $key => $value) { ?>
+			<?php if (isset($get_param[0]) && $get_param[0] == $value){ ?>
+			<?php $class = 'active'; ?>
+			<?php }else { ?>
+			<?php $class = ""; ?>
+			<?php }?>
+			    <?php if (!isset($get_param[0]) && $value == 'AllDesigners') { ?>
+					<li class="active"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
+				<?php } else { ?>
+					<li class="<?php echo $class ?>"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
+				<?php } ?>
+			<?php } ?>
+		</ul>
+    </div>
+	
+	<?php if (count($_categories) > 0): ?>
+		<div class="designer">
+			<ul id="limheight">
+				<?php $prev_cat_name = ''; ?>
+				<?php if(isset($get_param[0]) && is_numeric($get_param[0]) ) { ?>
+					<li class="alphabet-name-all"><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($_GET['category']); ?></a></li>
+				<?php } else if (isset($get_param[0]) && $get_param[0] != 'All-Designers') { ?>
+					<li class="alphabet-name-1"><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($get_param[0]); ?></a></li>
+				<?php } ?>
+
+				<?php foreach($_categories as $_category): ?>
+					<?php $cat_name = strtolower($_category->getName()); ?>
+					   
+					<?php if (isset($get_param[0]) && $get_param[0] != 'AllDesigners') { ?>
+						<?php if (is_numeric($get_param[0])) { ?>
+						   <?php if (is_numeric($cat_name[0])) { ?>
+								<li>
+									<a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a>
+								</li>
+							<?php } ?>
+						<?php } else if (strpos($cat_name, $get_param[0]) === 0) { ?>
+								
+							<li>
+								<a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a>
+							</li>
+						
+						<?php } ?>
+
+					<?php } else { ?>							
+						<?php if ($prev_cat_name != $cat_name[0] || $prev_cat_name = '') { ?>
+						
+							<li style="padding-bottom: 10px; color: black; font-size: 18px;" class="alphabet-name-2">
+								<h3>
+									<a href="" style="color: black;"><?php echo strtoupper($cat_name[0]); ?></a>
+								</h3>
+							</li>
+						
+						<?php } ?>
+							
+						<li class="design-name">
+							<a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name); ?></a>
+						</li>
+						<br/>
+							
+						<?php $prev_cat_name = $cat_name[0]; ?>
+					<?php } ?>					
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	<?php endif; ?> 
+</div>
+
+
+
 <style type="text/css">
 .breadcrumbs {
 	display: none;
@@ -114,867 +263,3 @@ ul li{
 }
 
 </style>
-<?php 
-if(isset($_GET['category'])) {
-	$get_param = explode('-', $_GET['category']);
-}
-
-$parent_category = (isset($_GET['parent_category']) && $_GET['parent_category'] > 0)  ? $_GET['parent_category'] : '';
-
-
-$_helper = Mage::helper('catalog/category');
-
-$categoryId = 81;
-
-$categories = Mage::getModel('catalog/category')->load($categoryId);
-
-$uCategories = $categories->getChildrenCategories();
-
-
-$parent_cat_ids = array();
-
-foreach ($uCategories as $_category)
-{
-   $_categories[$_category->getName()] = $_category;
-   $cat_values = Mage::getResourceModel('catalog/category')->getAttributeRawValue($_category->getId(), "designer_name", Mage::app()->getStore()->getId());
-    if ($cat_values) {
-	   	$cat_value_array = explode(',', $cat_values);
-	    foreach ($cat_value_array as $value) {
-		   	//if (!array_key_exists($value, $parent_cat_ids)){
-		   	 $parent_cat_ids[$value][] = array($_category->getId() => $_category->getName());
-		   //	} else {
-		   	// array_push($parent_cat_ids[$value], $_category->getName());
-		   //}
-   		}
-	}
-}
-ksort($_categories);
-
-
-$asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');
-
- ?>
-<div class="container">
-<div class="parent-cat-div">
-	<ul>
-<?php
-if ($parent_category >  0) {
-	$_categories = array();
-}
-foreach ($parent_cat_ids as $parent_cat_id => $parent_cat_value) {
-
-$parent_categories = Mage::getModel('catalog/category')->load($parent_cat_id);
-if ($parent_category > 0) {
-   
- 	if ($parent_cat_id == $parent_category) {
-		foreach ($parent_cat_value as $child_key => $child_value) {
-			foreach ($child_value as $key => $value) {
-				
-			 	$final_cat= Mage::getModel('catalog/category')->load($key);
-			 	$child_cat_name = $final_cat->getName();
-			 	if (isset($get_param)) {
-			 		if (strtolower($child_cat_name[0]) == $get_param[0]) {
-			 		 	$_categories[$child_cat_name] = $final_cat;
-			 		}
-			 	}else {
-			 		$_categories[$child_cat_name] = $final_cat;
-			 	}
-			 	
-			   
-			 } 
-			
-		}
-	 
-		ksort($_categories);
-	}
-}
-//var_dump(count($_categories)); die();
-?>
-	   <li>
-	   	<a href="/designers.html/?parent_category=<?php echo $parent_cat_id ?>"><?php echo $parent_categories->getName(); ?></a>
-	   </li>
-	   
-<?php } ?>
-</ul>
-
-</div>
-	<div class="test">
-
-		<ul class="alpha" >
-			
-			<?php foreach ($asserious as $key => $value) { ?>
-			<?php if (isset($get_param[0]) && $get_param[0] == $value){ ?>
-			<?php $class = 'active'; ?>
-			<?php }else { ?>
-			<?php $class = ""; ?>
-			<?php }?>
-			    <?php if (!isset($get_param[0]) && $value == 'AllDesigners') { ?>
-					<li class="active"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
-				<?php } else { ?>
-				<li class="<?php echo $class ?>"><a href="/designers.html/?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
-				<?php } ?>
-			<?php } ?>
-		</ul>
-    </div>
-<?php if (count($_categories) > 0): ?>
-	<div class ="designer" >
-	    <ul id = "limheight">
-
-	    	<?php $prev_cat_name = ''; ?>
-	    	<?php if(isset($get_param[0]) && is_numeric($get_param[0]) ) { ?>
-	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($_GET['category']); ?></a></li>
-	    	<?php } else if (isset($get_param[0]) && $get_param[0] != 'All-Designers') { ?>
-	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($get_param[0]); ?></a></li>
-	    	<?php } ?>
-
-	        <?php foreach($_categories as $_category): ?>
-	             <?php $cat_name = strtolower($_category->getName()); ?>
-	               
-	               <?php if (isset($get_param[0]) && $get_param[0] != 'AllDesigners') { ?>
-		               <?php if (is_numeric($get_param[0])) { ?>
-			               <?php if (is_numeric($cat_name[0])) { ?>
-			               		<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
-			               <?php } ?>
-		               <?php } else if (strpos($cat_name, $get_param[0]) === 0) { ?>
-	                        	
-	                        <li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
-	                	
-	                	<?php } ?>
-
-	            	<?php } else { ?>
-                        <style type="text/css">
-                        #limheight {
-							column-count: 5;
-						}</style>
-		            	<?php if ($prev_cat_name != $cat_name[0] || $prev_cat_name = '') { ?>
-		            	
-		            		<li style="padding-bottom: 10px; color: black; font-size: 18px;"><h3><a href="" style="color: black;"><?php echo strtoupper($cat_name[0]); ?></a></h3></li>
-		            	
-		            	<?php } ?>
-	            		
-	            			<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name); ?></a> </li><br/>
-	            		
-	            		<?php $prev_cat_name = $cat_name[0]; ?>
-	                <?php } ?>
-	                
-	            
-	        <?php endforeach; ?>
-	    </ul>
-	</div>
-
-<?php endif; ?> 
-</div>
-
-   <!-- <link href='//martjackassests.azureedge.net/css/themes/mjt02012487/main_min.css?v=v10' rel='stylesheet' type='text/css' />
-   <link href='https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Stylesheet/CustomStyles.css?v=v4758' rel='stylesheet' type='text/css' /> -->
-
-<!-- <link href='https://www.indiancultr.com/skin/frontend/ultimo/default/css/customdesigner.css' rel='stylesheet' type='text/css' /> -->
-
-<!--    <script type="text/javascript">
-   MartJack ={"Config":{"MerchantId":"37509c70-78e6-42a4-a0cc-744f8212d423","st01_path":"//martjackassets-scripts.azureedge.net/script/Zone02","SiteUrlForControls":"https://www.carmaonlineshop.com","FilePaths":null,"IsProductCompare":"True","IsReview":"True","AppId":"171002983383275","IsAutoComplete":"True","jsVersion":"v3","InstalledApps":["ChimpJack","MobileSite","RewardPoints","LocationAwareness"],"PublisherMerchantId":"37509c70-78e6-42a4-a0cc-744f8212d423","IsSecurePage":"false","LangCode":"en","LangSiteUrl":"https://www.carmaonlineshop.com","IsFacebookUser":"True","Channel":"W","ThemeURL":"//martjackassests.azureedge.net/css","Theme":"mjt02012487","IsLightWeightIntegration":"False","Analytics":{"GaProfileId":"UA-54053197-1"},"Returnurl":"https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F","GoogleClientID":"359007044967-h503jib8cfhlipoich59343r21oucae0.apps.googleusercontent.com","GoogleAPIKey":"AIzaSyBYrYn8ZybvecMGK_YdTkDz2PaDKEcxjX8","IsGoogleUser":"True","IsResponsive":"True","CartOrientation":"H","IsQuickView":true,"NavigationType":"MC","DefaultShoppingListID":"688","Culture":"en-IN","IsSSLEnabled":true,"ConversionFactor":1.0,"DynamicImagePath":"//images-cdn.azureedge.net/azure/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Images/ProductImages/Source","IsTwitterUser":"False","ResourceUrl":"https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423","JSLibUrl":"http://martjackassets-scripts.azureedge.net/script/ZoneTP"},"PageInfo":{"PageID":1191134,"PredefinedPageID":5,"PageTitle":"Designers pages","PageConfigType":"content","CategoryID":null,"CategoryName":null,"BrandID":null,"BrandName":null,"GroupID":null,"GroupName":null,"PostID":0,"ProductID":0,"ProductTitle":null,"Sku":null,"ProductMrp":0.0,"WebPrice":0.0,"OfferText":null,"BlogId":0,"Variants":null,"PageType":"content"},"ProviderConfig":{"GoogleAddwords":{"RemarketingEnabled":"0","ConversionId":"966923379","ConversionLanguage":"en","ConversionFormat":"3","ConversionColor":"ffffff","ConversionLabel":"4dUhCLXx7WsQ86iIzQM","ConversionValue":"0.00","IsRemarketingVariantLevel":null}},"WebNotifications":[],"Current":{"Cart":[],"Location":{"LocationId":0,"LocationCode":null,"LocationName":null,"City":null,"Country":null},"User":{"Email":null,"UserID":null,"FBProfileId":null,"GmailProfileID":null,"crm_externalid":null,"crm_uniqueid":null,"FirstName":null,"LastName":null,"MobileNo":null,"UserEmail":null},"RequestTime":1515143417,"CurrencySymbol":"<span class=\"sp_currencysyb WebRupee\">INR </span><span class=\"sp_amt\"></span>","CurrencyCode":null,"OrderId":0,"OrderTotal":0.0,"CheckoutType":null,"ActualShippingCost":0.0,"TaxTotal":0.0,"BillEmail":null,"OrderStatus":null,"Source":null,"DeliveryMode":"","utm_source":"","utm_medium":"","utm_campaign":"","IsOrderTrack":false,"utm_content":""},"WidgetSettings":"","Apps":{}}</script>
-   <script src="//martjackassets-scripts.azureedge.net/script/Zone02/js/Lib/MJ_Static-Built.js?v=v3" type="text/javascript"></script> -->
-<?php
-die();
-// $_helper = Mage::helper('catalog/category');
-// $_categories = $_helper->getStoreCategories();
-// $category=array();
-// $removeParentCategoryById = array(15,81);
-// $removeChildCategoryById = array();
-// if (count($_categories) > 0){
-//     foreach($_categories as $_category){
-// 		if(!in_array($_category->getId(),$removeParentCategoryById)){
-// 			$category[$_category->getId()] = $_category->getName();
-// 		}
-//     }
-// }
- // echo "hellos"; die();
-//$category=array('tabHeader_1'=>'ALL DESIGNERS', 'tabHeader_3'=> 'ACCESSORIES','tabHeader_4'=>'MEN','tabHeader_2'=>'CLOTHING');
-$asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');	
-
-
-?>
-<div id="ctl00_ContentPlaceHolder1_ctl00_Pane1" >
-<div class="container1">
-    <div class="controlcontent_r">
-		<div class="htmlbucket">
-		<style type="text/css">
-				.content-tab .tabdata {float: left;  width: 25%;}
-				.content-tab ul {width:auto;}
-				.content-tab .tabdata h3{ border: 0 none; color: #333; font-family: DidotHTF24Light; font-size: 28px;padding-bottom: 0; text-transform: capitalize; margin-bottom:15px; text-align:left; font-style: italic;  font-weight: normal;}
-				.tabHeader_1, .tabHeader_2, .tabHeader_3, .tabHeader_4, .tabHeader_5 {
-					box-sizing: border-box;
-					display: inline-block;
-					padding: 0 10px !important;
-					width: 19% !important;
-				}
-		</style>
-		<div class="tabHeader_0" rel="tabHeader_0">All Designers</div>
-			<div id="categorys">
-				<!-- <div class="left-navi">
-					<ul class="category-nav">
-						<?php $i=1; foreach($category as $key=>$values){ 
-							
-							?>
-							<li class="tabHeader_<?php echo $i ;?>" rel='tabHeader_<?php echo $key ;?>'><?php echo $values;?></li>
-						<?php 
-						$i++; } ?>
-					</ul>
-				</div> -->
-
-				<div class="Location_container">
-					<?php foreach($category as $key=>$values){ ?>
-						<div class="Cityes" id="tabHeader_<?php echo $key;?>"><!-- Inside City Names -->
-							<?php 
-								$charIdf = strtolower(substr($values, 0, 3));
-								$pcatId = $key;
-							?>
-							<div class="places_coimbatore">
-								<div class="city_areas">
-									<ul class="locations_coimbatore">
-										<?php foreach($asserious as $key=>$values){ ?>
-											<li class="<?php if($key == 1) { echo "active activeDefault" ;}?>" rel="alpha_<?=$charIdf?><?= $key; ?>"><?= $values ; ?></li>
-										<?php } ?>
-									</ul>
-								</div>
-
-								<div class="places_container">
-									<?php $k=1; foreach($asserious as $key=>$values){ ?>
-										<?php 
-											$subCatName = array();
-											$subCatFcName = array();
-											$_category = Mage::getModel('catalog/category')->load($pcatId);
-											$_subcategories = $_category->getChildrenCategories();
-											//->addAttributeToSelect('is_active')->addAttributeToSort('name','ASC');
-											if (count($_subcategories) > 0){     
-												foreach($_subcategories as $_subcategory){
-													if(!in_array($_subcategory->getId(),$removeChildCategoryById)){
-														$subCatName[$_subcategory->getUrl()] = $_subcategory->getName();
-														$subCatFcName[] = strtolower(substr($_subcategory->getName(), 0, 1));
-													}
-												}
-											}
-										?>
-										<div class="city_coimbatore <?php if($k==1){ echo 'defaultActive'; } ?>" id="alpha_<?=$charIdf?><?= $key; ?>">
-											<?php if($key == 1) { ?>
-											
-												<?php foreach($asserious as $key=>$values){ ?>
-													<?php if($key !=28) { ?>
-														<?php if(in_array($values, $subCatFcName)) { ?>
-															<h2><?= $values ?></h2>
-															<ul class="content-tab">
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == $values) {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														<?php } ?>
-													<?php } else { ?>
-														<?php 
-															$dArray= array(0,1,2,3,4,5,6,7,8,9);
-															$intersection  = array_intersect($subCatFcName, $dArray);
-														?>
-														<?php if(!empty($intersection)) { ?>
-															<h2>0-9</h2>
-															<ul class="content-tab">
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																	<?php $digit = "0123456789" ?>
-																	<?php if(strpos($digit, $fChat)) {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>
-															</ul>
-														<?php } ?>
-													<?php } ?>
-												<?php } ?>
-												
-												<?php } else { ?>
-													<?php if($key !=28) { ?>
-														<h2><?= $values ?></h2>
-														<ul class="content-tab">
-															<?php foreach($subCatName as $_key=>$_val){ ?>
-																<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																<?php if($fChat == $values) {?>
-																	<li>
-																		<a href="<?= $_key ?>"><?= $_val ?></a>
-																	</li>
-																<?php } ?>
-															<?php } ?>	
-														</ul>
-													<?php } else { ?>
-														<h2>0-9</h2>
-														<ul class="content-tab">
-															<?php foreach($subCatName as $_key=>$_val){ ?>
-																<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																<?php $digit = "0123456789" ?>
-																<?php if(strpos($digit, $fChat)) {?>
-																	<li>
-																		<a href="<?= $_key ?>"><?= $_val ?></a>
-																	</li>
-																<?php } ?>
-															<?php } ?>
-														</ul>
-													<?php } ?>
-												<?php } ?>
-										</div>
-									<?php $k++; } ?>
-								</div>
-							<!-- Inside All Alphabets section closed -->
-							</div>
-						</div>
-					<?php } ?>
-					<!-- Location_container -->
-				</div>
-			</div>
-			<div class="r_bottom">
-				<div class="l_bottom">
-				</div>
-			</div> 
-	</div>
-  </div>
-   
-</div>
-</div>
-
-    <script type="text/javascript" async src="https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Plugin/CustomScript.js?v=v4758"></script>
-
-
-    <style type="text/css">
-    .breadcrumbs{
-    	display: none !important;
-    }
-    </style>
-	
-	<script>
-jQuery(document).ready(function(){
-    jQuery(".category-nav li").click(function(){
-        jQuery('.defaultActive').css("display", "block");
-        jQuery('.locations_coimbatore li').removeClass("active");
-        jQuery('.activeDefault').addClass("active");
-    });
-});
-</script><?php //error_reporting(E_ALL); ini_set('display_errors', 1); ?>
-   <link href='//martjackassests.azureedge.net/css/themes/mjt02012487/main_min.css?v=v10' rel='stylesheet' type='text/css' />
-   <link href='https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Stylesheet/CustomStyles.css?v=v4758' rel='stylesheet' type='text/css' />
-
-<!-- <link href='https://www.indiancultr.com/skin/frontend/ultimo/default/css/customdesigner.css' rel='stylesheet' type='text/css' /> -->
-
-   <script type="text/javascript">
-   MartJack ={"Config":{"MerchantId":"37509c70-78e6-42a4-a0cc-744f8212d423","st01_path":"//martjackassets-scripts.azureedge.net/script/Zone02","SiteUrlForControls":"https://www.carmaonlineshop.com","FilePaths":null,"IsProductCompare":"True","IsReview":"True","AppId":"171002983383275","IsAutoComplete":"True","jsVersion":"v3","InstalledApps":["ChimpJack","MobileSite","RewardPoints","LocationAwareness"],"PublisherMerchantId":"37509c70-78e6-42a4-a0cc-744f8212d423","IsSecurePage":"false","LangCode":"en","LangSiteUrl":"https://www.carmaonlineshop.com","IsFacebookUser":"True","Channel":"W","ThemeURL":"//martjackassests.azureedge.net/css","Theme":"mjt02012487","IsLightWeightIntegration":"False","Analytics":{"GaProfileId":"UA-54053197-1"},"Returnurl":"https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F","GoogleClientID":"359007044967-h503jib8cfhlipoich59343r21oucae0.apps.googleusercontent.com","GoogleAPIKey":"AIzaSyBYrYn8ZybvecMGK_YdTkDz2PaDKEcxjX8","IsGoogleUser":"True","IsResponsive":"True","CartOrientation":"H","IsQuickView":true,"NavigationType":"MC","DefaultShoppingListID":"688","Culture":"en-IN","IsSSLEnabled":true,"ConversionFactor":1.0,"DynamicImagePath":"//images-cdn.azureedge.net/azure/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Images/ProductImages/Source","IsTwitterUser":"False","ResourceUrl":"https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423","JSLibUrl":"http://martjackassets-scripts.azureedge.net/script/ZoneTP"},"PageInfo":{"PageID":1191134,"PredefinedPageID":5,"PageTitle":"Designers pages","PageConfigType":"content","CategoryID":null,"CategoryName":null,"BrandID":null,"BrandName":null,"GroupID":null,"GroupName":null,"PostID":0,"ProductID":0,"ProductTitle":null,"Sku":null,"ProductMrp":0.0,"WebPrice":0.0,"OfferText":null,"BlogId":0,"Variants":null,"PageType":"content"},"ProviderConfig":{"GoogleAddwords":{"RemarketingEnabled":"0","ConversionId":"966923379","ConversionLanguage":"en","ConversionFormat":"3","ConversionColor":"ffffff","ConversionLabel":"4dUhCLXx7WsQ86iIzQM","ConversionValue":"0.00","IsRemarketingVariantLevel":null}},"WebNotifications":[],"Current":{"Cart":[],"Location":{"LocationId":0,"LocationCode":null,"LocationName":null,"City":null,"Country":null},"User":{"Email":null,"UserID":null,"FBProfileId":null,"GmailProfileID":null,"crm_externalid":null,"crm_uniqueid":null,"FirstName":null,"LastName":null,"MobileNo":null,"UserEmail":null},"RequestTime":1515143417,"CurrencySymbol":"<span class=\"sp_currencysyb WebRupee\">INR </span><span class=\"sp_amt\"></span>","CurrencyCode":null,"OrderId":0,"OrderTotal":0.0,"CheckoutType":null,"ActualShippingCost":0.0,"TaxTotal":0.0,"BillEmail":null,"OrderStatus":null,"Source":null,"DeliveryMode":"","utm_source":"","utm_medium":"","utm_campaign":"","IsOrderTrack":false,"utm_content":""},"WidgetSettings":"","Apps":{}}</script>
-   <script src="//martjackassets-scripts.azureedge.net/script/Zone02/js/Lib/MJ_Static-Built.js?v=v3" type="text/javascript"></script>
-  
-<?php
-$_helper = Mage::helper('catalog/category');
-$_categories = $_helper->getStoreCategories();
-$category=array();
-if (count($_categories) > 0){
-    foreach($_categories as $_category){
-		$category[$_category->getId()] = $_category->getName();
-    }
-}
-?>
-    
-<?php
-//$category=array('tabHeader_1'=>'ALL DESIGNERS', 'tabHeader_3'=> 'ACCESSORIES','tabHeader_4'=>'MEN','tabHeader_2'=>'CLOTHING');
-$asserious=array(1=>'All Designers', 2=>'a', 3 => 'b',3 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');	
-?>
-<div id="ctl00_ContentPlaceHolder1_ctl00_Pane1" >
-<div class="container1">
-    <div class="controlcontent_r">
-		<div class="htmlbucket">
-		<style type="text/css">
-				.content-tab .tabdata {float: left;  width: 25%;}
-				.content-tab ul {width:auto;}
-				.content-tab .tabdata h3{ border: 0 none; color: #333; font-family: DidotHTF24Light; font-size: 28px;padding-bottom: 0; text-transform: capitalize; margin-bottom:15px; text-align:left; font-style: italic;  font-weight: normal;}
-		</style>
-		<div class="tabHeader_0" rel="tabHeader_0">DESIGNERS</div>
-			<div id="categorys">
-				<div class="left-navi">
-					<ul class="category-nav">
-						<?php foreach($category as $key=>$values){ ?>
-							<li class="tabHeader_1" rel='tabHeader_<?php echo $key ;?>'><?php echo $values;?></li>
-						<?php } ?>
-					</ul>
-				</div>
-
-				<div class="Location_container">
-					<?php foreach($category as $key=>$values){ ?>
-						<div class="Cityes" id="tabHeader_<?php echo $key;?>" style="display: block;"><!-- Inside City Names -->
-							<?php 
-								$charIdf = strtolower(substr($values, 0, 3));
-								$pcatId = $key;
-							?>
-							<div class="places_coimbatore">
-								<div class="city_areas">
-									<ul class="locations_coimbatore">
-										<?php foreach($asserious as $key=>$values){ ?>
-											<li class="<?php if($key == 1) { echo "active" ;}?>" rel="alpha_<?=$charIdf?><?= $key; ?>"><?= $values ; ?></li>
-										<?php } ?>
-									</ul>
-								</div>
-
-								<div class="places_container">
-									<?php foreach($asserious as $key=>$values){ ?>
-										<?php 
-											$subCatName = array();
-											$_category = Mage::getModel('catalog/category')->load($pcatId);
-											$_subcategories = $_category->getChildrenCategories();
-											//->addAttributeToSelect('is_active')->addAttributeToSort('name','ASC');
-											if (count($_subcategories) > 0){     
-												foreach($_subcategories as $_subcategory){
-													$subCatName[$_subcategory->getUrl()] = $_subcategory->getName();
-												}
-											}
-										?>
-										<div class="city_coimbatore" id="alpha_<?=$charIdf?><?= $key; ?>" style="display: block;">
-											<?php if($key == 1) { ?>
-												<div class="content-tab">
-													<div class="block1">
-														<div class="tabdata">
-															<h2>A</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'a') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>B</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'b') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>C</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'c') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>D</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'd') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>E</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'e') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>F</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'f') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>G</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'g') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>H</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'h') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>I</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'i') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>J</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'j') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>K</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'k') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>L</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'l') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>M</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'm') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>N</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'n') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>O</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'o') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>P</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'p') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>Q</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'q') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>R</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'r') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>S</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 's') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>T</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 't') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>U</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'u') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>V</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'v') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>W</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'w') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>X</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'x') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>Y</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'y') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>
-														
-														<div class="tabdata">
-															<h2>Z</h2>
-															<ul>
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																	<?php if($fChat == 'z') {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>	
-															</ul>
-														</div>										
-														<div class="tabdata">
-															<h2>0-9</h2>
-															<ul class="content-tab">
-																<?php foreach($subCatName as $_key=>$_val){ ?>
-																	<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																	<?php $digit = "0123456789" ?>
-																	<?php if(strpos($digit, $fChat)) {?>
-																		<li>
-																			<a href="<?= $_key ?>"><?= $_val ?></a>
-																		</li>
-																	<?php } ?>
-																<?php } ?>
-															</ul>
-														</div>
-														
-														<!-- <div class="tabdata">
-															<h2>0-9</h2>
-															<ul>
-																<li><a href="//www.carmaonlineshop.com/pages/5-elements/pgid-1125708.aspx">5 Elements</a></li>
-															</ul>						
-														</div> -->
-													</div>
-												</div>
-												<?php } else { ?>
-													<?php if($key !=28) { ?>
-														<h2><?= $values ?></h2>
-														<ul class="content-tab">
-															<?php foreach($subCatName as $_key=>$_val){ ?>
-																<?php $fChat = strtolower(substr($_val, 0, 1)) ?>							
-																<?php if($fChat == $values) {?>
-																	<li>
-																		<a href="<?= $_key ?>"><?= $_val ?></a>
-																	</li>
-																<?php } ?>
-															<?php } ?>	
-														</ul>
-													<?php } else { ?>
-														<h2>0-9</h2>
-														<ul class="content-tab">
-															<?php foreach($subCatName as $_key=>$_val){ ?>
-																<?php $fChat = strtolower(substr($_val, 0, 1)) ?>
-																<?php $digit = "0123456789" ?>
-																<?php if(strpos($digit, $fChat)) {?>
-																	<li>
-																		<a href="<?= $_key ?>"><?= $_val ?></a>
-																	</li>
-																<?php } ?>
-															<?php } ?>
-														</ul>
-													<?php } ?>
-												<?php } ?>
-										</div>
-									<?php } ?>
-								</div>
-							<!-- Inside All Alphabets section closed----->
-							</div>
-						</div>
-					<?php } ?>
-					<!-- .Location_container -->
-				</div>
-			</div>
-			<div class="r_bottom">
-				<div class="l_bottom">
-				</div>
-			</div> 
-	</div>
-  </div>
-   
-    </center>
-    
-    <script type="text/javascript" async src="https://martjackstorage.azureedge.net/in-resources/37509c70-78e6-42a4-a0cc-744f8212d423/Plugin/CustomScript.js?v=v4758"></script>
-
-
-    <style type="text/css">
-    .breadcrumbs{
-    	display: none !important;
-    }
-
-    </style>
