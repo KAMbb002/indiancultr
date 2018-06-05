@@ -79,7 +79,7 @@ $asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =
 		</ul>
 	</div>
 	
-	<div class="test">
+	<div class="test alphabet-outer">
 		<ul class="alpha" >			
 			<?php foreach ($asserious as $key => $value) { ?>
 			<?php if (isset($get_param[0]) && $get_param[0] == $value){ ?>
@@ -151,9 +151,11 @@ $asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =
 
 
 <style type="text/css">
-.parent-cat-div{
-	text-align: center;
-	font-size: 20px;
+.breadcrumbs {
+	display: none;
+}
+.category-title {
+	display: none;
 }
 .parent-cat-ul {
    padding: 20px;
@@ -167,25 +169,34 @@ $asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =
 .parent-cat-ul  li a:hover {
    color:black;
 }
-.breadcrumbs {
-	display: none;
-}
-.category-title {
-	display: none;
-}
+
+
+
 ul li{
 	display: inline;
 }
-@media only screen and (max-width: 500px) {
-    .parent-cat-ul  li {
-       display: inherit;
-    }
-    .parent-cat-ul {
-	   padding: 1px;
-	}
-	.parent-cat-ul  li {
-	   padding: 10px;
-	}
+
+
+.parent-cat-div{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom:10px;
+}
+
+.alphabet-outer{width:100%; margin:0 0 15px}
+.alpha li:hover {
+	background: #00c1e9 !important;
+
+}
+.alpha li:hover a {
+	color: white !important;
+
+}
+.alpha .active {
+	background: #00c1e9 !important;
+}
+.alpha .active a {
+	color: white !important;
 }
 .alpha li{    
 	float: left;
@@ -198,37 +209,57 @@ ul li{
     border: 1px solid #f2f2f2;
 }
 
+.designer {
+	margin:0 0 20px;
+	float: left;
+	width:100%;
+	padding:0;
+}
+
 #limheight li {
     display: inline-block;
     padding-bottom: 10px;  
     width:100%;  
 }
-.alpha li:hover {
-	background: #00c1e9 !important;
-
-}
-.alpha li:hover a {
-	color: white !important;
-
-}
-
 #limheight li a {
     color: black;
     
 }
-.designer {
-	margin: 25px;
-	float: left;
+#limheight {
+	column-count: 5;
 }
-.alpha .active {
-	background: #00c1e9 !important;
-}
-.alpha .active a {
-	color: white !important;
-}
-</style>
-<style type="text/css">
+
+@media only screen and (max-width: 1200px) {
 	#limheight {
-		column-count: 5;
+		column-count: 4;
 	}
+}
+@media only screen and (max-width: 1024px) {
+	#limheight {
+		column-count: 3;
+	}	
+}
+@media only screen and (max-width: 960px) {
+	#limheight {
+		column-count: 2;
+	}	
+}
+
+
+@media only screen and (max-width: 500px) {
+    .parent-cat-ul  li {
+       display: inherit;
+    }
+    .parent-cat-ul {
+	   padding: 1px;
+	}
+	.parent-cat-ul  li {
+	   padding: 10px;
+	}
+	
+	#limheight {
+		column-count: 1;
+	}
+}
+
 </style>
