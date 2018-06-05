@@ -183,10 +183,19 @@ ul li{
 	margin-bottom:10px;
 }
 
-.alphabet-outer{width:100%; margin:0 0 15px}
+.alphabet-outer{width:100%; margin:0 0 15px; float: left;}
+.alpha li{    
+	float: left;
+    padding: 7px !important;
+    margin: 0 3px 6px;
+    font-size: 18px;
+    color: #000;
+    background: #f2f2f2;
+    padding: 0 8px;
+    border: 1px solid #f2f2f2;
+}
 .alpha li:hover {
 	background: #00c1e9 !important;
-
 }
 .alpha li:hover a {
 	color: white !important;
@@ -198,16 +207,7 @@ ul li{
 .alpha .active a {
 	color: white !important;
 }
-.alpha li{    
-	float: left;
-    padding: 7px !important;
-    margin: 0 3px 3px;
-    font-size: 18px;
-    color: #000;
-    background: #f2f2f2;
-    padding: 0 8px;
-    border: 1px solid #f2f2f2;
-}
+
 
 .designer {
 	margin:0 0 20px;
@@ -239,7 +239,7 @@ ul li{
 		column-count: 3;
 	}	
 }
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 768px) {
 	#limheight {
 		column-count: 2;
 	}	
