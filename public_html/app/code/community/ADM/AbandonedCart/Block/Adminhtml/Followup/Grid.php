@@ -11,19 +11,19 @@ class ADM_AbandonedCart_Block_Adminhtml_Followup_Grid extends Mage_Adminhtml_Blo
         $this->setSaveParametersInSession(false);
         $this->setUseAjax(true);
     }
-
-
+    
+    
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('adm_abandonedcart/followup')->getCollection();
-
+        
         $this->setCollection($collection);
-
+        
         parent::_prepareCollection();
         return $this;
     }
-
-
+    
+    
     protected function _prepareColumns()
     {
         $this->addColumn('followup_id', array(
@@ -31,40 +31,40 @@ class ADM_AbandonedCart_Block_Adminhtml_Followup_Grid extends Mage_Adminhtml_Blo
                 'width' => '80px',
                 'index'  => 'followup_id'
         ));
-
+        
         $this->addColumn('abandoned_at', array(
                 'header' => Mage::helper('sales')->__('Abandoned At'),
                 'index' => 'abandoned_at',
                 'type' => 'datetime',
                 'width' => '150px',
         ));
-
+        
         $this->addColumn('customer_email', array(
                 'header' => $this->__('Email'),
                 'index'  => 'customer_email',
                 'sortable' => false
        ));
-
+        
         $this->addColumn('customer_email', array(
                 'header' => $this->__('Email'),
                 'index'  => 'customer_email',
                 'sortable' => false
         ));
-
+        
         $this->addColumn('base_grand_total', array(
                 'header' => Mage::helper('sales')->__('G.T. (Base)'),
                 'index' => 'base_grand_total',
                 'type'  => 'currency',
                 'currency' => 'currency',
         ));
-
-
+        
+        
         $this->addColumn('offset', array(
                 'header' => Mage::helper('sales')->__('Mails sent'),
                 'index' => 'offset',
                 'width' => '100px',
         ));
-
+        
         $this->addColumn('status', array(
                 'header' => $this->__('Status'),
                 'width' => '80px',
@@ -75,35 +75,35 @@ class ADM_AbandonedCart_Block_Adminhtml_Followup_Grid extends Mage_Adminhtml_Blo
                         ADM_AbandonedCart_Model_Tracker::SUCCESS=>'Restored'
                         ),
                 'sortable' => false
-
+            
         ));
-
+        
         $this->addExportType('*/*/exportCsv', Mage::helper('adm_abandonedcart')->__('CSV'));
-
+        
         return parent::_prepareColumns();
     }
-
-
+    
+    
     protected function _prepareMassaction()
     {
         $this->setMassactionIdField('id');
         $this->getMassactionBlock()->setFormFieldName('ids');
-
+        
         $this->getMassactionBlock()->addItem('sendmail', array(
                 'label'=> $this->__('Send mail(s)'),
                 'url'  => $this->getUrl('*/*/massSendMail'),
                 'confirm' => $this->__('Are you sure you want to send mails()?')
         ));
     }
-
+    
     public function getGridUrl()
     {
         return $this->getUrl('*/*/grid', array('_current' => true));
     }
-
+    
     public function getRowUrl($row)
     {
         return false;
     }
-
+    
 }
