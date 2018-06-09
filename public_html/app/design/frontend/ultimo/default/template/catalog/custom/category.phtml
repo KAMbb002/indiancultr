@@ -1,6 +1,3 @@
-<?php error_reporting(E_ALL); 
-ini_set('display_errors', 1); ?>
-<<<<<<< Updated upstream
 
 <style type="text/css">
 .breadcrumbs {
@@ -59,9 +56,7 @@ if(isset($_GET['category'])) {
 
 $parent_category = (isset($_GET['parent_category']) && $_GET['parent_category'] > 0)  ? $_GET['parent_category'] : '';
 
-
-=======
-
+?>
 <style type="text/css">
 .parent-cat-div{
 	text-align: center;
@@ -160,23 +155,23 @@ if (isset($get_param[0]) && $get_param[0] != 'All-Designers' && $parent_category
 </style>
 <?php } ?>
 <?php 
->>>>>>> Stashed changes
+
 $_helper = Mage::helper('catalog/category');
 
 $categoryId = 81;
 
 $categories = Mage::getModel('catalog/category')->load($categoryId);
 
-<<<<<<< Updated upstream
+
 $uCategories = $categories->getChildrenCategories();
-=======
+
 $uCategories = $categories->getChildren();
->>>>>>> Stashed changes
+
 
 
 $parent_cat_ids = array();
 
-<<<<<<< Updated upstream
+
 foreach ($uCategories as $_category)
 {
    $_categories[$_category->getName()] = $_category;
@@ -209,7 +204,7 @@ foreach ($parent_cat_ids as $parent_cat_id => $parent_cat_value) {
 
 $parent_categories = Mage::getModel('catalog/category')->load($parent_cat_id);
 if ($parent_category > 0) {
-=======
+
 foreach (explode(',', $uCategories) as $_category)
 {
    $_category = Mage::getModel('catalog/category')->load($_category);
