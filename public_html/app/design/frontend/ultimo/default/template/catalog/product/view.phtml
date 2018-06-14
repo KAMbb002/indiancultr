@@ -6,6 +6,28 @@
  * @see Mage_Review_Block_Product_View
  */
 ?>
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl("js/jquery.fancybox.js?v=2.1.5") ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl("js/jquery.fancybox.css?v=2.1.5") ?>" media="screen" />
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('.fancybox').fancybox();
+		jQuery("#fancybox-manual-c").click(function() {
+			jQuery.fancybox.open([
+			], {
+				
+			});
+		});
+		
+   	});
+	function popupcloseme(){
+		console.log('close button called');
+		jQuery.fancybox.close();
+	}
+   
+</script>
+
+
 <?php
 	$_helper = $this->helper('catalog/output');
 	$_product = $this->getProduct();
@@ -181,6 +203,105 @@
 
 		<?php echo $this->getBlockHtml('formkey'); ?>
 			<?php if (!$this->hasOptions()): //add to cart when no options (e.g. simple products) ?>
+			
+				<!--  added new customization -->
+			
+			<?php 
+			if($_product->getTypeId() == 'simple' ){
+			$custom_measurement = $_product->getResource()->getAttribute('custom_measurement')->getFrontend()->getValue($_product); 
+			if($custom_measurement == 'Yes'){ ?>
+				<a class="fancybox customize-link" href="#inline3" style="margin-left: 0px;">Customize</a>
+				<div id="inline3" style="max-width:600px; width:100%;display: none;">	  
+					<div class="fieldset custom-size-chart">					
+						<div class="customize-your-product-image">
+							<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('customize-your-product-image')->toHtml(); ?>
+						</div>
+						<h2 class="legend">CUSTOMIZE YOUR PRODUCT (In Inches)</h2>
+						<div class="customize-your-product-option">
+							<ul class="product-custom-option form-list">
+								<li class="fields">
+									<div class="field">
+										<label for="bust_chest">Bust/Chest</label>
+										<div class="input-box">
+											<input type="text" class="input-text product-custom-option" name="bust_chest" value="">
+										</div>
+									</div>
+									<div class="field">
+										<label for="waist">Waist</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="waist" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="sleeve_length">Sleeve Length</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="sleeve_length" value="">
+										</div>
+									</div>
+									<div class="field">
+										<label for="shoulders">Shoulders</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="shoulders" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="armhole">Armhole</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="armhole" value="">
+										</div>
+									</div>
+									<div class="field">
+										<label for="neck">Neck</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="neck" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="length">Length</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="length" value="">
+										</div>
+									</div>
+								
+									<div class="field">
+										<label for="hip">Hip</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="hip" value="">
+										</div>
+									</div>
+								</li>
+								<li class="fields">
+									<div class="field">
+										<label for="length_shoulder_to_nee">Length (Shoulder to Knee)</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="length_shoulder_to_nee" value="">
+										</div>
+									</div>
+								
+									<div class="field">
+										<label for="length_waist_to_ankle">Length (Waist to Ankle)</label>
+										<div class="input-box">
+											<input type="text" class="input-text  product-custom-option" name="length_waist_to_ankle" value="">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<a href="#" title="Submit" class="button" onclick="popupcloseme();"><span><span>Submit</span></span></a>
+						</div>
+						
+					</div>						
+				</div>
+			<?php }	?>
+			<?php }	?>
+			
+			<!--  End: added new customization -->
+			
 				<?php if($_product->isSaleable()): ?>
 					<div class="add-to-box">
 						<?php echo $this->getChildHtml('addtocart') ?>
@@ -212,6 +333,10 @@
     		<?php endif; ?>
     		<div class="clear"></div>
 			<!--  added customization -->
+			
+			
+			
+			
 			<?php if (isset($p['primCol_2'])) echo $p['primCol_2']; ?>
 
 			<?php echo $this->getChildHtml('other'); ?>
@@ -310,3 +435,73 @@
 	<?php endif; ?>
 
 </div> <!-- end: product-view -->
+
+<style>
+	.custom-size-chart{
+		background:#fff;
+		padding:15px 15px 30px;
+		width:100%;
+		box-sizing:border-box;
+	}
+	.custom-size-chart.fieldset .legend{
+		font-weight: 500;
+		font-size: 20px;
+		font-family: arial;
+		text-transform: uppercase;
+		color: #000;     padding-bottom: 15px;
+		margin-bottom:20px;
+	}
+	.custom-size-chart .form-list .field{
+		width:48%;
+	}
+	.custom-size-chart .form-list .field:nth-child(even){
+		float:right;
+	}
+	.custom-size-chart .form-list .field:nth-child(odd){
+		float:left;
+	}
+	.custom-size-chart .form-list label{font-weight:500; font-family: arial; font-size: 13px; color: #000;}
+	.custom-size-chart .form-list input.input-text{display:block; width:100%;}
+
+	.customize-your-product-image{
+		display:block;
+		width:100%;
+		margin-bottom:30px;
+	}
+	.customize-your-product-image img{
+		max-width:100%;
+	}
+	.customize-your-product-option{
+		display:block;
+		width:100%;
+	}
+	
+	.sizechart-link,
+	.customize-link{
+		font-size: 12px;
+		font-family: arial;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: #aaa;
+		display: inline-block;
+		line-height: 17px;
+		margin: 0;
+		padding: 0;
+		height: 30px;
+		line-height: 30px;
+		letter-spacing: 1.1px;
+	}
+	.sizechart-link{
+		color: #aaa;
+		margin: 0 10px !important;
+		letter-spacing: .5px;
+	}
+	
+	@media (max-width:480px){
+		.custom-size-chart .form-list .field{
+			width:100%;
+			margin-bottom:10px;
+		}
+	}
+	
+</style>

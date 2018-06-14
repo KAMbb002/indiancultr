@@ -4,13 +4,17 @@ class Tilkor_ProductOptions_Model_Observer
 	public function afterAddToCart($observer) {
 		
 		$data = Mage::app()->getRequest()->getParams();
-		$bust_chest = $data[bust_chest];		
-		$waist = $data[waist];		
-		$sleeve_length = $data[sleeve_length];		
-		$shoulders = $data[shoulders];		
-		$armhole = $data[armhole];		
-		$neck = $data[neck];		
-		$length = $data[length];		
+		
+		$bust_chest = $data[bust_chest] ? $data[bust_chest] : 'N/A';		
+		$waist = $data[waist] ? $data[waist] : 'N/A';		
+		$sleeve_length = $data[sleeve_length] ? $data[sleeve_length] : 'N/A';	
+		$shoulders = $data[shoulders] ? $data[shoulders] : 'N/A';	
+		$armhole = $data[armhole] ? $data[armhole] : 'N/A';		
+		$neck = $data[neck] ? $data[neck] : 'N/A';
+		$length = $data[length] ? $data[length] : 'N/A';	
+		$hip = $data[hip] ? $data[hip] : 'N/A';	
+		$length_shoulder_to_nee = $data[length_shoulder_to_nee] ? $data[length_shoulder_to_nee] : 'N/A';	
+		$length_waist_to_ankle = $data[length_waist_to_ankle] ? $data[length_waist_to_ankle] : 'N/A';		
 		
 		$itemsCollection = Mage::getSingleton('checkout/cart')->getQuote()->getItemsCollection();		
 		$firstItem = $itemsCollection->getFirstItem();
@@ -31,9 +35,13 @@ class Tilkor_ProductOptions_Model_Observer
 			$item_id = $readConnection->fetchOne($select);
 //Mage::log('<br>Your Data item_id :'.$item_id, Zend_Log::DEBUG, 'custom.log');
 			if($item_id != ''){
-				$query = "UPDATE icsales_flat_quote_item SET custom_measurement = 'Bust/Chest: $bust_chest, Waist: $waist, Sleeve Length: $sleeve_length, Shoulders: $shoulders, Armhole: $armhole, Neck: $neck, Length: $length' WHERE item_id = $item_id AND quote_id = $quote_id";
-//Mage::log('<br>Your Data update query :'.$query, Zend_Log::DEBUG, 'custom.log'); 
-				$res = $writeConnection->query($query);
+
+				if(trim($data[bust_chest]) || trim($data[waist]) || trim($data[sleeve_length]) || trim($data[shoulders])){
+					$query = "UPDATE icsales_flat_quote_item SET custom_measurement = 'Bust/Chest: $bust_chest, <br>Waist: $waist, <br>Sleeve Length: $sleeve_length, <br>Shoulders: $shoulders, <br>Armhole: $armhole, Neck: $neck, <br>Length: $length, <br>Hip: $hip, <br>Length (Shoulder to Knee): $length_shoulder_to_nee, <br>Length (Waist to Ankle): $length_waist_to_ankle' WHERE item_id = $item_id AND quote_id = $quote_id";
+					$res = $writeConnection->query($query);
+				}
+				
+
 			}
 		}
 	}

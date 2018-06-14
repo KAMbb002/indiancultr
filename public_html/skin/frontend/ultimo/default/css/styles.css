@@ -3822,3 +3822,27 @@ body.cms-index-index .breadcrumbs { display:none; }
 }
 .catalog-category-view h2.product-name.product-brand {height: 15px;}
 .catalogsearch-result-index h2.product-name.product-brand {height: 15px;}
+
+
+.custom-size-chart{
+	background:#fff;
+	padding:15px 15px 30px;
+}
+.custom-size-chart.fieldset .legend{
+    font-weight: 500;
+    font-size: 20px;
+    font-family: arial;
+    text-transform: uppercase;
+    color: #000;     padding-bottom: 15px;
+}
+.custom-size-chart .form-list .field{
+	width:48%;
+}
+.custom-size-chart .form-list .field:nth-child(even){
+	float:right;
+}
+.custom-size-chart .form-list .field:nth-child(odd){
+	float:left;
+}
+.custom-size-chart .form-list label{font-weight:500; font-family: arial; font-size: 13px; color: #000;}
+.custom-size-chart .form-list input.input-text{display:block; width:100%;}
