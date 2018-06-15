@@ -1,0 +1,266 @@
+<?php 
+error_reporting(E_ALL);
+ini_set("display_errors", 1); 
+?>
+
+<style type="text/css">
+.page-title{
+	display: none;
+}
+.parent-cat-div{
+	text-align: center;
+	font-size: 20px;
+}
+.parent-cat-ul {
+   padding: 20px;
+}
+.parent-cat-ul  li {
+   padding: 20px;
+}
+.parent-cat-ul  li a{
+   color:  #999;
+}
+.parent-cat-ul  li a:hover {
+   color:black;
+}
+.breadcrumbs {
+	display: none;
+}
+.category-title {
+	display: none;
+}
+ul li{
+	display: inline;
+}
+@media only screen and (max-width: 500px) {
+    .parent-cat-ul  li {
+       display: inherit;
+    }
+    .parent-cat-ul {
+	   padding: 1px;
+	}
+	.parent-cat-ul  li {
+	   padding: 10px;
+	}
+}
+.alpha li{    
+	float: left;
+    padding: 7px !important;
+    margin: 0 3px 3px;
+    font-size: 18px;
+    color: #000;
+    background: #f2f2f2;
+    padding: 0 8px;
+    border: 1px solid #f2f2f2;
+}
+
+#limheight li {
+    display: inline-block;
+    padding-bottom: 10px;  
+    width:100%;  
+}
+.alpha li:hover {
+	background: #00c1e9 !important;
+
+}
+.alpha li:hover a {
+	color: white !important;
+
+}
+
+#limheight li a {
+    color: black;
+    
+}
+.designer {
+	margin: 25px;
+	float: left;
+}
+.alpha .active {
+	background: #00c1e9 !important;
+}
+.alpha .active a {
+	color: white !important;
+}
+</style>
+
+<?php 
+if(isset($_GET['category'])) {
+	$get_param = explode('-', $_GET['category']);
+}
+
+$parent_category = (isset($_GET['parent_category']) && $_GET['parent_category'] > 0)  ? $_GET['parent_category'] : '';
+
+if (isset($get_param[0]) && $get_param[0] != 'AllDesigners' && $parent_category < 1) { ?>
+<style type="text/css">
+	#limheight {
+		column-count: auto;
+	} 
+</style>
+<?php } else {?>
+<style type="text/css">
+	#limheight {
+		column-count: 5;
+	}
+</style>
+<?php } ?>
+<?php 
+
+
+$_helper = Mage::helper('catalog/category');
+$categoryId = 81;
+
+$categories = Mage::getModel('catalog/category')->load($categoryId);
+
+
+$uCategories = $categories->getChildrenCategories();
+
+$uCategories_id = $categories->getChildren();
+
+
+
+$parent_cat_ids = array();
+
+$asserious=array(1=>'AllDesigners', 2=>'a', 3 => 'b',4 =>'c',5 =>'d',6 =>'e',7 =>'f',8 =>'g',9 =>'h',10 =>'i',11=>'j',12=>'k',13=>'l',14=>'m',15=>'n',16=>'o',17=>'p',18=>'q',19=>'r',20=>'s',21=>'t',22=>'u',23=>'v',24=>'w',25=>'x',26=>'y',27=>'z',28=>'0-9');
+
+foreach ($uCategories as $_category)
+{
+	
+   $_categories[$_category->getName()] = $_category;
+   $cat_values = Mage::getResourceModel('catalog/category')->getAttributeRawValue($_category->getId(), "designer_name", Mage::app()->getStore()->getId());
+    if ($cat_values) {
+	   	$cat_value_array = explode(',', $cat_values);
+	    foreach ($cat_value_array as $value) {
+		   	//if (!array_key_exists($value, $parent_cat_ids)){
+		   	 $parent_cat_ids[$value][] = array($_category->getId() => $_category->getName());
+		   //	} else {
+		   	// array_push($parent_cat_ids[$value], $_category->getName());
+		   //}
+   		}
+	}
+}
+ksort($_categories);
+
+?>
+<div class="container">
+<div class="parent-cat-div">
+	<ul class="parent-cat-ul">
+<?php
+if ($parent_category >  0) {
+	$_categories = array();
+}
+if (isset($_GET['xyz'])) {
+ 	var_dump($parent_cat_ids); 
+}
+foreach ($parent_cat_ids as $parent_cat_id => $parent_cat_value) {
+
+$parent_categories = Mage::getModel('catalog/category')->load($parent_cat_id);
+if ($parent_category > 0) {
+   
+ 	if ($parent_cat_id == $parent_category) {
+		foreach ($parent_cat_value as $child_key => $child_value) {
+			foreach ($child_value as $key => $value) {
+				
+			 	$final_cat= Mage::getModel('catalog/category')->load($key);
+			 	$child_cat_name = $final_cat->getName();
+			 	if (isset($get_param) && $get_param[0] != 'AllDesigners') {
+			 		if (strtolower($child_cat_name[0]) == $get_param[0]) {
+			 		 	$_categories[$child_cat_name] = $final_cat;
+			 		}
+			 	}else {
+			 		$_categories[$child_cat_name] = $final_cat;
+			 	}
+			 	
+			   
+			 } 
+			
+		}
+
+		ksort($_categories);
+	}else if(isset($get_param[0]) && $get_param[0]  == 'AllDesigners') {
+
+	}
+}
+// if (isset($_GET['xyz'])) {
+//  	var_dump($_categories); 
+// }
+?>
+	   <li>
+	   	<a href="/designer/?parent_category=<?php echo $parent_cat_id ?>"><?php echo $parent_categories->getName(); ?></a>
+	   </li>
+	   
+<?php } ?>
+</ul>
+
+</div>
+	<div class="test">
+
+		<ul class="alpha" >
+			
+			<?php foreach ($asserious as $key => $value) { ?>
+			<?php if (isset($get_param[0]) && $get_param[0] == $value){ ?>
+			<?php $class = 'active'; ?>
+			<?php }else { ?>
+			<?php $class = ""; ?>
+			<?php }?>
+			    <?php if (!isset($get_param[0]) && $value == 'AllDesigners') { ?>
+					<li class="active"><a href="/designer?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
+				<?php } else { ?>
+				<li class="<?php echo $class ?>"><a href="/designer?parent_category=<?php echo $parent_category;?>&category=<?php echo $value ?>"><?php echo strtoupper($value); ?></a></li>
+				<?php } ?>
+			<?php } ?>
+		</ul>
+    </div>
+<?php if (count($_categories) > 0): ?>
+	<div class ="designer" >
+	    <ul id = "limheight">
+
+	    	<?php $prev_cat_name = ''; ?>
+	    	<?php if(isset($get_param[0]) && is_numeric($get_param[0]) ) { ?>
+	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($_GET['category']); ?></a></li>
+	    	<?php } else if (isset($get_param[0]) && $get_param[0] != 'AllDesigners') { ?>
+	    		<li><a style="color: black; font-size: 18px;" href=""><?php echo strtoupper($get_param[0]); ?></a></li>
+	    	<?php } ?>
+
+	        <?php foreach($_categories as $_category): ?>
+	             <?php $cat_name = strtolower($_category->getName()); ?>
+	               
+	               <?php if (isset($get_param[0]) && $get_param[0] != 'AllDesigners') { ?>
+		               <?php if (is_numeric($get_param[0])) { ?>
+			               <?php if (is_numeric($cat_name[0])) { ?>
+			               		<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
+			               <?php } ?>
+		               <?php } else if (strpos($cat_name, $get_param[0]) === 0) { ?>
+	                        	
+	                        <li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name) ?></a> </li>
+	                	
+	                	<?php } ?>
+
+	            	<?php } else { ?>
+                        <style type="text/css">
+                        
+						@media only screen and (max-width: 500px) {
+					     #limheight {
+							column-count: 3;
+						}
+					}
+					</style>
+		            	<?php if ($prev_cat_name != $cat_name[0] || $prev_cat_name = '') { ?>
+		            	
+		            		<li style="padding-bottom: 10px; color: black; font-size: 18px;"><h3><a href="" style="color: black;"><?php echo strtoupper($cat_name[0]); ?></a></h3></li>
+		            	
+		            	<?php } ?>
+	            		
+	            			<li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo strtoupper($cat_name); ?></a> </li><br/>
+	            		
+	            		<?php $prev_cat_name = $cat_name[0]; ?>
+	                <?php } ?>
+	                
+	            
+	        <?php endforeach; ?>
+	    </ul>
+	</div>
+
+<?php endif; ?> 
+</div>
+
