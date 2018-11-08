@@ -86,6 +86,8 @@ RewriteRule ^(.*)$ http://www.indiancultr.com/$1 [L,R=301,NC]
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-l
 	RewriteRule .* index.php [L]
+	RewriteRule ^(.*\.js) gzip.php?type=js&file=$1
+	RewriteRule ^(.*\.css) gzip.php?type=css&file=$1
 </IfModule>
 
 ##### mod_deflate compresses your output to lower the file size being sent to the client #####
